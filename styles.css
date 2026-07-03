@@ -154,7 +154,8 @@ textarea{min-height:130px;resize:vertical}
 .marquee{overflow:hidden;position:relative;padding:10px 0}
 .marquee-track{display:flex;gap:14px;width:max-content;animation:scrollX 30s linear infinite}
 @keyframes scrollX{to{transform:translateX(-50%)}}
-.school{border:1.5px solid #E3DCCA;background:var(--paper);border-radius:14px;padding:12px 24px;font-family:var(--serif);font-weight:600;font-size:16px;color:var(--muted);white-space:nowrap}
+.school{border:1px solid #E7DECF;background:#fff;border-radius:12px;height:76px;min-width:150px;padding:0 26px;display:flex;align-items:center;justify-content:center;flex:none}
+.school img{max-height:46px;max-width:148px;width:auto;object-fit:contain;display:block}
 
 /* ---- RESPONSIVE ---- */
 @media(max-width:960px){
