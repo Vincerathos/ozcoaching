@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Idées & automatisations — OZ Coaching</title>
+<meta name="description" content="Pistes d'évolution du site et automatisations pour OZ Coaching, classées par impact et effort. Document de travail." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="images/favicon-v2.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cream:#FAF7F1; --paper:#FFFFFF; --ink:#1C2721; --muted:#5B6157;
+    --olive:#67794C; --olive-d:#46552F; --ocean:#1F7F8C; --ocean-d:#14606B;
+    --sand:#E9DFC8; --sun:#C08422; --line:#E7DECF;
+    --serif:'Fraunces',Georgia,'Times New Roman',serif;
+    --sans:'Outfit','Segoe UI',system-ui,sans-serif;
+    --hand:'Caveat',cursive;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+
+  /* Barre de retour */
+  .topbar{position:sticky;top:0;z-index:20;background:rgba(250,247,241,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .topbar .in{max-width:940px;margin:0 auto;padding:0 30px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:baseline;gap:8px}
+  .brand .oz{font-family:var(--serif);font-style:italic;font-weight:600;font-size:23px;color:var(--ink)}
+  .brand .oz b{color:var(--ocean);font-style:normal}
+  .brand .sub{font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted)}
+  .back{font-size:14px;font-weight:500;color:var(--ocean);border:1.5px solid var(--ocean);border-radius:30px;padding:8px 16px;transition:all .2s}
+  .back:hover{background:var(--ocean);color:#fff}
+
+  .doc{max-width:940px;margin:0 auto;padding:48px 30px 80px}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12;text-wrap:balance}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:2.6px;text-transform:uppercase;color:var(--ocean)}
+  .lead{font-size:18px;color:var(--muted);max-width:62ch;margin-top:14px}
+  .hand{font-family:var(--hand);color:var(--olive);font-size:1.35em;line-height:1}
+
+  .top h1{font-size:clamp(32px,5vw,46px);margin:14px 0 0}
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px 22px;margin:26px 0 8px;padding:16px 20px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+  .legend .grp{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--muted)}
+  .legend b{color:var(--ink);font-weight:500}
+  .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  .dot.f{background:var(--ocean)} .dot.m{background:var(--olive)}
+
+  section{margin-top:52px}
+  .sec-head{margin-bottom:22px;padding-bottom:14px;border-bottom:1.5px solid var(--line)}
+  .sec-head h2{font-size:26px;margin-top:6px}
+  .sec-head p{font-size:15px;color:var(--muted);margin-top:6px}
+  .grouptitle{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.5px;color:var(--olive-d);text-transform:uppercase;margin:28px 0 12px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 22px 18px;display:flex;flex-direction:column;gap:9px}
+  .card.win{border-color:var(--ocean);box-shadow:0 14px 34px -26px rgba(31,127,140,.55)}
+  .card h3{font-size:18.5px}
+  .card p{font-size:14.5px;color:var(--muted)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:6px}
+  .chip{font-size:11.5px;font-weight:500;letter-spacing:.3px;padding:4px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+  .chip.impact{background:#E9EFE2;color:var(--olive-d)}
+  .chip.impact.fort{background:#DCECEE;color:var(--ocean-d)}
+  .chip.effort{background:var(--cream);border:1px solid var(--line);color:var(--muted)}
+  .chip.tool{background:#F3EEE2;color:#7a6a3d}
+  .pill-win{align-self:flex-start;background:var(--ocean);color:#fff;font-size:11.5px;font-weight:600;letter-spacing:.5px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+  .done{background:#E7F0E7;border-color:#BCD6BC}
+  .done .pill-win{background:var(--olive)}
+
+  .flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px}
+  .flow .step{background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+  .flow .arr{color:var(--ocean);font-weight:600}
+  .gain{font-family:var(--hand);font-size:19px;color:var(--olive);margin-top:2px}
+
+  .note{margin-top:52px;background:var(--ink);color:#EDE9DF;border-radius:20px;padding:34px}
+  .note h2{color:#fff;font-size:23px}
+  .note .eyebrow{color:#A9C08F}
+  .note p{font-size:14.5px;color:rgba(237,233,223,.82);margin-top:12px;max-width:66ch}
+  .note table{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}
+  .note td{padding:9px 6px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .note td:last-child{text-align:right;color:#fff;font-variant-numeric:tabular-nums}
+  .foot{margin-top:34px;font-size:13px;color:var(--muted);text-align:center}
+
+  @media(max-width:600px){
+    .topbar .in,.doc{padding-left:20px;padding-right:20px}
+    .brand .sub{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="in">
+    <a class="brand" href="index.html" aria-label="OZ Coaching">
+      <span class="oz"><b>Oz</b> Coaching</span>
+      <span class="sub">Aurélia Grino</span>
+    </a>
+    <a class="back" href="index.html">← Retour au site</a>
+  </div>
+</div>
+
+<div class="doc">
+
+  <header class="top">
+    <p class="eyebrow">Pistes d'évolution — site &amp; coulisses</p>
+    <h1>Des fonctionnalités et des automatisations pensées pour ta pratique</h1>
+    <p class="lead">Une sélection d'idées concrètes pour <b style="color:var(--ink);font-weight:500">convertir plus de visiteurs</b>, <b style="color:var(--ink);font-weight:500">gagner du temps</b> et <b style="color:var(--ink);font-weight:500">rayonner davantage</b> — classées par impact et effort. Rien d'obligatoire : on pioche ensemble ce qui a du sens pour toi. <span class="hand">Pas à pas 🌱</span></p>
+  </header>
+
+  <div class="legend">
+    <div class="grp"><b>Impact&nbsp;:</b></div>
+    <div class="grp"><span class="dot f"></span>Fort</div>
+    <div class="grp"><span class="dot m"></span>Moyen</div>
+    <div class="grp" style="margin-left:auto"><b>Effort&nbsp;:</b> faible · moyen · élevé (temps de mise en place)</div>
+  </div>
+
+  <!-- QUICK WINS -->
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Par où commencer</p>
+      <h2>⚡ Les 3 quick wins</h2>
+      <p>Fort impact, peu d'effort. Si on ne fait que trois choses, ce sont celles-là.</p>
+    </div>
+    <div class="grid">
+      <div class="card win">
+        <span class="pill-win">Quick win</span>
+        <h3>Fiche &amp; avis Google</h3>
+        <p>Créer la fiche Google Business et récolter des avis (tes 12 recommandations LinkedIn sont un vivier). C'est le levier n°1 pour apparaître sur Google Maps et le « pack local » à Montpellier/Nîmes.</p>
+        <div class="chips"><span class="chip impact fort"><span class="dot f"></span>Impact fort</span><span class="chip effort">Effort faible</span><span class="chip tool">Google · gratuit</span></div>
+      </div>
+      <div class="card win">
+        <span class="pill-win">Quick win</span>
+        <h3>Guide offert (aimant à emails)</h3>
+        <p>Un mini-guide PDF — « 7 erreurs qui plombent un CV » ou « LinkedIn en 2026 » — téléchargeable contre un e-mail. Tu construis une liste de contacts chauds à recontacter plus tard.</p>
+        <div class="chips"><span class="chip impact fort"><span class="dot f"></span>Impact fort</span><span class="chip effort">Effort moyen</span><span class="chip tool">PDF + formulaire</span></div>
+      </div>
+      <div class="card win">
+        <span class="pill-win">Quick win</span>
+        <h3>E-mail de préparation au RDV</h3>
+        <p>Dès qu'un créneau est réservé, un e-mail personnalisé part automatiquement (« Pour préparer notre échange… »). Première impression pro, et le RDV est plus productif.</p>
+        <div class="chips"><span class="chip impact fort"><span class="dot f"></span>Impact fort</span><span class="chip effort">Effort faible</span><span class="chip tool">Calendly + n8n</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FONCTIONNALITÉS SITE -->
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Sur le site</p>
+      <h2>Fonctionnalités qui font la différence</h2>
+      <p>Au-delà des pages actuelles, ce qui aide vraiment un coach à convaincre et à fidéliser.</p>
+    </div>
+
+    <div class="grouptitle">◆ Convertir plus de visiteurs</div>
+    <div class="grid">
+      <div class="card">
+        <h3>Témoignages en vidéo</h3>
+        <p>Trois clips de 30 s « avant / après » valent mille mots. Le format vidéo rassure et se partage sur LinkedIn.</p>
+        <div class="chips"><span class="chip impact fort"><span class="dot f"></span>Fort</span><span class="chip effort">Moyen</span></div>
+      </div>
+      <div class="card">
+        <h3>Paiement à la réservation</h3>
+        <p>Encaisser une séance directement au moment de la prise de RDV (via Calendly + Stripe). Moins de no-shows, zéro relance.</p>
+        <div class="chips"><span class="chip impact fort"><span class="dot f"></span>Fort</span><span class="chip effort">Faible</span><span class="chip tool">Stripe</span></div>
+      </div>
+      <div class="card">
+        <h3>Contact rapide WhatsApp</h3>
+        <p>Un bouton flottant pour poser une question en un tap. Beaucoup de jeunes talents préfèrent ça au formulaire.</p>
+        <div class="chips"><span class="chip impact"><span class="dot m"></span>Moyen</span><span class="chip effort">Faible</span></div>
+      </div>
+      <div class="card">
+        <h3>Avis Google intégrés</h3>
+        <p>Afficher la note ★ et les derniers avis en direct sur le site — la preuve sociale qui rassure au moment de réserver.</p>
+        <div class="chips"><span class="chip impact fort"><span class="dot f"></span>Fort</span><span class="chip effort">Faible</span></div>
+      </div>
+    </div>
+
+    <div class="grouptitle">◆ Gagner en crédibilité</div>
+    <div class="grid">
+      <div class="card">
+        <h3>Espace ressources</h3>
+        <p>Checklists d'entretien, modèle de CV, trame LinkedIn à télécharger. Tu donnes de la valeur avant même la 1ʳᵉ séance.</p>
+        <div class="chips"><span class="chip impact"><span class="dot m"></span>Moyen</span><span class="chip effort">Moyen</span></div>
+      </div>
+      <div class="card">
+        <h3>Page « références » détaillée</h3>
+        <p>Logos des écoles cliquables + mini cas concrets (MOOC, e-portfolio, conférences). Idéal pour convaincre écoles &amp; entreprises.</p>
+        <div class="chips"><span class="chip impact"><span class="dot m"></span>Moyen</span><span class="chip effort">Faible</span></div>
+      </div>
+      <div class="card">
+        <h3>Offre écoles en PDF</h3>
+        <p>Un bouton « Recevoir l'offre complète » qui envoie ta plaquette. Les Career Centers aiment un document à faire circuler en interne.</p>
+        <div class="chips"><span class="chip impact"><span class="dot m"></span>Moyen</span><span class="chip effort">Faible</span></div>
+      </div>
+    </div>
+
+    <div class="grouptitle">◆ Rayonner &amp; durer</div>
+    <div class="grid">
+      <div class="card">
+        <h3>Blog / ressources</h3>
+        <p>Recycler tes posts LinkedIn en articles (les « trous » dans un CV, la reconversion…). Chaque article = une porte d'entrée durable sur Google.</p>
+        <div class="chips"><span class="chip impact fort"><span class="dot f"></span>Fort · SEO</span><span class="chip effort">Moyen</span></div>
+      </div>
+      <div class="card">
+        <h3>Newsletter</h3>
+        <p>Capter les emails et envoyer un conseil par mois. Tu restes présente dans l'esprit des talents jusqu'au jour où ils ont besoin de toi.</p>
+        <div class="chips"><span class="chip impact"><span class="dot m"></span>Moyen</span><span class="chip effort">Moyen</span></div>
+      </div>
+      <div class="card">
+        <h3>Version anglaise</h3>
+        <p>Vu ton ADN international (Sydney, recrutement à l'étranger), une version EN ouvre les profils expat et les écoles à filière anglophone.</p>
+        <div class="chips"><span class="chip impact"><span class="dot m"></span>Moyen</span><span class="chip effort">Élevé</span></div>
+      </div>
+      <div class="card done">
+        <span class="pill-win">Déjà en place</span>
+        <h3>Quiz d'orientation</h3>
+        <p>Le petit quiz de l'accueil oriente déjà chaque visiteur vers la bonne offre (particulier / école / entreprise). ✅</p>
+        <div class="chips"><span class="chip impact fort"><span class="dot f"></span>Fort</span><span class="chip effort">Fait</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTOMATISATIONS -->
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Dans les coulisses</p>
+      <h2>Automatisations qui te libèrent du temps</h2>
+      <p>Des enchaînements « quand X → alors Y » (via Calendly, Outlook et n8n) pour que l'administratif tourne tout seul.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>Suivi &amp; demande d'avis</h3>
+        <div class="flow"><span class="step">Fin de séance</span><span class="arr">→</span><span class="step">E-mail récap</span><span class="arr">→</span><span class="step">Avis à J+3</span></div>
+        <p>Un récap automatique après chaque séance, puis une demande d'avis Google/LinkedIn trois jours plus tard.</p>
+        <div class="gain">≈ preuve sociale en pilote auto</div>
+      </div>
+      <div class="card">
+        <h3>Mini-CRM sans saisie</h3>
+        <div class="flow"><span class="step">Nouveau lead</span><span class="arr">→</span><span class="step">Fiche client</span><span class="arr">→</span><span class="step">Séquence de suivi</span></div>
+        <p>Chaque contact (quiz, formulaire, RDV) crée une fiche dans Notion/Airtable et déclenche une relance douce.</p>
+        <div class="gain">≈ plus aucun lead perdu</div>
+      </div>
+      <div class="card">
+        <h3>Devis → facture</h3>
+        <div class="flow"><span class="step">Devis accepté</span><span class="arr">→</span><span class="step">Facture générée</span><span class="arr">→</span><span class="step">Envoi</span></div>
+        <p>La facture électronique se crée et part toute seule (conforme aux obligations 2026-2027).</p>
+        <div class="gain">≈ 8 min gagnées par devis</div>
+      </div>
+      <div class="card">
+        <h3>Relance des impayés</h3>
+        <div class="flow"><span class="step">J+14 / J+30</span><span class="arr">→</span><span class="step">Rappel automatique</span></div>
+        <p>Des relances progressives et polies partent seules tant qu'une facture n'est pas réglée.</p>
+        <div class="gain">≈ trésorerie sereine</div>
+      </div>
+      <div class="card">
+        <h3>Onboarding école</h3>
+        <div class="flow"><span class="step">Formulaire</span><span class="arr">→</span><span class="step">Devis</span><span class="arr">→</span><span class="step">Convention</span></div>
+        <p>Une demande d'école déclenche fiche + brouillon de devis + relance à J+7 si pas de réponse.</p>
+        <div class="gain">≈ leads B2B jamais oubliés</div>
+      </div>
+      <div class="card">
+        <h3>Rattrapage des no-shows</h3>
+        <div class="flow"><span class="step">RDV manqué</span><span class="arr">→</span><span class="step">E-mail bienveillant</span><span class="arr">→</span><span class="step">Nouveau créneau</span></div>
+        <p>Un message chaleureux propose automatiquement de reprogrammer. On récupère la personne au lieu de la perdre.</p>
+        <div class="gain">≈ clients récupérés</div>
+      </div>
+      <div class="card">
+        <h3>LinkedIn programmé</h3>
+        <div class="flow"><span class="step">Idées dans un tableau</span><span class="arr">→</span><span class="step">Publication planifiée</span></div>
+        <p>Tu écris tes posts quand tu veux, ils se publient au bon moment. La régularité sans y penser.</p>
+        <div class="gain">≈ visibilité constante</div>
+      </div>
+      <div class="card">
+        <h3>Fidélisation à +2 mois</h3>
+        <div class="flow"><span class="step">Fin d'accompagnement</span><span class="arr">→</span><span class="step">Nouvelles à J+60</span></div>
+        <p>Un message de suivi quelques semaines après : des nouvelles, et l'occasion d'une nouvelle séance si besoin.</p>
+        <div class="gain">≈ bouche-à-oreille &amp; retours</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTE STACK -->
+  <div class="note">
+    <p class="eyebrow">Le nerf de la guerre</p>
+    <h2>Une boîte à outils légère et peu coûteuse</h2>
+    <p>Tout ça repose sur des outils simples qui se parlent entre eux. On peut démarrer petit et enrichir au fil de l'eau — rien n'est verrouillé, et chaque brique s'ajoute sans tout refondre.</p>
+    <table>
+      <tr><td>Prise de RDV — Calendly (synchro Outlook)</td><td>0 → 14 €/mois</td></tr>
+      <tr><td>Facturation électronique — Tiime ou Abby</td><td>gratuit</td></tr>
+      <tr><td>Automatisations — n8n</td><td>0 → 20 €/mois</td></tr>
+      <tr><td>Formulaires / quiz / e-mails</td><td>0 → 25 €/mois</td></tr>
+      <tr><td><b style="color:#fff">Total pour démarrer</b></td><td><b style="color:#A9C08F">≈ 0 à 35 €/mois</b></td></tr>
+    </table>
+  </div>
+
+  <p class="foot">OZ Coaching · document de travail — à trier ensemble selon tes priorités. Aucune de ces briques n'est indispensable au lancement du site.</p>
+
+</div>
+</body>
+</html>
