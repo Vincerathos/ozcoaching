@@ -1,0 +1,10 @@
+# Fichiers sources bruts fournis par la cliente (non nécessaires au site)
+Oz coaching/
+
+# Temporaires / OS
+_*.png
+_*.html
+*.tmp
+Thumbs.db
+.DS_Store
+desktop.ini

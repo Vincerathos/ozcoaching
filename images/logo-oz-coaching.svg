@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" role="img" aria-label="OZ Coaching — Aurélia Grino, coach emploi et carrière">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&amp;family=Jost:wght@300;400&amp;display=swap');
+      .serif{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+      .sans{font-family:'Jost','Segoe UI',Arial,sans-serif}
+    </style>
+  </defs>
+  <rect x="170" y="86" width="220" height="36" fill="#D9BBA1"/>
+  <text x="280" y="146" text-anchor="middle" class="serif" font-size="170" font-weight="600" fill="#1F1B16">Oz</text>
+  <text x="272" y="192" text-anchor="middle" class="sans" font-size="26" font-weight="400" letter-spacing="15" fill="#1F1B16">COACHING</text>
+  <text x="278" y="222" text-anchor="middle" class="sans" font-size="12.5" font-weight="300" letter-spacing="3.2" fill="#9A7B5E">AURÉLIA GRINO · COACH EMPLOI &amp; CARRIÈRE</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Monogramme OZ Coaching">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&amp;display=swap');
+      .serif{font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif}
+    </style>
+  </defs>
+  <circle cx="100" cy="100" r="94" fill="none" stroke="#1F1B16" stroke-width="2.5"/>
+  <rect x="32" y="90" width="136" height="22" fill="#D9BBA1"/>
+  <text x="100" y="132" text-anchor="middle" class="serif" font-size="110" font-weight="600" fill="#1F1B16">Oz</text>
+</svg>
