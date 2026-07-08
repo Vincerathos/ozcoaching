@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Particuliers — Coaching, reconversion & Ikigai | OZ Coaching (maquette v3)</title>
+<!-- MAQUETTE v3 — textes & tarifs PROVISOIRES. Touche « G » = grille. -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="oz-v3.css">
+</head>
+<body>
+<button class="toggle" id="gridToggle" aria-pressed="false"><span class="dot"></span><span class="lbl">Voir la grille</span></button>
+
+<header>
+  <div class="nav">
+    <a href="accueil-v3.html" aria-label="OZ Coaching" style="text-decoration:none">
+      <svg width="176" height="42" viewBox="36 44 690 176" aria-hidden="true">
+        <g transform="translate(104,116)"><circle r="64" fill="none" stroke="#1C2721" stroke-width="7"/><path d="M-42,0 Q0,-36 42,0 Q0,36 -42,0 Z" fill="#FAF7F1" stroke="#1C2721" stroke-width="6" stroke-linejoin="round"/><circle r="16" fill="#1F7F8C"/><circle r="6.6" fill="#1C2721"/><circle cx="5.6" cy="-5.6" r="2.8" fill="#FAF7F1"/></g>
+        <text x="196" y="128" font-family="Fraunces,serif" font-size="66" font-weight="600" fill="#1C2721">Oz Coaching</text>
+        <path d="M241,158 C 306,140 368,178 434,158 S 582,140 641,160" fill="none" stroke="#1F7F8C" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <a href="ecoles-v3.html">Écoles</a>
+      <a href="particuliers-v3.html" class="on">Particuliers</a>
+      <a href="entreprises-v3.html">Entreprises</a>
+      <a href="accueil-v3.html#histoire">Mon histoire</a>
+    </nav>
+    <a href="accueil-v3.html#rdv" class="navcta">Prendre RDV</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="spread" style="padding-top:8px">
+  <div class="wrap" style="padding-bottom:56px">
+    <div class="grid">
+      <div class="band"><p class="provisional rv">▚ Maquette de travail — textes & tarifs provisoires · touche « G » pour voir la grille</p></div>
+      <div class="band" style="margin-top:16px">
+        <div class="rv" style="grid-column:1 / 8">
+          <p class="kicker">02 — Pour vous</p>
+          <h1 class="masthead">Trouver le poste — et le <em>sens</em> — qui vous ressemble.</h1>
+        </div>
+      </div>
+      <div class="band" style="margin-top:16px">
+        <div class="rv d1" style="grid-column:1 / 6">
+          <p class="lede">Reconversion, prise de poste, doute professionnel : on clarifie ce qui compte pour vous, puis on construit un cap concret — étape par étape.</p>
+          <div style="margin-top:32px"><a href="accueil-v3.html#rdv" class="btn">Réserver un échange · 30 min offert</a></div>
+        </div>
+        <figure class="rv d2" style="grid-column:7 / 13">
+          <div class="ph" style="height:432px;border-radius:16px"><img src="../images/c1-coaching.jpg" alt="Séance de coaching individuel"></div>
+          <figcaption class="cap">Accompagnement individuel</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- IKIGAI (mise en avant) -->
+<section class="spread" style="background:var(--ink);color:var(--paper)">
+  <div class="wrap" style="padding-top:72px;padding-bottom:72px">
+    <div class="grid">
+      <div class="band" style="margin-bottom:16px"><div class="rv" style="grid-column:1 / 10"><p class="kicker" style="color:#7FD0DA">La méthode phare</p><h2 class="shead"><span style="font-family:var(--serif);font-weight:600;font-size:clamp(30px,4vw,48px);line-height:52px;color:#fff">L'Ikigai : votre raison d'aller travailler le matin.</span></h2></div></div>
+      <div class="band">
+        <figure class="rv" style="grid-column:1 / 5;align-self:center">
+          <svg width="100%" viewBox="0 0 260 260" aria-hidden="true">
+            <circle cx="105" cy="105" r="78" fill="#1F7F8C" fill-opacity=".30" stroke="#3FA8B5" stroke-width="1.5"/>
+            <circle cx="155" cy="105" r="78" fill="#67794C" fill-opacity=".30" stroke="#A9C08F" stroke-width="1.5"/>
+            <circle cx="105" cy="155" r="78" fill="#67794C" fill-opacity=".22" stroke="#A9C08F" stroke-width="1.5"/>
+            <circle cx="155" cy="155" r="78" fill="#1F7F8C" fill-opacity=".22" stroke="#3FA8B5" stroke-width="1.5"/>
+            <circle cx="130" cy="130" r="13" fill="#3FA8B5"/>
+            <text x="130" y="134" text-anchor="middle" font-family="Fraunces,serif" font-style="italic" font-size="15" fill="#0E1714">生き甲斐</text>
+          </svg>
+          <figcaption class="cap" style="text-align:center;color:#9FB0A2">Ikigai · 生き甲斐</figcaption>
+        </figure>
+        <div class="rv d1" style="grid-column:5 / 13;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div><p class="k" style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#7FD0DA">Passion</p><p style="font-family:var(--serif);font-weight:600;font-size:20px;line-height:26px;margin:6px 0 0">Ce que vous aimez</p></div>
+          <div><p class="k" style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#7FD0DA">Talent</p><p style="font-family:var(--serif);font-weight:600;font-size:20px;line-height:26px;margin:6px 0 0">Ce dans quoi vous excellez</p></div>
+          <div><p class="k" style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#7FD0DA">Mission</p><p style="font-family:var(--serif);font-weight:600;font-size:20px;line-height:26px;margin:6px 0 0">Ce dont le monde a besoin</p></div>
+          <div><p class="k" style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#7FD0DA">Vocation</p><p style="font-family:var(--serif);font-weight:600;font-size:20px;line-height:26px;margin:6px 0 0">Ce pour quoi on vous rémunère</p></div>
+          <p class="body" style="grid-column:1 / -1;color:#C4CEC3;margin-top:8px">En quelques séances, on cartographie ces quatre cercles pour vous — et on trouve, à leur croisement, le métier ou le poste qui vous fait vibrer <em>et</em> qui tient debout.</p>
+        </div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- ACCOMPAGNEMENTS (cartes + tarifs provisoires) -->
+<section class="spread" style="background:#fff">
+  <div class="wrap" style="padding-top:64px;padding-bottom:72px">
+    <div class="grid">
+      <div class="band" style="margin-bottom:16px"><div class="rv" style="grid-column:1 / 9"><p class="kicker euca">Mes accompagnements</p><p class="shead"><span style="font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:44px">Un format pour chaque moment.</span></p></div></div>
+      <div class="band">
+        <div class="card rv" style="grid-column:1 / 5"><p class="k">Découverte</p><h3>Premier échange</h3><p class="body">30 min pour faire le point et voir si l'on avance ensemble.</p><p class="price" style="color:var(--accent)">Offert</p></div>
+        <div class="card rv d1" style="grid-column:5 / 9"><p class="k">À l'unité</p><h3>Séance individuelle</h3><p class="body">Un point précis à débloquer : CV, entretien, décision.</p><p class="price">80&nbsp;€<span style="font-size:14px;font-style:normal;color:var(--ink-soft)"> / séance</span></p></div>
+        <div class="card rv d2" style="grid-column:9 / 13"><p class="k">Le plus choisi</p><h3>Parcours Ikigai</h3><p class="body">3 à 5 séances pour clarifier votre cap et passer à l'action.</p><p class="price">à partir de 220&nbsp;€</p></div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section class="spread">
+  <div class="wrap" style="padding-top:64px;padding-bottom:64px">
+    <div class="grid">
+      <div class="band" style="margin-bottom:8px"><div class="rv" style="grid-column:1 / 9"><p class="kicker">Elles & ils l'ont vécu</p></div></div>
+      <div class="band">
+        <figure class="rv" style="grid-column:1 / 7">
+          <blockquote style="margin:0;font-family:var(--serif);font-weight:500;font-size:22px;line-height:32px;font-style:italic">« En trois séances, j'ai enfin su vers quoi aller. Aurélia voit ce que vous n'osez pas nommer. »</blockquote>
+          <figcaption style="display:flex;align-items:center;gap:12px;margin-top:20px">
+            <img src="../images/avis-mallory.jpg" alt="" style="width:44px;height:44px;border-radius:50%">
+            <span class="cap" style="margin:0">Mallory — reconversion réussie</span>
+          </figcaption>
+        </figure>
+        <figure class="rv d1" style="grid-column:7 / 13">
+          <blockquote style="margin:0;font-family:var(--serif);font-weight:500;font-size:22px;line-height:32px;font-style:italic">« Un cap clair, un vrai plan d'action, et beaucoup de confiance retrouvée. Merci. »</blockquote>
+          <figcaption style="display:flex;align-items:center;gap:12px;margin-top:20px">
+            <img src="../images/avis-jean.jpg" alt="" style="width:44px;height:44px;border-radius:50%">
+            <span class="cap" style="margin:0">Jean — prise de poste</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="spread" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap" style="padding-top:72px;padding-bottom:80px">
+    <div class="grid"><div class="band"><div class="rv" style="grid-column:1 / 9">
+      <p class="kicker">On commence ?</p>
+      <h2 class="shead" style="font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:56px;margin:0">Votre premier pas, c'est 30 minutes.</h2>
+      <p class="lede" style="margin-top:20px">Offertes, sans engagement, en visio ou par téléphone.</p>
+      <div style="margin-top:32px;display:flex;gap:14px;flex-wrap:wrap"><a href="accueil-v3.html#rdv" class="btn">Réserver mon créneau</a><a href="tel:+33676921574" class="btn ghost">06 76 92 15 74</a></div>
+    </div></div></div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="spread">
+  <div class="wrap"><div class="grid"><div class="band">
+    <div style="grid-column:1 / 6">
+      <svg width="200" height="48" viewBox="36 44 690 176" aria-hidden="true"><g transform="translate(104,116)"><circle r="64" fill="none" stroke="#FAF7F1" stroke-width="7"/><path d="M-42,0 Q0,-36 42,0 Q0,36 -42,0 Z" fill="#1C2721" stroke="#FAF7F1" stroke-width="6" stroke-linejoin="round"/><circle r="16" fill="#3FA8B5"/><circle r="6.6" fill="#FAF7F1"/></g><text x="196" y="128" font-family="Fraunces,serif" font-size="66" font-weight="600" fill="#FAF7F1">Oz Coaching</text><path d="M241,158 C 306,140 368,178 434,158 S 582,140 641,160" fill="none" stroke="#3FA8B5" stroke-width="6" stroke-linecap="round"/></svg>
+      <p class="body" style="color:#B9C2B7;margin-top:16px;max-width:300px">L'œil du recruteur, la posture du coach. Entre Montpellier et Nîmes — en visio partout en France.</p>
+    </div>
+    <div style="grid-column:7 / 9"><p class="foot-h">Accompagnements</p><a href="ecoles-v3.html">Écoles</a><br><a href="particuliers-v3.html">Particuliers</a><br><a href="entreprises-v3.html">Entreprises</a></div>
+    <div style="grid-column:9 / 11"><p class="foot-h">OZ Coaching</p><a href="accueil-v3.html#histoire">Mon histoire</a><br><a href="accueil-v3.html#rdv">Contact</a><br><a href="https://www.linkedin.com/in/aureliagrino/">LinkedIn</a></div>
+    <div style="grid-column:11 / 13"><p class="foot-h">Contact</p><a href="tel:+33676921574">06 76 92 15 74</a><br><a href="mailto:aurelia.grino@outlook.fr">aurelia.grino@outlook.fr</a></div>
+  </div></div></div>
+  <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+</footer>
+
+<script src="oz-v3.js"></script>
+</body></html>

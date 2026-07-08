@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140" role="img" aria-label="Oz Coaching">
+  <circle cx="70" cy="70" r="64" fill="#1C2721"/>
+  <path d="M28,70 Q70,34 112,70 Q70,106 28,70 Z" fill="#FAF7F1"/>
+  <circle cx="70" cy="70" r="16.5" fill="#1F7F8C"/>
+  <circle cx="70" cy="70" r="7" fill="#1C2721"/>
+  <circle cx="76" cy="64" r="3" fill="#FAF7F1"/>
+</svg>

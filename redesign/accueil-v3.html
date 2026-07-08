@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OZ Coaching — Coach emploi, carrière & recrutement (maquette v3)</title>
+<!-- MAQUETTE DE TRAVAIL v3 — textes PROVISOIRES (proposition marketing à venir).
+     Grille Müller-Brockmann + ADN chaleureux OZ. Touche « G » = grille. -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="oz-v3.css">
+</head>
+<body>
+<button class="toggle" id="gridToggle" aria-pressed="false"><span class="dot"></span><span class="lbl">Voir la grille</span></button>
+
+<header>
+  <div class="nav">
+    <a href="accueil-v3.html" aria-label="OZ Coaching" style="text-decoration:none">
+      <svg width="176" height="42" viewBox="36 44 690 176" aria-hidden="true">
+        <g transform="translate(104,116)">
+          <circle r="64" fill="none" stroke="#1C2721" stroke-width="7"/>
+          <path d="M-42,0 Q0,-36 42,0 Q0,36 -42,0 Z" fill="#FAF7F1" stroke="#1C2721" stroke-width="6" stroke-linejoin="round"/>
+          <circle r="16" fill="#1F7F8C"/><circle r="6.6" fill="#1C2721"/>
+          <circle cx="5.6" cy="-5.6" r="2.8" fill="#FAF7F1"/>
+        </g>
+        <text x="196" y="128" font-family="Fraunces,serif" font-size="66" font-weight="600" fill="#1C2721">Oz Coaching</text>
+        <path d="M241,158 C 306,140 368,178 434,158 S 582,140 641,160" fill="none" stroke="#1F7F8C" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <a href="ecoles-v3.html">Écoles</a>
+      <a href="particuliers-v3.html">Particuliers</a>
+      <a href="entreprises-v3.html">Entreprises</a>
+      <a href="#histoire">Mon histoire</a>
+    </nav>
+    <a href="#rdv" class="navcta">Prendre RDV</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="spread" style="padding-top:8px">
+  <div class="wrap" style="padding-bottom:64px">
+    <div class="grid">
+      <div class="band">
+        <p class="provisional rv">▚ Maquette de travail — textes provisoires, à remplacer par la proposition marketing · touche « G » pour voir la grille</p>
+      </div>
+      <div class="band" style="margin-top:24px">
+        <div class="rv" style="grid-column:1 / 8">
+          <p class="kicker">Coach emploi · carrière · recrutement</p>
+          <h1 class="masthead">Je vois en vous ce que vous ne <em>voyez pas</em> encore.</h1>
+        </div>
+      </div>
+      <div class="band" style="margin-top:16px">
+        <div class="rv d1" style="grid-column:1 / 6">
+          <p class="lede">Recruteuse pendant 7 ans, coach depuis, formée à l'école du terrain — d'ici et d'Australie. J'accompagne les écoles, les personnes et les entreprises à faire les bons choix professionnels.</p>
+          <div style="margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+            <a href="#rdv" class="btn">Réserver un échange · 30 min offert</a>
+            <a href="#histoire" class="tlink">Mon histoire</a>
+          </div>
+        </div>
+        <figure class="rv d2" style="grid-column:7 / 13">
+          <div class="ph" style="height:480px;border-radius:16px">
+            <img src="../images/aurelia-studio-wide.jpg" alt="Aurélia Grino, fondatrice d'OZ Coaching" />
+          </div>
+          <figcaption class="cap">Aurélia Grino — fondatrice d'OZ Coaching</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- INTRO 3 PUBLICS -->
+<section class="spread" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap" style="padding-top:56px;padding-bottom:56px">
+    <div class="grid">
+      <div class="band">
+        <div class="rv" style="grid-column:1 / 9">
+          <p class="kicker euca">Trois publics, un même regard</p>
+          <p class="shead" style="font-family:var(--serif);font-weight:500;font-size:clamp(22px,2.8vw,32px);line-height:40px;margin:0">
+            Le même œil de recruteuse au service des <strong style="color:var(--accent)">écoles</strong>, des <strong style="color:var(--accent)">personnes</strong> et des <strong style="color:var(--accent)">entreprises</strong>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- 01 · ÉCOLES -->
+<section class="spread" id="ecoles">
+  <div class="wrap">
+    <div class="grid">
+      <div class="band shead">
+        <p class="numeral rv" style="grid-column:1 / 3">01</p>
+        <div class="rv d1" style="grid-column:3 / 8">
+          <p class="kicker">Pour les écoles</p>
+          <h2>Rendre vos étudiants employables, vraiment.</h2>
+          <p class="body" style="margin-top:20px">Ateliers CV, entretiens, posture pro, coaching d'alternance… J'interviens auprès d'une <strong>quinzaine d'écoles</strong> pour préparer vos promotions au monde du travail — méthodes concrètes, ton qui leur parle.</p>
+          <p style="margin-top:24px"><a href="ecoles-v3.html" class="tlink">Voir les interventions écoles →</a></p>
+        </div>
+        <figure class="rv d2" style="grid-column:8 / 13">
+          <div class="ph" style="height:360px;border-radius:16px"><img src="../images/c5-students.jpg" alt="Atelier avec des étudiants" /></div>
+          <figcaption class="cap">Atelier employabilité — promo étudiante</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<div class="spread"><div class="wrap" style="padding-top:0;padding-bottom:0"><div class="grid"><div class="rule"></div></div></div></div>
+
+<!-- 02 · PARTICULIERS + IKIGAI -->
+<section class="spread" id="particuliers" style="background:#fff">
+  <div class="wrap">
+    <div class="grid">
+      <div class="band shead">
+        <figure class="rv" style="grid-column:1 / 6">
+          <div class="ph" style="height:432px;border-radius:16px"><img src="../images/c1-coaching.jpg" alt="Séance de coaching individuel" /></div>
+          <figcaption class="cap">Accompagnement individuel — séance découverte</figcaption>
+        </figure>
+        <div class="rv d1" style="grid-column:6 / 13">
+          <p class="numeral" style="margin-bottom:4px">02</p>
+          <p class="kicker">Pour vous</p>
+          <h2>Trouver le poste — et le sens — qui vous ressemble.</h2>
+          <p class="body" style="margin-top:20px">Reconversion, prise de poste, doute professionnel : on clarifie ce qui compte vraiment pour vous, puis on construit un cap concret, étape par étape.</p>
+          <div class="ikigai" style="margin-top:24px">
+            <svg class="venn" width="96" height="96" viewBox="0 0 96 96" aria-hidden="true">
+              <circle cx="40" cy="40" r="26" fill="#1F7F8C" fill-opacity=".22" stroke="#1F7F8C" stroke-width="1.5"/>
+              <circle cx="56" cy="40" r="26" fill="#67794C" fill-opacity=".22" stroke="#67794C" stroke-width="1.5"/>
+              <circle cx="40" cy="56" r="26" fill="#67794C" fill-opacity=".18" stroke="#67794C" stroke-width="1.5"/>
+              <circle cx="56" cy="56" r="26" fill="#1F7F8C" fill-opacity=".18" stroke="#1F7F8C" stroke-width="1.5"/>
+              <circle cx="48" cy="48" r="5" fill="#1F7F8C"/>
+            </svg>
+            <div class="txt">
+              <p style="margin:0;font-family:var(--serif);font-weight:600;font-size:19px;line-height:24px"><strong>La méthode Ikigai</strong></p>
+              <p class="body" style="margin-top:6px">Le point de rencontre entre ce que vous aimez, ce dans quoi vous excellez, ce dont le monde a besoin et ce pour quoi on vous rémunère.</p>
+            </div>
+          </div>
+          <p style="margin-top:24px"><a href="particuliers-v3.html" class="tlink">Découvrir l'accompagnement particuliers →</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- 03 · ENTREPRISES (compact) -->
+<section class="spread" id="entreprises">
+  <div class="wrap" style="padding-top:64px;padding-bottom:64px">
+    <div class="grid">
+      <div class="band shead" style="align-items:center">
+        <p class="numeral rv" style="grid-column:1 / 3">03</p>
+        <div class="rv d1" style="grid-column:3 / 8">
+          <p class="kicker">Pour les entreprises</p>
+          <h2 style="font-size:clamp(24px,3vw,34px);line-height:40px">Recruter juste, faire grandir vos équipes.</h2>
+          <p class="body" style="margin-top:12px">Conseil recrutement, conférences, coaching de managers.</p>
+        </div>
+        <div class="rv d2" style="grid-column:8 / 11;align-self:center">
+          <a href="entreprises-v3.html" class="tlink">En savoir plus →</a>
+        </div>
+        <figure class="rv d2" style="grid-column:11 / 13">
+          <div class="ph" style="height:144px;border-radius:12px"><img src="../images/c2-meeting.jpg" alt="Réunion en entreprise" /></div>
+        </figure>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="spread" style="background:var(--ink);color:var(--paper)">
+  <div class="wrap" style="padding-top:72px;padding-bottom:72px">
+    <div class="grid">
+      <div class="band">
+        <div class="stat rv" style="grid-column:1 / 5"><div class="n" style="color:#fff" data-count="2000" data-prefix="+">+2000</div><div class="l" style="color:#9FB0A2">personnes accompagnées</div></div>
+        <div class="stat rv d1" style="grid-column:5 / 9"><div class="n" style="color:#fff" data-count="15">15</div><div class="l" style="color:#9FB0A2">écoles partenaires</div></div>
+        <div class="stat rv d2" style="grid-column:9 / 13"><div class="n" style="color:#fff" data-count="9300">9 300</div><div class="l" style="color:#9FB0A2">abonnés sur LinkedIn</div></div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- RDV -->
+<section class="spread" id="rdv" style="background:#fff">
+  <div class="wrap" style="padding-top:80px;padding-bottom:80px">
+    <div class="grid">
+      <div class="band">
+        <div class="rv" style="grid-column:1 / 9">
+          <p class="kicker">On fait connaissance&nbsp;?</p>
+          <h2 class="shead" style="font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:56px;margin:0">30 minutes, offertes, sans engagement.</h2>
+          <p class="lede" style="margin-top:20px">En visio ou par téléphone. On regarde où vous en êtes, et si l'on avance ensemble.</p>
+          <div style="margin-top:32px;display:flex;gap:14px;flex-wrap:wrap">
+            <a href="#" class="btn">Réserver mon créneau</a>
+            <a href="tel:+33676921574" class="btn ghost">06 76 92 15 74</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="spread" id="histoire">
+  <div class="wrap">
+    <div class="grid">
+      <div class="band">
+        <div style="grid-column:1 / 6">
+          <svg width="200" height="48" viewBox="36 44 690 176" aria-hidden="true">
+            <g transform="translate(104,116)">
+              <circle r="64" fill="none" stroke="#FAF7F1" stroke-width="7"/>
+              <path d="M-42,0 Q0,-36 42,0 Q0,36 -42,0 Z" fill="#1C2721" stroke="#FAF7F1" stroke-width="6" stroke-linejoin="round"/>
+              <circle r="16" fill="#3FA8B5"/><circle r="6.6" fill="#FAF7F1"/>
+            </g>
+            <text x="196" y="128" font-family="Fraunces,serif" font-size="66" font-weight="600" fill="#FAF7F1">Oz Coaching</text>
+            <path d="M241,158 C 306,140 368,178 434,158 S 582,140 641,160" fill="none" stroke="#3FA8B5" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <p class="body" style="color:#B9C2B7;margin-top:16px;max-width:300px">L'œil du recruteur, la posture du coach. Entre Montpellier et Nîmes — en visio partout en France et à l'international.</p>
+        </div>
+        <div style="grid-column:7 / 9">
+          <p class="foot-h">Accompagnements</p>
+          <a href="ecoles-v3.html">Écoles</a><br><a href="particuliers-v3.html">Particuliers</a><br><a href="entreprises-v3.html">Entreprises</a>
+        </div>
+        <div style="grid-column:9 / 11">
+          <p class="foot-h">OZ Coaching</p>
+          <a href="#histoire">Mon histoire</a><br><a href="#rdv">Contact</a><br><a href="https://www.linkedin.com/in/aureliagrino/">LinkedIn</a>
+        </div>
+        <div style="grid-column:11 / 13">
+          <p class="foot-h">Contact</p>
+          <a href="tel:+33676921574">06 76 92 15 74</a><br><a href="mailto:aurelia.grino@outlook.fr">aurelia.grino@outlook.fr</a>
+        </div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</footer>
+
+<script src="oz-v3.js"></script>
+</body></html>

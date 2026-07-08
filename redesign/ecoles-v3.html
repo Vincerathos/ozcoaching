@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Écoles — Interventions & employabilité | OZ Coaching (maquette v3)</title>
+<!-- MAQUETTE v3 — textes PROVISOIRES. Touche « G » = grille. -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="oz-v3.css">
+</head>
+<body>
+<button class="toggle" id="gridToggle" aria-pressed="false"><span class="dot"></span><span class="lbl">Voir la grille</span></button>
+
+<header>
+  <div class="nav">
+    <a href="accueil-v3.html" aria-label="OZ Coaching" style="text-decoration:none">
+      <svg width="176" height="42" viewBox="36 44 690 176" aria-hidden="true">
+        <g transform="translate(104,116)">
+          <circle r="64" fill="none" stroke="#1C2721" stroke-width="7"/>
+          <path d="M-42,0 Q0,-36 42,0 Q0,36 -42,0 Z" fill="#FAF7F1" stroke="#1C2721" stroke-width="6" stroke-linejoin="round"/>
+          <circle r="16" fill="#1F7F8C"/><circle r="6.6" fill="#1C2721"/><circle cx="5.6" cy="-5.6" r="2.8" fill="#FAF7F1"/>
+        </g>
+        <text x="196" y="128" font-family="Fraunces,serif" font-size="66" font-weight="600" fill="#1C2721">Oz Coaching</text>
+        <path d="M241,158 C 306,140 368,178 434,158 S 582,140 641,160" fill="none" stroke="#1F7F8C" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <a href="ecoles-v3.html" class="on">Écoles</a>
+      <a href="particuliers-v3.html">Particuliers</a>
+      <a href="entreprises-v3.html">Entreprises</a>
+      <a href="accueil-v3.html#histoire">Mon histoire</a>
+    </nav>
+    <a href="accueil-v3.html#rdv" class="navcta">Prendre RDV</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="spread" style="padding-top:8px">
+  <div class="wrap" style="padding-bottom:56px">
+    <div class="grid">
+      <div class="band"><p class="provisional rv">▚ Maquette de travail — textes provisoires · touche « G » pour voir la grille</p></div>
+      <div class="band" style="margin-top:16px">
+        <div class="rv" style="grid-column:1 / 8">
+          <p class="kicker">01 — Pour les écoles</p>
+          <h1 class="masthead">Préparer vos promotions au <em>monde du travail</em>.</h1>
+        </div>
+      </div>
+      <div class="band" style="margin-top:16px">
+        <div class="rv d1" style="grid-column:1 / 6">
+          <p class="lede">De l'atelier CV au coaching d'alternance : des interventions concrètes, un regard de recruteuse, et un ton qui parle vraiment aux étudiants.</p>
+          <div style="margin-top:32px"><a href="#devis" class="btn">Demander une intervention</a></div>
+        </div>
+        <figure class="rv d2" style="grid-column:7 / 13">
+          <div class="ph" style="height:432px;border-radius:16px"><img src="../images/c5-students.jpg" alt="Atelier avec une promotion étudiante" /></div>
+          <figcaption class="cap">Atelier employabilité — en promo</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- INTERVENTIONS (6 cartes) -->
+<section class="spread" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap" style="padding-top:64px;padding-bottom:72px">
+    <div class="grid">
+      <div class="band" style="margin-bottom:16px"><div class="rv" style="grid-column:1 / 9"><p class="kicker euca">Mes interventions</p><p class="shead"><span style="font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:44px">Six formats, un objectif : l'employabilité.</span></p></div></div>
+      <div class="band">
+        <div class="card rv" style="grid-column:1 / 5"><p class="k">01</p><h3>CV & LinkedIn qui sortent du lot</h3><p class="body">Relire, restructurer, donner de l'impact — version papier et profil en ligne.</p></div>
+        <div class="card rv d1" style="grid-column:5 / 9"><p class="k">02</p><h3>Entretiens & pitch</h3><p class="body">Se présenter, répondre aux questions pièges, gérer le stress, convaincre.</p></div>
+        <div class="card rv d2" style="grid-column:9 / 13"><p class="k">03</p><h3>Posture pro & soft skills</h3><p class="body">Codes de l'entreprise, communication, savoir-être qui font la différence.</p></div>
+        <div class="card rv" style="grid-column:1 / 5"><p class="k">04</p><h3>Coaching d'alternance</h3><p class="body">Décrocher, réussir et vivre son alternance — côté étudiant comme entreprise.</p></div>
+        <div class="card rv d1" style="grid-column:5 / 9"><p class="k">05</p><h3>Job dating & réseau</h3><p class="body">Préparer un forum, aborder un recruteur, faire vivre son réseau.</p></div>
+        <div class="card rv d2" style="grid-column:9 / 13"><p class="k">06</p><h3>Conférences inspirantes</h3><p class="body">Donner de l'élan à une promo : sens, confiance, projet professionnel.</p></div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="spread" style="background:var(--ink);color:var(--paper)">
+  <div class="wrap" style="padding-top:64px;padding-bottom:64px">
+    <div class="grid">
+      <div class="band">
+        <div class="stat rv" style="grid-column:1 / 5"><div class="n" style="color:#fff" data-count="15">15</div><div class="l" style="color:#9FB0A2">écoles partenaires</div></div>
+        <div class="stat rv d1" style="grid-column:5 / 9"><div class="n" style="color:#fff" data-count="1300" data-suffix="+">1 300+</div><div class="l" style="color:#9FB0A2">alternants accompagnés</div></div>
+        <div class="stat rv d2" style="grid-column:9 / 13"><div class="n" style="color:#fff" data-count="700">700</div><div class="l" style="color:#9FB0A2">entreprises mobilisées</div></div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- ÉCOLES PARTENAIRES (logos) -->
+<section class="spread">
+  <div class="wrap" style="padding-top:64px;padding-bottom:64px">
+    <div class="grid">
+      <div class="band" style="margin-bottom:8px"><div class="rv" style="grid-column:1 / 9"><p class="kicker">Ils me font confiance</p><p class="shead"><span style="font-family:var(--serif);font-weight:600;font-size:clamp(24px,3vw,34px);line-height:40px">Une quinzaine d'écoles partenaires.</span></p></div></div>
+      <div class="band">
+        <div class="rv" style="grid-column:1 / 13;display:flex;flex-wrap:wrap;gap:16px;margin-top:8px">
+          <span class="logotile"><img src="../images/ecoles/mbs.png" alt="Montpellier Business School"></span>
+          <span class="logotile"><img src="../images/ecoles/studi.png" alt="Studi"></span>
+          <span class="logotile"><img src="../images/ecoles/rocket-school.png" alt="Rocket School"></span>
+          <span class="logotile"><img src="../images/ecoles/iscod.png" alt="ISCOD"></span>
+          <span class="logotile"><img src="../images/ecoles/epf.png" alt="EPF"></span>
+          <span class="logotile"><img src="../images/ecoles/wis.png" alt="WIS"></span>
+          <span class="logotile"><img src="../images/ecoles/academee.png" alt="Académée"></span>
+          <span class="logotile"><img src="../images/ecoles/galileo.png" alt="Galileo"></span>
+          <span class="logotile"><img src="../images/ecoles/cube.png" alt="Cube"></span>
+          <span class="logotile"><img src="../images/ecoles/esg.png" alt="ESG"></span>
+          <span class="logotile"><img src="../images/ecoles/hecten.png" alt="Hecten"></span>
+          <span class="logotile"><img src="../images/ecoles/la-merkanterie.png" alt="La Merkanterie"></span>
+        </div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- DEVIS / CTA -->
+<section class="spread" id="devis" style="background:#fff">
+  <div class="wrap" style="padding-top:72px;padding-bottom:80px">
+    <div class="grid">
+      <div class="band">
+        <figure class="rv" style="grid-column:1 / 6"><div class="ph" style="height:336px;border-radius:16px"><img src="../images/s-conf.jpg" alt="Conférence devant une promotion"></div><figcaption class="cap">Conférence de rentrée — promotion</figcaption></figure>
+        <div class="rv d1" style="grid-column:7 / 13">
+          <p class="kicker">Construisons votre programme</p>
+          <h2 class="shead" style="font-family:var(--serif);font-weight:600;font-size:clamp(28px,3.8vw,44px);line-height:48px;margin:0">Parlons de votre promo.</h2>
+          <p class="lede" style="margin-top:20px">Je m'adapte à votre calendrier, votre filière et votre budget — atelier ponctuel ou programme sur l'année.</p>
+          <div style="margin-top:32px;display:flex;gap:14px;flex-wrap:wrap">
+            <a href="accueil-v3.html#rdv" class="btn">Demander un devis</a>
+            <a href="mailto:aurelia.grino@outlook.fr" class="btn ghost">aurelia.grino@outlook.fr</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="spread">
+  <div class="wrap">
+    <div class="grid">
+      <div class="band">
+        <div style="grid-column:1 / 6">
+          <svg width="200" height="48" viewBox="36 44 690 176" aria-hidden="true">
+            <g transform="translate(104,116)"><circle r="64" fill="none" stroke="#FAF7F1" stroke-width="7"/><path d="M-42,0 Q0,-36 42,0 Q0,36 -42,0 Z" fill="#1C2721" stroke="#FAF7F1" stroke-width="6" stroke-linejoin="round"/><circle r="16" fill="#3FA8B5"/><circle r="6.6" fill="#FAF7F1"/></g>
+            <text x="196" y="128" font-family="Fraunces,serif" font-size="66" font-weight="600" fill="#FAF7F1">Oz Coaching</text>
+            <path d="M241,158 C 306,140 368,178 434,158 S 582,140 641,160" fill="none" stroke="#3FA8B5" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <p class="body" style="color:#B9C2B7;margin-top:16px;max-width:300px">L'œil du recruteur, la posture du coach. Entre Montpellier et Nîmes — en visio partout en France.</p>
+        </div>
+        <div style="grid-column:7 / 9"><p class="foot-h">Accompagnements</p><a href="ecoles-v3.html">Écoles</a><br><a href="particuliers-v3.html">Particuliers</a><br><a href="entreprises-v3.html">Entreprises</a></div>
+        <div style="grid-column:9 / 11"><p class="foot-h">OZ Coaching</p><a href="accueil-v3.html#histoire">Mon histoire</a><br><a href="accueil-v3.html#rdv">Contact</a><br><a href="https://www.linkedin.com/in/aureliagrino/">LinkedIn</a></div>
+        <div style="grid-column:11 / 13"><p class="foot-h">Contact</p><a href="tel:+33676921574">06 76 92 15 74</a><br><a href="mailto:aurelia.grino@outlook.fr">aurelia.grino@outlook.fr</a></div>
+      </div>
+    </div>
+    <div class="guides" aria-hidden="true"><div class="cols"></div><div class="rows"></div><div class="mline l"></div><div class="mline r"></div></div>
+  </div>
+</footer>
+
+<script src="oz-v3.js"></script>
+</body></html>
