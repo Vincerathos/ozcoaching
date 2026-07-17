@@ -25,12 +25,19 @@ Site vitrine multi-pages pour **OZ Coaching – Aurélia Grino**, coach emploi, 
 - Domaine + hébergement (Hostinger), remplacer `https://www.ozcoaching.fr/`
 
 ## Génération de leads (juillet 2026)
-- `oeil-recruteuse.html` + `oeil.js` — outil « L'œil de la recruteuse » : analyse titre LinkedIn / accroche CV
-  (scoring 100 % côté client), jauge animée, capture e-mail. Promo sur l'accueil + lien nav/footer.
+- `oeil-recruteuse.html` + `oeil.js` — outil « L'œil de la recruteuse », 2 parcours :
+  - **J'écris** : analyse titre LinkedIn / accroche CV (scoring 100 % côté client), jauge animée.
+  - **J'importe mon CV (PDF)** : extraction du texte via pdf.js (chargé depuis CDN cloudflare, parcours PDF
+    uniquement), détection des PDF illisibles (image/colonnes). Analyse IA **à brancher** :
+    remplir la constante `CV_ANALYZE_ENDPOINT` en haut de `oeil.js` avec l'URL d'un endpoint (ex. edge function
+    Supabase appelant Claude) qui reçoit `{texte, cible}` et renvoie `{score, verdict:{t,d}, forces, alertes, conseils}`.
+    Tant qu'elle est vide → capture du CV + lead pour **audit humain** par Aurélia (source `cv`).
+  - Capture e-mail sur les deux parcours. Promo sur l'accueil + lien nav/footer.
 - Quiz d'orientation (accueil) : résultat personnalisé avec offre recommandée + capture e-mail « plan d'action ».
 - Workflow n8n `OZ Coaching — Leads site (outil + quiz) → séquence email` (ID `UT8YMlsURN9g59Pk`) :
   - Webhook actif : `POST https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead` (capture les leads, visibles dans les exécutions)
-  - Séquence : e-mail 1 immédiat (rapport outil / plan quiz) → J+2 histoire → J+5 preuve sociale → J+9 offre Pack Décollage
+  - Séquence : e-mail 1 immédiat (rapport outil / plan quiz / accusé de réception CV) → J+2 histoire → J+5 preuve sociale → J+9 offre Pack Décollage
+  - Sources gérées : `outil` (score texte), `quiz` (plan d'action par profil), `cv` (accusé réception + audit 48h)
   - ⚠️ **Les 4 nœuds d'envoi sont désactivés** : l'expéditeur est réglé sur `contact@ozcoaching.fr`, à activer
     seulement après vérification du domaine ozcoaching.fr dans Resend (+ crédential Resend dédiée si compte séparé).
     En attendant, aucun e-mail ne part ; les leads sont capturés.

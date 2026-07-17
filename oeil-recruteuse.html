@@ -54,7 +54,16 @@
   .scan-line{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--ocean),transparent);border-radius:3px;opacity:0;pointer-events:none}
   @keyframes scanmove{0%{top:8%;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:92%;opacity:0}}
   .scanning .scan-line{animation:scanmove 1.6s ease-in-out}
-  @media(max-width:600px){.oeil-card{padding:30px 22px}}
+  .path-pick{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .path-btn{display:flex;gap:14px;align-items:center;text-align:left;background:var(--cream);border:1.5px solid #E2DCC9;border-radius:16px;padding:18px 20px;cursor:pointer;font-family:var(--sans);transition:all .2s}
+  .path-btn:hover{border-color:var(--ocean)}
+  .path-btn.on{border-color:var(--ocean);background:var(--ocean-soft);box-shadow:0 0 0 3px rgba(31,127,140,.12)}
+  .path-btn .pe{flex:none;width:44px;height:44px;border-radius:12px;background:#fff;border:1.5px solid #E8E1D0;display:flex;align-items:center;justify-content:center;font-size:22px}
+  .path-btn strong{display:block;font-weight:500;font-size:15.5px;color:var(--ink)}
+  .path-btn .d{font-size:13px;color:var(--muted)}
+  #cv-drop{border:2px dashed #C9D3B8;border-radius:18px;padding:38px 24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--cream)}
+  #cv-drop:hover,#cv-drop.drag{border-color:var(--ocean);background:var(--ocean-soft)}
+  @media(max-width:600px){.oeil-card{padding:30px 22px}.path-pick{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -107,20 +116,51 @@
   <div class="wrap" style="max-width:860px">
     <div class="oeil-card rv" id="oeil-box">
       <div class="scan-line"></div>
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px">
-        <div class="mode-switch" role="tablist" aria-label="Type de texte à analyser">
-          <button type="button" class="on" data-mode="titre" role="tab" aria-selected="true">Titre LinkedIn / CV</button>
-          <button type="button" data-mode="accroche" role="tab" aria-selected="false">Accroche · « À propos »</button>
+      <p class="eyebrow" style="margin-bottom:14px">Comment voulez-vous procéder&nbsp;?</p>
+      <div class="path-pick">
+        <button type="button" class="path-btn on" data-path="ecrire">
+          <span class="pe">✍️</span>
+          <span><strong>J'écris mon texte</strong><span class="d">Titre LinkedIn ou accroche — analyse instantanée</span></span>
+        </button>
+        <button type="button" class="path-btn" data-path="pdf">
+          <span class="pe">📄</span>
+          <span><strong>J'importe mon CV (PDF)</strong><span class="d">Audit complet de votre CV par la recruteuse</span></span>
+        </button>
+      </div>
+
+      <!-- PARCOURS : J'ÉCRIS -->
+      <div id="path-ecrire" style="margin-top:24px">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px">
+          <div class="mode-switch" role="tablist" aria-label="Type de texte à analyser">
+            <button type="button" class="on" data-mode="titre" role="tab" aria-selected="true">Titre LinkedIn / CV</button>
+            <button type="button" data-mode="accroche" role="tab" aria-selected="false">Accroche · « À propos »</button>
+          </div>
+          <span class="hand" style="font-size:22px;color:var(--ocean)">l'œil ne rate rien 👁️</span>
         </div>
-        <span class="hand" style="font-size:22px;color:var(--ocean)">l'œil ne rate rien 👁️</span>
+        <label for="oeil-txt" style="position:absolute;left:-9999px">Votre texte à analyser</label>
+        <textarea id="oeil-txt" placeholder="Ex. « Chef de projet digital | J'aide les PME à doubler leur visibilité en ligne | 40+ sites livrés »"></textarea>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:14px">
+          <span id="oeil-count" style="font-size:13px;color:var(--muted)">0 caractère</span>
+          <button type="button" id="oeil-go" class="btn btn-dark">Passer sous l'œil de la recruteuse 👁️</button>
+        </div>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:14px">🔒 L'analyse se fait dans votre navigateur : votre texte n'est envoyé nulle part (sauf si vous demandez le rapport par e-mail).</p>
       </div>
-      <label for="oeil-txt" class="sr-only" style="position:absolute;left:-9999px">Votre texte à analyser</label>
-      <textarea id="oeil-txt" placeholder="Ex. « Chef de projet digital | J'aide les PME à doubler leur visibilité en ligne | 40+ sites livrés »"></textarea>
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:14px">
-        <span id="oeil-count" style="font-size:13px;color:var(--muted)">0 caractère</span>
-        <button type="button" id="oeil-go" class="btn btn-dark">Passer sous l'œil de la recruteuse 👁️</button>
+
+      <!-- PARCOURS : J'IMPORTE UN PDF -->
+      <div id="path-pdf" hidden style="margin-top:24px">
+        <div id="cv-drop" role="button" tabindex="0" aria-label="Déposer ou choisir un CV en PDF">
+          <div style="font-size:34px">📄</div>
+          <p style="font-size:16px;font-weight:500;margin-top:8px">Déposez votre CV en PDF ici</p>
+          <p style="font-size:13.5px;color:var(--muted);margin-top:4px">ou <span style="color:var(--ocean);text-decoration:underline">cliquez pour choisir un fichier</span> — PDF, 8 Mo max</p>
+        </div>
+        <input type="file" id="cv-file" accept="application/pdf,.pdf" hidden />
+        <p id="cv-status" hidden style="margin-top:14px;font-size:14px;line-height:1.6"></p>
+        <div style="margin-top:16px">
+          <label for="cv-cible" style="font-size:13.5px;font-weight:500">Poste visé <span style="color:var(--muted);font-weight:400">(optionnel — affine l'analyse)</span></label>
+          <input id="cv-cible" placeholder="Ex. Chef de projet marketing digital" style="width:100%;border:1.5px solid #E2DCC9;border-radius:12px;padding:13px 16px;font-family:var(--sans);font-size:15px;background:var(--cream);margin-top:6px" />
+        </div>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:14px">🔒 Votre CV est lu dans votre navigateur, puis transmis de façon sécurisée à OZ Coaching pour l'analyse. Il n'est jamais partagé.</p>
       </div>
-      <p style="font-size:12.5px;color:var(--muted);margin-top:14px">🔒 L'analyse se fait dans votre navigateur : votre texte n'est envoyé nulle part (sauf si vous demandez le rapport par e-mail).</p>
     </div>
 
     <!-- RÉSULTATS -->
@@ -168,6 +208,27 @@
           </form>
         </div>
         <p id="oeil-sent" hidden style="margin-top:18px;background:#E7F3E9;border:1.5px solid #4CAF7D;color:#245E3C;border-radius:14px;padding:14px 20px;font-size:15px">✅ C'est parti ! Votre rapport arrive dans quelques minutes. Pensez à vérifier vos spams — les recruteuses aussi finissent parfois dedans.</p>
+      </div>
+    </div>
+
+    <!-- CV REÇU — capture audit (interim, tant que l'analyse IA n'est pas branchée) -->
+    <div id="cv-pending" hidden style="margin-top:34px">
+      <div class="oeil-card" style="background:var(--euca-soft);border-color:#DCE5CB">
+        <div class="grid2" style="align-items:center;gap:34px">
+          <div>
+            <span class="hand" style="font-size:24px">CV bien reçu 👁️</span>
+            <h3 style="font-size:22px;margin:8px 0 10px">Votre audit CV personnalisé, par la recruteuse</h3>
+            <p style="font-size:14.5px;color:var(--muted)">Aurélia passe votre CV au crible — structure, résultats mis en avant, ce qui accroche et ce qui fait fermer une porte — et vous renvoie un audit concret sous 48&nbsp;h. Laissez-lui où l'envoyer :</p>
+          </div>
+          <form id="cv-form" style="display:grid;gap:12px">
+            <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
+            <div><label for="cv-prenom" style="font-size:13.5px;font-weight:500">Votre prénom</label><input id="cv-prenom" name="prenom" required placeholder="Prénom" style="width:100%;border:1.5px solid #E2DCC9;border-radius:12px;padding:13px 16px;font-family:var(--sans);font-size:15px;background:#fff" /></div>
+            <div><label for="cv-email" style="font-size:13.5px;font-weight:500">Votre e-mail</label><input id="cv-email" type="email" name="email" required placeholder="vous@mail.fr" style="width:100%;border:1.5px solid #E2DCC9;border-radius:12px;padding:13px 16px;font-family:var(--sans);font-size:15px;background:#fff" /></div>
+            <button type="submit" class="btn btn-ocean" style="justify-content:center">Recevoir mon audit CV</button>
+            <p style="font-size:12px;color:var(--muted)">RGPD : votre CV et votre e-mail servent à réaliser et vous envoyer l'audit. Aucun partage, désinscription en 1 clic.</p>
+          </form>
+        </div>
+        <p id="cv-sent" hidden style="margin-top:18px;background:#E7F3E9;border:1.5px solid #4CAF7D;color:#245E3C;border-radius:14px;padding:14px 20px;font-size:15px">✅ Bien reçu ! Votre audit CV arrive sous 48&nbsp;h ouvrées. Pensez à vérifier vos spams.</p>
       </div>
     </div>
   </div>
