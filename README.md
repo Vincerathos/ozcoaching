@@ -24,5 +24,17 @@ Site vitrine multi-pages pour **OZ Coaching – Aurélia Grino**, coach emploi, 
 - Validation des tarifs (`OFFRE-TARIFS-PROPOSITION.md`)
 - Domaine + hébergement (Hostinger), remplacer `https://www.ozcoaching.fr/`
 
+## Génération de leads (juillet 2026)
+- `oeil-recruteuse.html` + `oeil.js` — outil « L'œil de la recruteuse » : analyse titre LinkedIn / accroche CV
+  (scoring 100 % côté client), jauge animée, capture e-mail. Promo sur l'accueil + lien nav/footer.
+- Quiz d'orientation (accueil) : résultat personnalisé avec offre recommandée + capture e-mail « plan d'action ».
+- Workflow n8n `OZ Coaching — Leads site (outil + quiz) → séquence email` (ID `UT8YMlsURN9g59Pk`) :
+  - Webhook actif : `POST https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead` (capture les leads, visibles dans les exécutions)
+  - Séquence : e-mail 1 immédiat (rapport outil / plan quiz) → J+2 histoire → J+5 preuve sociale → J+9 offre Pack Décollage
+  - ⚠️ **Les 4 nœuds d'envoi sont désactivés** : l'expéditeur est réglé sur `contact@ozcoaching.fr`, à activer
+    seulement après vérification du domaine ozcoaching.fr dans Resend (+ crédential Resend dédiée si compte séparé).
+    En attendant, aucun e-mail ne part ; les leads sont capturés.
+  - Champ `test: true` dans le payload = e-mail 1 seul, pas de séquence.
+
 ## Docs de travail
 `SEO-PLAN.md` · `OFFRE-TARIFS-PROPOSITION.md` · `AUTOMATISATIONS.md`
