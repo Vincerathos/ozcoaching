@@ -15,13 +15,10 @@
 
    • Znikomit — police display de la charte. Licence SIL OFL 1.1 (gluk),
      usage commercial autorisé. Utilisée sur les titres de héros.
-   • Manrope — substitut de Neue Montréal pour le texte courant, choisi après
-     comparaison visuelle avec l'échantillon de la charte (le plus proche en
-     graisse et en rythme parmi Space Grotesk / Geist / Archivo). SIL OFL.
-   • Neue Montréal — police officielle, COMMERCIALE (Pangram Pangram) : elle
-     nécessite une licence webfont. Les @font-face sont prêts ci-dessous, il
-     suffit de déposer les .woff2 dans /fonts et de retirer les commentaires ;
-     la pile --sans la place déjà en premier. Voir fonts/README.md.
+   • Neue Montréal — police officielle de la charte, utilisée pour tout le texte.
+     Fournie par Aurélia (fonderie Pangram Pangram, police commerciale : l'usage
+     web suppose une licence webfont détenue par elle).
+   • Manrope — filet de sécurité si une graisse manque à l'appel. SIL OFL.
    -------------------------------------------------------------------------- */
 @font-face{
   font-family:'Znikomit';
@@ -34,12 +31,14 @@
   font-weight:200 800;font-style:normal;font-display:swap;
 }
 
-/* Neue Montréal — à activer dès que les fichiers sous licence sont dans /fonts :
+/* Neue Montréal — police officielle de la charte (Pangram Pangram Foundry).
+   Le poids 200 demandé par certains titres n'existe pas dans la famille : le
+   navigateur retombe sur Light (300), ce qui est le rendu voulu. */
 @font-face{font-family:'Neue Montreal';src:url('fonts/NeueMontreal-Light.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap}
 @font-face{font-family:'Neue Montreal';src:url('fonts/NeueMontreal-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'Neue Montreal';src:url('fonts/NeueMontreal-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:'Neue Montreal';src:url('fonts/NeueMontreal-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
-*/
+@font-face{font-family:'Neue Montreal';src:url('fonts/NeueMontreal-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
 
 :root{
   /* --- couleurs charte --- */
@@ -65,7 +64,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:300;line-height:1.16;letter-spacin
 h1{font-weight:200}
 a{color:inherit;text-decoration:none}
 img{max-width:100%}
-.eyebrow{font-weight:600;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan)}
+.eyebrow{font-weight:600;font-size:12.5px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan)}
 /* .hand : ancien accent manuscrit — la charte v3 n'a pas de manuscrite,
    on garde la classe (utilisée dans le HTML) mais en capitales fines cyan. */
 .hand{font-family:var(--sans);font-size:14px!important;font-weight:600;letter-spacing:2.4px;text-transform:uppercase;color:var(--cyan);line-height:1.5;display:inline-block}
@@ -308,7 +307,7 @@ img,svg,video{max-width:100%}
   .hero{padding:38px 0 52px}
   .hero h1,.page-hero h1{font-size:clamp(34px,9.4vw,46px);letter-spacing:-.01em}
   /* eyebrow : en capitales espacées, un libellé long mange 3 lignes sur mobile */
-  .eyebrow{font-size:11px;letter-spacing:1.8px}
+  .eyebrow{font-size:11.5px;letter-spacing:1.8px}
   .hero p.lead,.page-hero p.lead{font-size:16.5px}
   .btn{padding:13px 22px;font-size:14px}
   .hero-actions .btn,.hero .btn,.page-hero .btn{width:100%;justify-content:center}

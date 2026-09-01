@@ -13,30 +13,38 @@ La charte graphique (`design/charte-graphique-ag.png`) impose deux polices :
 |---|---|
 | `Znikomit.woff2` | ✅ **en place** — licence SIL OFL 1.1 (voir `Znikomit-OFL.txt`), usage commercial autorisé |
 | `Manrope-Variable.woff2` | ✅ **en place** — substitut de Neue Montréal, SIL OFL, variable 200→800 |
-| `NeueMontreal-*.woff2` | ⬜ à fournir (licence à acquérir, voir ci-dessous) |
+| `NeueMontreal-*.woff2` | ✅ **en place** — Light, Regular, Medium, Bold + Italic, fournis par Aurélia |
 
 Tout est **hébergé en local** : le site ne fait plus aucune requête vers Google Fonts,
 donc aucune adresse IP de visiteur n'est transmise à un tiers (point RGPD non négligeable —
 la CNIL et plusieurs autorités européennes ont sanctionné le chargement direct de Google Fonts).
 
-### Pour activer Neue Montréal
+### Neue Montréal — en place ✅
 
-1. Déposer les 4 fichiers ici :
-   ```
-   fonts/NeueMontreal-Light.woff2      (300)
-   fonts/NeueMontreal-Regular.woff2    (400)
-   fonts/NeueMontreal-Medium.woff2     (500)
-   fonts/NeueMontreal-Bold.woff2       (700)
-   ```
-2. Dans `styles.css`, retirer les `/*` `*/` autour du bloc « Neue Montréal — à activer… ».
+Fichiers fournis par Aurélia (OTF), convertis en `.woff2` : Light (300), Regular (400),
+Medium (500), Bold (700) et Italic (400) — soit 118 Ko au total pour les cinq.
+Métadonnées d'origine : Pangram Pangram Foundry, dessinée par Mathieu Desjardins &
+Sebastien Tremblay, version 1.000.
 
-C'est tout : la pile `--sans` la place déjà avant Manrope, tout le site suivra.
+⚠️ **Point de vigilance licence.** Les fichiers ne portent aucune licence embarquée
+(champs `license` / `licenseURL` vides), donc rien ne permet de vérifier depuis les fichiers
+qu'une licence *webfont* a bien été acquise. Chez Pangram Pangram, la licence bureau (celle
+qui permet d'installer la police sur un ordinateur) **ne couvre pas** la diffusion sur un
+site : c'est une licence distincte. À confirmer avec Aurélia avant la mise en ligne.
 
-### Pourquoi Manrope comme substitut
+Notes techniques :
+- Le poids **200** demandé par certains titres n'existe pas dans la famille (la plus légère
+  est Light/300) : le navigateur retombe sur Light, ce qui est le rendu attendu.
+- Les fichiers `Light` et `Medium` déclarent en interne un style « Regular » — sans effet ici,
+  puisque chaque `@font-face` fixe explicitement son `font-weight`.
+- Neue Montréal a une **hauteur d'x 5,6 % plus faible que Manrope** : les plus petits textes
+  (mentions RGPD, notes) ont été remontés de 12 → 12,5 px pour compenser.
 
-Le choix n'est pas arbitraire : Manrope, Space Grotesk, Geist et Archivo ont été comparées
-au même corps avec l'échantillon « Neue Montréal » extrait de la charte. Manrope est la plus
-proche en graisse et en rythme ; Space Grotesk est trop large et espacée, Geist trop dense.
+### Manrope — filet de sécurité
+
+Conservée après Neue Montréal dans la pile `--sans` : si une graisse venait à manquer, le
+rendu reste cohérent. Choisie après comparaison au même corps de Manrope, Space Grotesk,
+Geist et Archivo avec l'échantillon de la charte — la plus proche en graisse et en rythme.
 
 ## Où obtenir les fichiers
 

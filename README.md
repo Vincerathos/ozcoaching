@@ -33,15 +33,14 @@ Référence : `design/charte-graphique-ag.png`
 
 **Typographie officielle : Neue Montréal (texte) + Znikomit (titres de héros).**
 
-- **Znikomit est en place** ✅ — licence SIL OFL 1.1, usage commercial autorisé. Elle habille
-  les titres de héros, en écho au logo qui est composé dans cette même police.
-- **Neue Montréal** est **commerciale** (fonderie Pangram Pangram, licences dès ~40 $) : un usage
-  web nécessite une licence webfont, distincte de la licence bureau. En attendant, **Manrope**
-  assure le texte courant — choisie après comparaison au même corps avec l'échantillon de la
-  charte (plus proche que Space Grotesk, Geist ou Archivo). La pile CSS place déjà
-  `'Neue Montreal'` en premier : déposer les `.woff2` et décommenter le bloc suffit.
-- **Toutes les polices sont hébergées en local** (`/fonts`) : plus aucune requête vers Google
-  Fonts, donc aucune IP de visiteur transmise à un tiers (RGPD).
+- **Les deux sont en place** ✅ — Neue Montréal (Light/Regular/Medium/Bold/Italic) pour le texte,
+  Znikomit pour les titres de héros, en écho au logo composé dans cette même police.
+- **Toutes hébergées en local** (`/fonts`) : plus aucune requête vers Google Fonts, donc aucune
+  IP de visiteur transmise à un tiers (RGPD).
+- ⚠️ **Licence Neue Montréal à confirmer** : police commerciale (Pangram Pangram) dont la
+  licence *webfont* est distincte de la licence bureau. Les fichiers fournis ne portent pas de
+  licence embarquée — à valider avec Aurélia avant mise en ligne. Manrope reste dans la pile
+  comme filet de sécurité.
 
 👉 Marche à suivre détaillée : [`fonts/README.md`](fonts/README.md)
 
@@ -87,8 +86,8 @@ Référence : `design/charte-graphique-ag.png`
       dans les mentions légales
 - [ ] Vérifier le domaine dans Resend, puis réactiver les 4 nœuds d'envoi n8n
 - [ ] Trancher le sort de `entreprises.html`
-- [ ] Polices officielles : obtenir les `.woff2` (licence webfont pour Neue Montréal),
-      voir `fonts/README.md`
+- [ ] Confirmer avec Aurélia qu'elle détient bien une licence **webfont** pour Neue Montréal
+      (distincte de la licence bureau) — voir `fonts/README.md`
 - [ ] Nouvelle photo d'Aurélia quand elle l'aura faite (`images/aurelia-2026.jpg` est une
       photo de transition, 635×869 — à ne pas afficher plus grand)
 
