@@ -1,25 +1,38 @@
-/* ===== OZ COACHING — DA v2 « Good vibes » : eucalyptus · océan · crème ===== */
+/* ===== OZ COACHING — Charte v3 (août 2026) =====
+   Couleurs officielles : #004956 pétrole · #0097b2 cyan · #231f20 encre · #f6f4f0 fond
+   Typo officielle : Neue Montréal (texte) + Znikomit (display).
+   Ces deux polices ne sont pas libres de droits pour le web : on utilise Manrope
+   comme substitut (grotesque néo-suisse aux proportions très proches). Si Aurélia
+   fournit les fichiers .woff2, il suffira de les déclarer en @font-face ci-dessous
+   et de remplacer la valeur de --sans / --serif.
+   ============================================================================= */
 :root{
-  --cream:#FAF7F1;--paper:#FFFFFF;--ink:#1C2721;--muted:#555D50;
-  --olive:#67794C;--olive-deep:#46552F;--euca:#E2E9D5;--euca-soft:#F0F3E8;
-  --ocean:#1F7F8C;--ocean-deep:#14606B;--ocean-soft:#DFEFF0;
-  --sand:#E9DFC8;--sun:#D99A34;
-  --serif:'Fraunces',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;--hand:'Caveat',cursive;
+  /* --- couleurs charte --- */
+  --petrole:#004956;--cyan:#0097B2;--encre:#231F20;--fond:#F6F4F0;
+  /* --- alias historiques (conservés pour ne pas casser les pages) --- */
+  --cream:#F6F4F0;--paper:#FFFFFF;--ink:#231F20;--muted:#5C6265;
+  --ocean:#0097B2;--ocean-deep:#004956;--ocean-soft:#E2F1F5;
+  --olive:#004956;--olive-deep:#00323C;--euca:#DCEBEF;--euca-soft:#EFF6F8;
+  --sand:#E8E4DC;--sun:#0097B2;
+  --serif:'Manrope',system-ui,sans-serif;--sans:'Manrope',system-ui,sans-serif;--hand:'Manrope',system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.7;font-weight:400;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1160px;margin:0 auto;padding:0 28px}
-h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12}
+h1,h2,h3{font-family:var(--serif);font-weight:300;line-height:1.16;letter-spacing:-.015em}
+h1{font-weight:200}
 a{color:inherit;text-decoration:none}
 img{max-width:100%}
-.eyebrow{font-weight:500;font-size:12.5px;letter-spacing:3px;text-transform:uppercase;color:var(--ocean)}
-.hand{font-family:var(--hand);font-size:24px;color:var(--olive);font-weight:500}
-em.hl{font-style:italic;position:relative;white-space:nowrap}
+.eyebrow{font-weight:600;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan)}
+/* .hand : ancien accent manuscrit — la charte v3 n'a pas de manuscrite,
+   on garde la classe (utilisée dans le HTML) mais en capitales fines cyan. */
+.hand{font-family:var(--sans);font-size:14px!important;font-weight:600;letter-spacing:2.4px;text-transform:uppercase;color:var(--cyan);line-height:1.5;display:inline-block}
+em.hl{font-style:normal;font-weight:400;position:relative;white-space:nowrap}
 em.hl svg{position:absolute;left:0;right:0;bottom:-6px;width:100%;height:12px}
 
 /* ---- NAV ---- */
-header{position:sticky;top:0;z-index:90;background:rgba(250,247,241,.9);backdrop-filter:blur(10px);border-bottom:1px solid #EAE4D5}
+header{position:sticky;top:0;z-index:90;background:rgba(246,244,240,.9);backdrop-filter:blur(10px);border-bottom:1px solid #EAE4D5}
 header nav{display:flex;align-items:center;justify-content:space-between;height:80px;gap:18px}
 .brand{display:flex;align-items:center;gap:11px;flex:none}
 .brand svg{display:block}
@@ -66,8 +79,8 @@ section.block{padding:96px 0}
 /* ---- CARTES / GRILLES ---- */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.card{background:var(--paper);border:1.5px solid #EBE5D6;border-radius:22px;padding:36px 32px;transition:transform .3s,box-shadow .3s,border-color .3s}
-.card:hover{transform:translateY(-6px);box-shadow:0 24px 46px -30px rgba(28,39,33,.35);border-color:var(--ocean)}
+.card{background:var(--paper);border:1.5px solid #E4E2DD;border-radius:22px;padding:36px 32px;transition:transform .3s,box-shadow .3s,border-color .3s}
+.card:hover{transform:translateY(-6px);box-shadow:0 24px 46px -30px rgba(35,31,32,.35);border-color:var(--ocean)}
 .card h3{font-size:22px;margin:16px 0 10px}
 .card p{font-size:15.5px;color:var(--muted);line-height:1.7}
 .ico{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;transition:transform .3s}
@@ -82,10 +95,10 @@ section.block{padding:96px 0}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
 .stat .num{font-family:var(--serif);font-size:clamp(36px,4.6vw,54px);font-weight:600;color:#fff}
 .stat .num span{color:var(--sun)}
-.stat .lbl{font-size:14px;color:rgba(250,247,241,.75);margin-top:6px}
+.stat .lbl{font-size:14px;color:rgba(246,244,240,.75);margin-top:6px}
 
 /* ---- TÉMOIGNAGES ---- */
-.quote{background:var(--paper);border:1.5px solid #EBE5D6;border-radius:22px;padding:36px;position:relative}
+.quote{background:var(--paper);border:1.5px solid #E4E2DD;border-radius:22px;padding:36px;position:relative}
 .quote .mark{font-family:var(--serif);font-size:70px;line-height:.5;color:var(--ocean);display:block;height:30px}
 .quote blockquote p{font-size:16.5px;font-style:italic;color:var(--ink);line-height:1.75;margin:16px 0 24px}
 .who{display:flex;align-items:center;gap:13px}
@@ -101,24 +114,24 @@ section.block{padding:96px 0}
 .rdv .btn{border-color:#fff}
 
 /* ---- FOOTER ---- */
-footer{background:var(--ink);color:rgba(250,247,241,.8);padding:64px 0 32px;margin-top:96px}
+footer{background:var(--ink);color:rgba(246,244,240,.8);padding:64px 0 32px;margin-top:96px}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;align-items:start;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.12)}
-footer h4{font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:1.8px;text-transform:uppercase;color:#A9C08F;margin-bottom:16px}
+footer h4{font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:1.8px;text-transform:uppercase;color:#7FD4E3;margin-bottom:16px}
 footer ul{list-style:none}
 footer li{margin-bottom:10px;font-size:14.5px}
 footer a:hover{color:#fff}
-.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:24px;font-size:13px;color:rgba(250,247,241,.55)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:24px;font-size:13px;color:rgba(246,244,240,.55)}
 
 /* ---- PAGES INTERNES ---- */
 .page-hero{padding:76px 0 60px;position:relative;overflow:hidden}
 .page-hero h1{font-size:clamp(34px,5vw,54px);max-width:760px}
 .page-hero p.lead{font-size:18px;color:var(--muted);max-width:600px;margin-top:20px;line-height:1.75}
 .steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.step{background:var(--paper);border:1.5px solid #EBE5D6;border-radius:20px;padding:30px 26px;position:relative}
+.step{background:var(--paper);border:1.5px solid #E4E2DD;border-radius:20px;padding:30px 26px;position:relative}
 .step .n{font-family:var(--serif);font-style:italic;font-size:44px;font-weight:600;color:var(--ocean);line-height:1}
 .step h3{font-size:19px;margin:12px 0 8px}
 .step p{font-size:14.5px;color:var(--muted)}
-details{background:var(--paper);border:1.5px solid #EBE5D6;border-radius:16px;margin-bottom:14px;padding:4px 26px;transition:border-color .25s}
+details{background:var(--paper);border:1.5px solid #E4E2DD;border-radius:16px;margin-bottom:14px;padding:4px 26px;transition:border-color .25s}
 details[open]{border-color:var(--ocean)}
 summary{font-family:var(--serif);font-size:19px;font-weight:600;cursor:pointer;list-style:none;padding:20px 34px 20px 0;position:relative}
 summary::-webkit-details-marker{display:none}
@@ -128,8 +141,8 @@ details p{padding:0 20px 22px 0;color:var(--muted);font-size:15.5px}
 
 /* ---- PRIX ---- */
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:stretch}
-.price{background:var(--paper);border:1.5px solid #EBE5D6;border-radius:24px;padding:38px 32px;display:flex;flex-direction:column;position:relative}
-.price.star{border:2.5px solid var(--ocean);box-shadow:0 26px 50px -34px rgba(31,127,140,.5)}
+.price{background:var(--paper);border:1.5px solid #E4E2DD;border-radius:24px;padding:38px 32px;display:flex;flex-direction:column;position:relative}
+.price.star{border:2.5px solid var(--ocean);box-shadow:0 26px 50px -34px rgba(0,151,178,.5)}
 .price .tag{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--ocean);color:#fff;font-size:12.5px;font-weight:500;letter-spacing:1px;padding:6px 18px;border-radius:30px;white-space:nowrap}
 .price h3{font-size:22px}
 .price .amount{font-family:var(--serif);font-size:44px;font-weight:600;margin:14px 0 2px}
@@ -144,7 +157,7 @@ details p{padding:0 20px 22px 0;color:var(--muted);font-size:15.5px}
 form .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 label{font-size:13.5px;font-weight:500;display:block;margin:16px 0 6px}
 input,select,textarea{width:100%;font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--paper);border:1.5px solid #DDD5C2;border-radius:12px;padding:13px 16px;outline:none;transition:border-color .2s,box-shadow .2s}
-input:focus,select:focus,textarea:focus{border-color:var(--ocean);box-shadow:0 0 0 3px rgba(31,127,140,.15)}
+input:focus,select:focus,textarea:focus{border-color:var(--ocean);box-shadow:0 0 0 3px rgba(0,151,178,.15)}
 textarea{min-height:130px;resize:vertical}
 
 /* ---- CHIPS / LOGOS ÉCOLES ---- */
@@ -178,7 +191,7 @@ textarea{min-height:130px;resize:vertical}
 .feat.rev .fimg{order:2}
 .fimg{border-radius:22px;overflow:hidden;aspect-ratio:4/3;position:relative}
 .fimg img{width:100%;height:100%;object-fit:cover;display:block}
-.fimg .cap{position:absolute;left:16px;bottom:16px;background:rgba(250,247,241,.94);border-radius:12px;padding:8px 16px}
+.fimg .cap{position:absolute;left:16px;bottom:16px;background:rgba(246,244,240,.94);border-radius:12px;padding:8px 16px}
 @media(max-width:960px){.feat{grid-template-columns:1fr;gap:30px}.feat.rev .fimg{order:0}}
 
 /* ===== Parcours animé « en quatre temps » (page particuliers) ===== */

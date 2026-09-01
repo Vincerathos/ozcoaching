@@ -261,7 +261,7 @@
         cvStatus.innerHTML = statusMsg('#8a6420', '⚠️ Je n\'arrive pas à lire le texte de ce PDF (souvent : un CV exporté en image, ou en colonnes qui se mélangent). Deux options : collez votre texte via « J\'écris mon texte », ou réservez directement un <a href="contact.html#rdv" style="color:var(--ocean)">échange offert</a>.');
         return;
       }
-      cvStatus.innerHTML = statusMsg('#245E3C', '✓ CV lu — ' + words.toLocaleString('fr-FR') + ' mots détectés.');
+      cvStatus.innerHTML = statusMsg('#004956', '✓ CV lu — ' + words.toLocaleString('fr-FR') + ' mots détectés.');
       ctx.source = 'cv'; ctx.texte = texte.slice(0, 8000); ctx.cible = cvCible.value.trim(); ctx.analyse = null;
 
       // Si l'analyse IA est branchée → résultat instantané ; sinon → capture (audit humain).

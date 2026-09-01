@@ -1,47 +1,84 @@
 # OZ Coaching — Site vitrine
 
-Site vitrine multi-pages pour **OZ Coaching – Aurélia Grino**, coach emploi, carrière et recrutement
-(Montpellier, Nîmes & visio).
+Site vitrine multi-pages pour **OZ Coaching – Aurélia Grino**
+*Révélatrice des talents de demain* — ingénierie pédagogique & employabilité, accompagnement carrière
+(Montpellier, Nîmes, Aix-Marseille & visio).
+
+> **Refonte v3 (septembre 2026)** — contenu et positionnement issus du document
+> `OZ_Coaching_Contenu_site_web_v3` (Caroline Vergier / helloCaroline), charte graphique
+> et logos fournis par Aurélia. Le site est passé de 3 portes (particuliers / écoles /
+> entreprises) à **2 portes** : Écoles supérieures et Accompagnement carrière.
 
 ## Pages
-- `index.html` — Accueil (3 portes : particuliers / écoles / entreprises, quiz d'orientation)
-- `particuliers.html` — Accompagnement individuel + tarifs + parcours animé
-- `ecoles.html` — Interventions écoles (ateliers, MOOCs, podcasts, conseil Career Center)
-- `entreprises.html` — Coaching collaborateurs, conférences RH
-- `a-propos.html` — Histoire d'Aurélia (recrutement → école → Australie → OZ)
-- `contact.html` — Prise de RDV (Calendly) + formulaires
-- `mentions-legales.html`
+- `index.html` — Accueil : hero, bifurcation 2 portes, quiz, outil « L'œil », chiffres, méthode, témoignages
+- `ecoles.html` — Écoles supérieures : écosystème alternance 360°, formats, Career Center & Qualiopi, réalisations
+- `carriere.html` — Accompagnement carrière : cadres/dirigeants, transitions, leadership au féminin, parcours Ikigaï, FAQ
+- `oeil-recruteuse.html` — Outil gratuit « L'œil de la recruteuse » (analyse de titre/accroche + import CV PDF)
+- `a-propos.html` — Qui suis-je : 17 ans de terrain, ADN, valeurs, convictions
+- `blog.html` — Page coquille (articles à venir) + capture e-mail
+- `contact.html` — Calendly + formulaire avec routage école / particulier
+- `mentions-legales.html` · `confidentialite.html`
+- `particuliers.html` — redirection vers `carriere.html` (ancienne URL)
+- `entreprises.html` — **conservée hors navigation** (`noindex`), le temps de trancher son sort avec Aurélia
+
+## Charte graphique v3
+Référence : `design/charte-graphique-ag.png`
+
+| Rôle | Couleur |
+|---|---|
+| Pétrole (primaire foncé) | `#004956` |
+| Cyan (accent) | `#0097B2` |
+| Encre | `#231F20` |
+| Fond | `#F6F4F0` |
+
+**Typographie officielle : Neue Montréal (texte) + Znikomit (display).** Ces deux polices ne sont
+pas libres de droits pour le web. Le site utilise **Manrope** (Google Fonts) comme substitut —
+grotesque néo-suisse aux proportions très proches, décliné en 200 pour les grands titres.
+👉 Si Aurélia fournit les fichiers `.woff2`, il suffit de les déclarer en `@font-face` dans
+`styles.css` et de changer `--sans` / `--serif` (tout le site suit).
+
+**Logos** (`images/`) — dérivés du PNG officiel fourni :
+- `logo-oz.png` — logo complet couleur (œil + nom + baseline)
+- `logo-oz-blanc.png` — version blanche, pour le footer sombre
+- `logo-oz-header.png` / `-blanc` — sans la baseline, pour la navigation (plus lisible en petit)
+- `favicon-oz-v3.png` — l'œil seul
+- `trait-oz.png` — le trait ondulé cyan seul
 
 ## Technique
 - HTML/CSS/JS statique, sans dépendance de build
-- `styles.css` (DA « good vibes » : eucalyptus / océan / crème) · `site.js` (menu, reveals, compteurs, quiz)
+- `styles.css` (charte v3) · `site.js` (menu, reveals, compteurs, quiz, formulaires) · `oeil.js` (outil)
 - Responsive (mobile-first, breakpoints 600 / 960 px), SEO (JSON-LD, sitemap, OG), RGPD
-- Polices : Fraunces + Outfit + Caveat (Google Fonts)
 
-## À finaliser avant mise en ligne
-- Choix du logo (voir `logos-v2/`)
-- URL Calendly réelle dans `contact.html`
-- Validation des tarifs (`OFFRE-TARIFS-PROPOSITION.md`)
-- Domaine + hébergement (Hostinger), remplacer `https://www.ozcoaching.fr/`
-
-## Génération de leads (juillet 2026)
-- `oeil-recruteuse.html` + `oeil.js` — outil « L'œil de la recruteuse », 2 parcours :
-  - **J'écris** : analyse titre LinkedIn / accroche CV (scoring 100 % côté client), jauge animée.
-  - **J'importe mon CV (PDF)** : extraction du texte via pdf.js (chargé depuis CDN cloudflare, parcours PDF
-    uniquement), détection des PDF illisibles (image/colonnes). Analyse IA **à brancher** :
-    remplir la constante `CV_ANALYZE_ENDPOINT` en haut de `oeil.js` avec l'URL d'un endpoint (ex. edge function
-    Supabase appelant Claude) qui reçoit `{texte, cible}` et renvoie `{score, verdict:{t,d}, forces, alertes, conseils}`.
-    Tant qu'elle est vide → capture du CV + lead pour **audit humain** par Aurélia (source `cv`).
-  - Capture e-mail sur les deux parcours. Promo sur l'accueil + lien nav/footer.
-- Quiz d'orientation (accueil) : résultat personnalisé avec offre recommandée + capture e-mail « plan d'action ».
-- Workflow n8n `OZ Coaching — Leads site (outil + quiz) → séquence email` (ID `UT8YMlsURN9g59Pk`) :
-  - Webhook actif : `POST https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead` (capture les leads, visibles dans les exécutions)
-  - Séquence : e-mail 1 immédiat (rapport outil / plan quiz / accusé de réception CV) → J+2 histoire → J+5 preuve sociale → J+9 offre Pack Décollage
-  - Sources gérées : `outil` (score texte), `quiz` (plan d'action par profil), `cv` (accusé réception + audit 48h)
-  - ⚠️ **Les 4 nœuds d'envoi sont désactivés** : l'expéditeur est réglé sur `contact@ozcoaching.fr`, à activer
-    seulement après vérification du domaine ozcoaching.fr dans Resend (+ crédential Resend dédiée si compte séparé).
-    En attendant, aucun e-mail ne part ; les leads sont capturés.
+## Génération de leads
+- **Outil « L'œil de la recruteuse »**, 2 parcours :
+  - *J'écris* : analyse de titre LinkedIn / accroche (scoring 100 % côté client), jauge animée
+  - *J'importe mon CV (PDF)* : extraction du texte via pdf.js, détection des PDF illisibles.
+    Analyse IA **à brancher** : renseigner `CV_ANALYZE_ENDPOINT` en haut de `oeil.js` avec l'URL
+    d'un endpoint qui reçoit `{texte, cible}` et renvoie `{score, verdict:{t,d}, forces, alertes, conseils}`.
+    Tant qu'elle est vide → capture du CV pour **audit humain** par Aurélia.
+- **Quiz d'orientation** (accueil) : 4 profils → offre recommandée + capture e-mail
+- **Formulaires de documentation** : plaquette écoles, doc carrière, alerte blog
+- **Workflow n8n** `OZ Coaching — Leads site (œil, quiz, CV, docs) → séquence email` (ID `UT8YMlsURN9g59Pk`)
+  - Webhook actif : `POST https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead`
+  - Sources gérées : `outil` · `quiz` · `cv` · `doc` — avec une **branche B2B distincte** pour les écoles
+  - Séquence : e-mail 1 immédiat → J+2 (histoire) → J+5 (preuve sociale) → J+9 (invitation)
+  - **Aucun tarif affiché** : tout est « sur devis », conformément au positionnement v3
+  - ⚠️ **Les 4 nœuds d'envoi sont désactivés.** L'expéditeur est réglé sur `contact@ozcoaching.fr` :
+    à activer seulement après vérification du domaine dans Resend. En attendant, les leads sont
+    capturés (visibles dans les exécutions n8n) mais aucun e-mail ne part.
   - Champ `test: true` dans le payload = e-mail 1 seul, pas de séquence.
 
+## À finaliser avant mise en ligne
+- [ ] **Photo d'Aurélia** : elle en refait une ; `Photo pro 2.jpg` (envoyée par mail) n'était pas
+      dans le dossier Drive — le hero utilise encore l'ancienne photo studio
+- [ ] **Brochures PDF** : les CTA « Téléchargez la plaquette » capturent l'e-mail, mais le PDF
+      reste à joindre côté n8n (sources : les 2 `.pptx` du dossier Drive)
+- [ ] URL Calendly réelle dans `contact.html`
+- [ ] Domaine + hébergement, puis remplacer `https://www.ozcoaching.fr/` et compléter l'hébergeur
+      dans les mentions légales
+- [ ] Vérifier le domaine dans Resend, puis réactiver les 4 nœuds d'envoi n8n
+- [ ] Trancher le sort de `entreprises.html`
+- [ ] Polices officielles (Neue Montréal / Znikomit) si Aurélia a les licences web
+
 ## Docs de travail
-`SEO-PLAN.md` · `OFFRE-TARIFS-PROPOSITION.md` · `AUTOMATISATIONS.md`
+`SEO-PLAN.md` · `OFFRE-TARIFS-PROPOSITION.md` (⚠️ obsolète : la v3 ne publie plus de tarifs) · `AUTOMATISATIONS.md`

@@ -1,4 +1,6 @@
 // OZ Coaching — interactions communes
+const OZ_WEBHOOK = 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead';
+
 document.addEventListener('DOMContentLoaded', () => {
   // Menu mobile
   const burger = document.querySelector('.burger');
@@ -15,8 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const cio = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      const el = e.target, target = parseInt(el.dataset.count, 10), suffix = el.dataset.suffix || '';
+      const el = e.target, target = parseInt(el.dataset.count, 10);
       const t0 = performance.now(), dur = 1400;
+      el.firstChild.nodeValue = target.toLocaleString('fr-FR'); // valeur correcte même si rAF est gelé
       const tick = now => {
         const p = Math.min((now - t0) / dur, 1);
         el.firstChild.nodeValue = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString('fr-FR');
@@ -28,10 +31,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: .5 });
   document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 
+  // Envoi générique vers le webhook (capture de lead)
+  async function envoyerLead(form, payload, sentId) {
+    if (form.website && form.website.value) return; // honeypot
+    const btn = form.querySelector('button[type=submit]');
+    const label = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
+    try {
+      await fetch(OZ_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.assign({ page: location.href }, payload))
+      });
+      form.hidden = true;
+      const sent = document.getElementById(sentId);
+      if (sent) sent.hidden = false;
+    } catch {
+      if (btn) { btn.disabled = false; btn.textContent = 'Réessayer l’envoi'; }
+    }
+  }
+
   // Quiz d'orientation (accueil) → résultat personnalisé + capture e-mail
   const quiz = document.getElementById('quiz');
   if (quiz) {
-    const WEBHOOK = 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead';
     const panes = quiz.querySelectorAll('.q-pane');
     let profile = null;
     quiz.addEventListener('click', ev => {
@@ -43,11 +65,40 @@ document.addEventListener('DOMContentLoaded', () => {
       panes.forEach(p => p.hidden = p.dataset.pane !== next);
       if (next === 'end') {
         const res = {
-          etudiant:  { t: 'Cap sur votre premier emploi 🎓', d: 'Projet pro, candidature, entretiens : l’accompagnement particuliers est fait pour vous — et vos tarifs sont pensés pour les étudiants.', o: '⭐ Recommandé pour vous : le Pack Décollage — CV + LinkedIn + simulation d’entretien, 3 séances, 220 €. Le plus choisi.', href: 'particuliers.html', cta: 'Voir l’accompagnement particuliers', form: 'Votre plan d’action « premier emploi » en 5 étapes, par e-mail :' },
-          actif:     { t: 'Donnons un nouvel élan à votre carrière 🚀', d: 'Reconversion, évolution, quête de sens : on clarifie votre cap avec l’Ikigai et l’œil de la recruteuse.', o: '⭐ Recommandé pour vous : Cap sur 3 mois — 8 séances + suivi continu, du projet pro à la signature, 600 € (payable en 3 fois).', href: 'particuliers.html', cta: 'Voir l’accompagnement particuliers', form: 'Votre plan d’action « nouveau cap » en 5 étapes, par e-mail :' },
-          ecole:     { t: 'Boostons l’employabilité de vos étudiants 🏫', d: 'Ateliers, MOOCs, podcasts, conseil Career Center : découvrez les interventions pensées pour les écoles.', o: '💡 De l’atelier ponctuel au cycle annuel : chaque intervention est construite sur mesure, sur devis.', href: 'ecoles.html', cta: 'Découvrir l’offre écoles', form: 'Recevez le catalogue des interventions écoles, par e-mail :' },
-          entreprise:{ t: 'Révélons le potentiel de vos équipes 💼', d: 'Coaching collaborateurs, conférences RH, marque employeur : des formats concrets pour votre organisation.', o: '💡 Coaching individuel, conférences, ateliers IA & recrutement : formats et devis adaptés à votre organisation.', href: 'entreprises.html', cta: 'Découvrir l’offre entreprises', form: 'Recevez la plaquette entreprises + exemples de missions, par e-mail :' }
-        }[profile] || { t: 'Parlons-en de vive voix', d: 'Le plus simple : un échange découverte gratuit de 30 minutes.', o: '', href: 'contact.html', cta: 'Réserver un échange', form: 'Recevez les conseils d’Aurélia par e-mail :' };
+          ecole: {
+            t: 'Boostons l’employabilité de vos apprenants 🏫',
+            d: 'Ateliers, MOOCs, bootcamps alternance, suivi tripartite, conseil Career Center et Qualiopi : découvrez les interventions pensées pour les écoles supérieures.',
+            o: '💡 Chaque intervention est construite sur mesure, du format court à la journée complète — du Bac au Bac+5, en présentiel, distanciel ou blended.',
+            href: 'ecoles.html', cta: 'Découvrez l’accompagnement écoles →',
+            form: 'Recevez la plaquette accompagnement écoles :'
+          },
+          actif: {
+            t: 'Donnons un nouvel élan à votre carrière 🚀',
+            d: 'Évolution, mobilité interne, repositionnement : on clarifie votre cap, on valorise votre expertise et on construit une stratégie de carrière à votre image.',
+            o: '💡 Personal branding, LinkedIn, réseau, entretiens, plan d’action : chaque accompagnement est chiffré sur devis personnalisé, après un premier échange.',
+            href: 'carriere.html', cta: 'Découvrez l’accompagnement carrière →',
+            form: 'Recevez votre plan d’action en 5 étapes, par e-mail :'
+          },
+          sens: {
+            t: 'Remettons du sens dans votre parcours 🌱',
+            d: 'Le parcours Ikigaï, ma méthode signature : cinq séances progressives pour aligner vos aspirations professionnelles avec votre style de vie.',
+            o: '💡 De l’exploration de vos motivations jusqu’à un plan d’action formalisé en feuille de route — avec des exercices entre chaque séance.',
+            href: 'carriere.html#ikigai', cta: 'Découvrir le parcours Ikigaï →',
+            form: 'Recevez la présentation du parcours Ikigaï :'
+          },
+          etudiant: {
+            t: 'Cap sur votre alternance ou votre premier emploi 🎓',
+            d: 'J’interviens surtout auprès des écoles, pour leurs apprenants — mais si vous cherchez seul·e, commencez par passer votre CV et votre profil LinkedIn sous l’œil de la recruteuse, c’est gratuit.',
+            o: '💡 Vous êtes dans une école partenaire ? Parlez-en à votre Career Center. Sinon, écrivez-moi : on regarde ensemble ce qui est possible.',
+            href: 'oeil-recruteuse.html', cta: 'Tester mon profil gratuitement 👁️',
+            form: 'Recevez mes conseils candidature par e-mail :'
+          }
+        }[profile] || {
+          t: 'Parlons-en de vive voix',
+          d: 'Le plus simple : un échange de 30 minutes, offert et sans engagement.',
+          o: '', href: 'contact.html', cta: 'Réserver un échange',
+          form: 'Recevez les conseils d’Aurélia par e-mail :'
+        };
         quiz.querySelector('#q-title').textContent = res.t;
         quiz.querySelector('#q-desc').textContent = res.d;
         const off = quiz.querySelector('#q-offre');
@@ -59,23 +110,37 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     const qf = document.getElementById('q-form');
-    if (qf) qf.addEventListener('submit', async ev => {
+    if (qf) qf.addEventListener('submit', ev => {
       ev.preventDefault();
-      if (qf.website.value) return; // honeypot anti-spam
-      const btn = qf.querySelector('button');
-      btn.disabled = true; btn.textContent = 'Envoi en cours…';
-      try {
-        await fetch(WEBHOOK, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ source: 'quiz', profil: profile, prenom: qf.prenom.value.trim(), email: qf.email.value.trim(), page: location.href })
-        });
-        qf.hidden = true;
-        document.getElementById('q-sent').hidden = false;
-      } catch {
-        btn.disabled = false; btn.textContent = 'Réessayer l’envoi';
-      }
+      envoyerLead(qf, { source: 'quiz', profil: profile, prenom: qf.prenom.value.trim(), email: qf.email.value.trim() }, 'q-sent');
     });
+  }
+
+  // Formulaires « documentation » (plaquette écoles, doc carrière, alerte blog)
+  const docForm = document.getElementById('doc-form');
+  if (docForm) docForm.addEventListener('submit', ev => {
+    ev.preventDefault();
+    envoyerLead(docForm, {
+      source: 'doc',
+      doc: docForm.dataset.doc || 'general',
+      prenom: docForm.prenom.value.trim(),
+      email: docForm.email.value.trim(),
+      organisation: docForm.organisation ? docForm.organisation.value.trim() : ''
+    }, 'doc-sent');
+  });
+
+  // Contact : routage école / particulier
+  const routeBtns = document.querySelectorAll('.route-btn');
+  if (routeBtns.length) {
+    const hidden = document.getElementById('f-profil-hidden');
+    const champEcole = document.getElementById('champ-ecole');
+    routeBtns.forEach(b => b.addEventListener('click', () => {
+      routeBtns.forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      const ecole = b.dataset.route === 'ecole';
+      if (hidden) hidden.value = ecole ? 'Une école' : 'Un particulier';
+      if (champEcole) champEcole.hidden = !ecole;
+    }));
   }
 
   // Formulaires : petit état d'envoi
