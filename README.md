@@ -32,14 +32,18 @@ Référence : `design/charte-graphique-ag.png`
 | Fond | `#F6F4F0` |
 
 **Typographie officielle : Neue Montréal (texte) + Znikomit (titres de héros).**
-Les deux sont déjà câblées : la pile CSS est `'Neue Montreal' → 'Manrope' → system-ui`, et les
-`@font-face` sont écrits dans `styles.css` (commentés pour ne pas générer de 404 tant que les
-fichiers manquent). **Marche à suivre complète dans [`fonts/README.md`](fonts/README.md)** —
-en résumé : déposer les `.woff2` dans `/fonts` et décommenter le bloc.
-En attendant, **Manrope** (Google Fonts) fait le relais : grotesque néo-suisse aux proportions
-très proches, en graisse 200 pour les grands titres.
-⚠️ Neue Montréal est une police **commerciale** (fonderie Pangram Pangram) : un usage web
-nécessite une licence webfont, distincte de la licence bureau.
+
+- **Znikomit est en place** ✅ — licence SIL OFL 1.1, usage commercial autorisé. Elle habille
+  les titres de héros, en écho au logo qui est composé dans cette même police.
+- **Neue Montréal** est **commerciale** (fonderie Pangram Pangram, licences dès ~40 $) : un usage
+  web nécessite une licence webfont, distincte de la licence bureau. En attendant, **Manrope**
+  assure le texte courant — choisie après comparaison au même corps avec l'échantillon de la
+  charte (plus proche que Space Grotesk, Geist ou Archivo). La pile CSS place déjà
+  `'Neue Montreal'` en premier : déposer les `.woff2` et décommenter le bloc suffit.
+- **Toutes les polices sont hébergées en local** (`/fonts`) : plus aucune requête vers Google
+  Fonts, donc aucune IP de visiteur transmise à un tiers (RGPD).
+
+👉 Marche à suivre détaillée : [`fonts/README.md`](fonts/README.md)
 
 **Logos** (`images/`) — dérivés du PNG officiel fourni :
 - `logo-oz.png` — logo complet couleur (œil + nom + baseline)

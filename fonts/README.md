@@ -7,21 +7,36 @@ La charte graphique (`design/charte-graphique-ag.png`) impose deux polices :
 | Texte courant, titres | **Neue Montréal** | tout le site |
 | Display | **Znikomit** | uniquement les titres de héros (`.hero h1`, `.page-hero h1`) |
 
-## Comment les activer
+## État actuel
 
-`styles.css` les déclare déjà en `@font-face`. **Il suffit de déposer les fichiers ici** —
-ils prennent le relais automatiquement, sans toucher au code. Tant qu'ils sont absents,
-le site utilise **Manrope** (Google Fonts) comme substitut et rien ne casse.
+| Fichier | Statut |
+|---|---|
+| `Znikomit.woff2` | ✅ **en place** — licence SIL OFL 1.1 (voir `Znikomit-OFL.txt`), usage commercial autorisé |
+| `Manrope-Variable.woff2` | ✅ **en place** — substitut de Neue Montréal, SIL OFL, variable 200→800 |
+| `NeueMontreal-*.woff2` | ⬜ à fournir (licence à acquérir, voir ci-dessous) |
 
-Fichiers attendus (format `.woff2`) :
+Tout est **hébergé en local** : le site ne fait plus aucune requête vers Google Fonts,
+donc aucune adresse IP de visiteur n'est transmise à un tiers (point RGPD non négligeable —
+la CNIL et plusieurs autorités européennes ont sanctionné le chargement direct de Google Fonts).
 
-```
-fonts/NeueMontreal-Light.woff2      (300)
-fonts/NeueMontreal-Regular.woff2    (400)
-fonts/NeueMontreal-Medium.woff2     (500)
-fonts/NeueMontreal-Bold.woff2       (700)
-fonts/Znikomit.woff2                (400)
-```
+### Pour activer Neue Montréal
+
+1. Déposer les 4 fichiers ici :
+   ```
+   fonts/NeueMontreal-Light.woff2      (300)
+   fonts/NeueMontreal-Regular.woff2    (400)
+   fonts/NeueMontreal-Medium.woff2     (500)
+   fonts/NeueMontreal-Bold.woff2       (700)
+   ```
+2. Dans `styles.css`, retirer les `/*` `*/` autour du bloc « Neue Montréal — à activer… ».
+
+C'est tout : la pile `--sans` la place déjà avant Manrope, tout le site suivra.
+
+### Pourquoi Manrope comme substitut
+
+Le choix n'est pas arbitraire : Manrope, Space Grotesk, Geist et Archivo ont été comparées
+au même corps avec l'échantillon « Neue Montréal » extrait de la charte. Manrope est la plus
+proche en graisse et en rythme ; Space Grotesk est trop large et espacée, Geist trop dense.
 
 ## Où obtenir les fichiers
 
@@ -43,13 +58,12 @@ diffusion sur un site. Trois pistes :
 en versions piratées. Utiliser une police sans licence expose Aurélia à une réclamation de
 la fonderie.
 
-### Znikomit — gratuite
-Créée par **gluk** (Grzegorz Luk), diffusée gratuitement (dafont, Font Library).
-Télécharger le `.ttf`, puis le convertir en `.woff2` (voir ci-dessous).
-Vérifier la licence affichée sur la page de téléchargement au moment de l'usage :
-selon la source, certaines polices de cet auteur sont en « usage personnel uniquement ».
-Si c'est le cas, écrire à l'auteur pour l'usage commercial — il accorde généralement
-l'autorisation.
+### Znikomit — c'est fait ✅
+Créée par **gluk** (glukfonts.pl), publiée sous **SIL Open Font License 1.1** : usage
+commercial, modification et redistribution autorisés. Le texte de la licence est conservé
+dans `Znikomit-OFL.txt`, comme l'OFL l'exige. Récupérée depuis Font Squirrel et convertie
+en `.woff2`. Elle est utilisée sur les titres de héros (`.hero h1`, `.page-hero h1`),
+ce qui fait écho au logo — qui est composé dans cette même police.
 
 ## Convertir un .ttf/.otf en .woff2
 
