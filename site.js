@@ -117,16 +117,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Formulaires « documentation » (plaquette écoles, doc carrière, alerte blog)
+  // Le PDF part aussi par e-mail, mais on le donne immédiatement : un visiteur qui
+  // a rempli le formulaire ne doit pas attendre sa boîte mail pour l'obtenir.
+  const PLAQUETTES = {
+    ecoles: 'brochures/OZ-Coaching-Ecoles-superieures.pdf',
+    carriere: 'brochures/OZ-Coaching-Accompagnement-carriere.pdf'
+  };
   const docForm = document.getElementById('doc-form');
-  if (docForm) docForm.addEventListener('submit', ev => {
+  if (docForm) docForm.addEventListener('submit', async ev => {
     ev.preventDefault();
-    envoyerLead(docForm, {
+    const doc = docForm.dataset.doc || 'general';
+    await envoyerLead(docForm, {
       source: 'doc',
-      doc: docForm.dataset.doc || 'general',
+      doc,
       prenom: docForm.prenom.value.trim(),
       email: docForm.email.value.trim(),
       organisation: docForm.organisation ? docForm.organisation.value.trim() : ''
     }, 'doc-sent');
+    const pdf = PLAQUETTES[doc];
+    if (pdf && docForm.hidden) {           // hidden => l'envoi a réussi
+      const a = document.createElement('a');
+      a.href = pdf; a.download = pdf.split('/').pop();
+      document.body.appendChild(a); a.click(); a.remove();
+    }
   });
 
   // Contact : routage école / particulier

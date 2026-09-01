@@ -31,11 +31,15 @@ Référence : `design/charte-graphique-ag.png`
 | Encre | `#231F20` |
 | Fond | `#F6F4F0` |
 
-**Typographie officielle : Neue Montréal (texte) + Znikomit (display).** Ces deux polices ne sont
-pas libres de droits pour le web. Le site utilise **Manrope** (Google Fonts) comme substitut —
-grotesque néo-suisse aux proportions très proches, décliné en 200 pour les grands titres.
-👉 Si Aurélia fournit les fichiers `.woff2`, il suffit de les déclarer en `@font-face` dans
-`styles.css` et de changer `--sans` / `--serif` (tout le site suit).
+**Typographie officielle : Neue Montréal (texte) + Znikomit (titres de héros).**
+Les deux sont déjà câblées : la pile CSS est `'Neue Montreal' → 'Manrope' → system-ui`, et les
+`@font-face` sont écrits dans `styles.css` (commentés pour ne pas générer de 404 tant que les
+fichiers manquent). **Marche à suivre complète dans [`fonts/README.md`](fonts/README.md)** —
+en résumé : déposer les `.woff2` dans `/fonts` et décommenter le bloc.
+En attendant, **Manrope** (Google Fonts) fait le relais : grotesque néo-suisse aux proportions
+très proches, en graisse 200 pour les grands titres.
+⚠️ Neue Montréal est une police **commerciale** (fonderie Pangram Pangram) : un usage web
+nécessite une licence webfont, distincte de la licence bureau.
 
 **Logos** (`images/`) — dérivés du PNG officiel fourni :
 - `logo-oz.png` — logo complet couleur (œil + nom + baseline)
@@ -57,7 +61,12 @@ grotesque néo-suisse aux proportions très proches, décliné en 200 pour les g
     d'un endpoint qui reçoit `{texte, cible}` et renvoie `{score, verdict:{t,d}, forces, alertes, conseils}`.
     Tant qu'elle est vide → capture du CV pour **audit humain** par Aurélia.
 - **Quiz d'orientation** (accueil) : 4 profils → offre recommandée + capture e-mail
-- **Formulaires de documentation** : plaquette écoles, doc carrière, alerte blog
+- **Formulaires de documentation** : plaquette écoles, doc carrière, alerte blog.
+  Le PDF se **télécharge immédiatement** après l'envoi du formulaire (le visiteur n'attend pas
+  sa boîte mail) et le lien est aussi repris dans l'e-mail.
+- **Brochures** (`brochures/`) : PDF générés depuis les `.pptx` d'Aurélia via LibreOffice,
+  en 16:9 (33,87 × 19,05 cm), avec les polices d'origine installées (Comfortaa, NTR,
+  Zen Kaku Gothic New) pour un rendu fidèle — vérifié : aucun texte perdu, aucun débordement.
 - **Workflow n8n** `OZ Coaching — Leads site (œil, quiz, CV, docs) → séquence email` (ID `UT8YMlsURN9g59Pk`)
   - Webhook actif : `POST https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead`
   - Sources gérées : `outil` · `quiz` · `cv` · `doc` — avec une **branche B2B distincte** pour les écoles
@@ -69,16 +78,15 @@ grotesque néo-suisse aux proportions très proches, décliné en 200 pour les g
   - Champ `test: true` dans le payload = e-mail 1 seul, pas de séquence.
 
 ## À finaliser avant mise en ligne
-- [ ] **Photo d'Aurélia** : elle en refait une ; `Photo pro 2.jpg` (envoyée par mail) n'était pas
-      dans le dossier Drive — le hero utilise encore l'ancienne photo studio
-- [ ] **Brochures PDF** : les CTA « Téléchargez la plaquette » capturent l'e-mail, mais le PDF
-      reste à joindre côté n8n (sources : les 2 `.pptx` du dossier Drive)
 - [ ] URL Calendly réelle dans `contact.html`
 - [ ] Domaine + hébergement, puis remplacer `https://www.ozcoaching.fr/` et compléter l'hébergeur
       dans les mentions légales
 - [ ] Vérifier le domaine dans Resend, puis réactiver les 4 nœuds d'envoi n8n
 - [ ] Trancher le sort de `entreprises.html`
-- [ ] Polices officielles (Neue Montréal / Znikomit) si Aurélia a les licences web
+- [ ] Polices officielles : obtenir les `.woff2` (licence webfont pour Neue Montréal),
+      voir `fonts/README.md`
+- [ ] Nouvelle photo d'Aurélia quand elle l'aura faite (`images/aurelia-2026.jpg` est une
+      photo de transition, 635×869 — à ne pas afficher plus grand)
 
 ## Docs de travail
 `SEO-PLAN.md` · `OFFRE-TARIFS-PROPOSITION.md` (⚠️ obsolète : la v3 ne publie plus de tarifs) · `AUTOMATISATIONS.md`

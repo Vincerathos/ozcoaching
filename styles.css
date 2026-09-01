@@ -1,11 +1,47 @@
 /* ===== OZ COACHING — Charte v3 (août 2026) =====
    Couleurs officielles : #004956 pétrole · #0097b2 cyan · #231f20 encre · #f6f4f0 fond
-   Typo officielle : Neue Montréal (texte) + Znikomit (display).
-   Ces deux polices ne sont pas libres de droits pour le web : on utilise Manrope
-   comme substitut (grotesque néo-suisse aux proportions très proches). Si Aurélia
-   fournit les fichiers .woff2, il suffira de les déclarer en @font-face ci-dessous
-   et de remplacer la valeur de --sans / --serif.
    ============================================================================= */
+
+/* --- POLICES DE LA CHARTE ---------------------------------------------------
+   Neue Montréal (texte) et Znikomit (display/logo) sont les polices officielles.
+   Dépose leurs fichiers .woff2 dans /fonts (voir fonts/README.md) : ils sont
+   déclarés ci-dessous et prennent le relais AUTOMATIQUEMENT dès qu'ils existent.
+   Tant qu'ils sont absents, le navigateur bascule sur Manrope (Google Fonts),
+   substitut aux proportions très proches — aucune page ne casse.
+   -------------------------------------------------------------------------- */
+/* ↓↓↓ À DÉCOMMENTER quand les .woff2 sont déposés dans /fonts (voir fonts/README.md).
+   Laissé inactif pour ne pas générer de 404 tant que les fichiers manquent.
+   Note : si la police est installée sur la machine du visiteur, la pile
+   --sans ci-dessous l'utilise déjà sans avoir besoin de ces @font-face.
+
+@font-face{
+  font-family:'Neue Montreal';
+  src:url('fonts/NeueMontreal-Light.woff2') format('woff2');
+  font-weight:300;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Neue Montreal';
+  src:url('fonts/NeueMontreal-Regular.woff2') format('woff2');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Neue Montreal';
+  src:url('fonts/NeueMontreal-Medium.woff2') format('woff2');
+  font-weight:500;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Neue Montreal';
+  src:url('fonts/NeueMontreal-Bold.woff2') format('woff2');
+  font-weight:700;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Znikomit';
+  src:url('fonts/Znikomit.woff2') format('woff2');
+  font-weight:400;font-style:normal;font-display:swap;
+}
+
+*/
+
 :root{
   /* --- couleurs charte --- */
   --petrole:#004956;--cyan:#0097B2;--encre:#231F20;--fond:#F6F4F0;
@@ -14,13 +50,19 @@
   --ocean:#0097B2;--ocean-deep:#004956;--ocean-soft:#E2F1F5;
   --olive:#004956;--olive-deep:#00323C;--euca:#DCEBEF;--euca-soft:#EFF6F8;
   --sand:#E8E4DC;--sun:#0097B2;
-  --serif:'Manrope',system-ui,sans-serif;--sans:'Manrope',system-ui,sans-serif;--hand:'Manrope',system-ui,sans-serif;
+  /* --- typographie : la charte d'abord, Manrope en filet de sécurité --- */
+  --sans:'Neue Montreal','Manrope',system-ui,sans-serif;
+  --serif:'Neue Montreal','Manrope',system-ui,sans-serif;
+  --display:'Znikomit','Neue Montreal','Manrope',system-ui,sans-serif;
+  --hand:'Neue Montreal','Manrope',system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.7;font-weight:400;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1160px;margin:0 auto;padding:0 28px}
 h1,h2,h3{font-family:var(--serif);font-weight:300;line-height:1.16;letter-spacing:-.015em}
+/* Znikomit ne sert qu'aux titres de héros (elle est très fine et large) */
+.hero h1,.page-hero h1{font-family:var(--display);font-weight:200;letter-spacing:0}
 h1{font-weight:200}
 a{color:inherit;text-decoration:none}
 img{max-width:100%}
