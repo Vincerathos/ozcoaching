@@ -1,5 +1,6 @@
 // OZ Coaching — interactions communes
-const OZ_WEBHOOK = 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead';
+// URL definie dans config.js ; la valeur en dur reste un filet de securite
+const OZ_WEBHOOK = (window.OZ_CONFIG && window.OZ_CONFIG.webhook) || 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Menu mobile
@@ -163,4 +164,27 @@ document.addEventListener('DOMContentLoaded', () => {
       if (b) { b.textContent = 'Envoi en cours…'; b.disabled = true; }
     });
   });
+});
+
+// Calendly : l'URL vient de config.js. Tant qu'elle est vide, on affiche un
+// repli utile (mail + telephone) plutot qu'un cadre blanc.
+window.ozInitCalendly = function () {
+  const hote = document.getElementById('oz-calendly');
+  if (!hote) return;
+  const cfg = window.OZ_CONFIG || {};
+  if (!cfg.calendly) {
+    hote.style.height = 'auto';
+    hote.innerHTML = '<p style="padding:28px 32px;color:var(--muted)">Le calendrier en ligne arrive. En attendant, ecrivez a ' +
+      '<a href="mailto:' + (cfg.emailContact || '') + '" style="color:var(--ocean)">' + (cfg.emailContact || '') + '</a> ' +
+      'ou appelez le <a href="tel:+33676921574" style="color:var(--ocean)">06 76 92 15 74</a>.</p>';
+    return;
+  }
+  const url = cfg.calendly + (cfg.calendly.includes('?') ? '&' : '?') +
+              'hide_gdpr_banner=1&primary_color=0097B2';
+  if (window.Calendly) {
+    window.Calendly.initInlineWidget({ url, parentElement: hote });
+  }
+};
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.Calendly) window.ozInitCalendly();   // script deja charge (cache)
 });

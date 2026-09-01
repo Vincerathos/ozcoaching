@@ -1,7 +1,7 @@
 // OZ Coaching — L'œil de la recruteuse
 // Deux parcours : (A) analyse de texte 100 % côté navigateur ; (B) upload CV PDF.
 (() => {
-  const WEBHOOK = 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead';
+  const WEBHOOK = (window.OZ_CONFIG && window.OZ_CONFIG.webhook) || 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead';
 
   // ↓↓↓ SEAM CLAUDE — pour brancher l'analyse IA du CV, colle ici l'URL de l'endpoint.
   // Il reçoit { texte, cible } et doit renvoyer { score, verdict:{t,d}, forces:[], alertes:[], conseils:[] }.
