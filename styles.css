@@ -104,6 +104,8 @@ section.block{padding:96px 0}
 .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:60px;align-items:center}
 .hero h1{font-size:clamp(38px,5.6vw,62px)}
 .hero p.lead{font-size:19px;color:var(--muted);margin:24px 0 34px;max-width:520px;line-height:1.75}
+/* les deux CTA du hero depassaient de 12px et retombaient sur 2 lignes */
+.hero .fx4 .btn{padding:14px 23px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
