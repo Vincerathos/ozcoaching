@@ -51,6 +51,17 @@ Référence : `design/charte-graphique-ag.png`
 - `favicon-oz-v3.png` — l'œil seul
 - `trait-oz.png` — le trait ondulé cyan seul
 
+## Photos
+Les visuels de personnes viennent d'**Unsplash** (licence gratuite, usage commercial autorisé,
+sans attribution obligatoire) : `oz-animation`, `oz-leadership`, `oz-echange`, `oz-atelier`.
+Ils remplacent des images qui posaient problème — la page « Qui suis-je » d'Aurélia était
+illustrée par un homme en présentation, et « Leadership au féminin » par des mains anonymes
+sur des claviers.
+
+⚠️ Les photos envoyées par Caroline (`Exemples d'images.pdf`) **ne sont pas libres de droit**
+hors Canva : elles ne sont pas utilisées ici. À remplacer à terme par de vraies photos
+d'Aurélia en atelier.
+
 ## Technique
 - HTML/CSS/JS statique, sans dépendance de build
 - `styles.css` (charte v3) · `site.js` (menu, reveals, compteurs, quiz, formulaires) · `oeil.js` (outil)
