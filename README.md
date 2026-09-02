@@ -63,6 +63,20 @@ sur des claviers.
 hors Canva : elles ne sont pas utilisées ici. À remplacer à terme par de vraies photos
 d'Aurélia en atelier.
 
+## Hébergement
+**Vercel, plan Pro**, sur le compte de Vincent Bélicot (prestataire).
+Le plan Hobby est explicitement réservé à un usage non commercial : la politique de Vercel
+range dans le commercial aussi bien la promotion d'un service que le fait d'être *payé pour
+créer le site*. Le plan Pro est donc obligatoire ici — il est facturé par équipe, pas par
+projet, et couvre un nombre illimité de sites.
+
+**Le nom de domaine, lui, est au nom d'Aurélia Grino** (titulaire AFNIC, avec son SIREN).
+C'est ce qui garantit son indépendance : le site étant statique et versionné sur GitHub,
+elle peut le faire redéployer ailleurs et repointer ses DNS sans dépendre de personne.
+
+À déclarer dans les mentions légales : **Vercel Inc.**, 340 S Lemon Ave #4133, Walnut,
+CA 91789, USA.
+
 ## Mesure d'audience
 **Vercel Web Analytics** (`<script defer src="/_vercel/insights/script.js">` sur chaque page).
 Sans cookie, sans identifiant permanent, sans suivi inter-sites : **aucun bandeau de consentement
