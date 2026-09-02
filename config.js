@@ -7,18 +7,15 @@
 window.OZ_CONFIG = {
 
   /* --- 1. Domaine définitif ------------------------------------------------
-     Sert aux liens absolus (partages, e-mails, plaquettes).
-     ⚠️ ozcoaching.fr appartient à un autre coach (à Brest) : un domaine
-     disponible reste à choisir. Laisser vide tant que ce n'est pas tranché. */
-  domaine: '',
+     Choisi par Aurélia le 02/09/2026 (ozcoaching.fr étant déjà pris).
+     Reste à acheter puis à héberger. */
+  domaine: 'https://www.oz-coaching.fr',
 
-  /* --- 2. Calendly ---------------------------------------------------------
-     Compte d'Aurélia : https://calendly.com/aurelia-grino
-     Un seul type de RDV y existe aujourd'hui : « RDV Individuel PPI ».
-     ⚠️ À valider : le site promet « un échange découverte de 30 min, offert ».
-     Si ce RDV n'est pas celui-là, créer dans Calendly un événement dédié
-     (30 min, gratuit) et remplacer le slug ci-dessous. */
-  calendly: 'https://calendly.com/aurelia-grino/rdv-individuel-ppi',
+  /* --- 2. Prise de rendez-vous --------------------------------------------
+     Aurélia a créé ses créneaux dans Google Agenda (et non Calendly) :
+     « OZ Coaching - Réserver un premier échange ☕ », 30 min.
+     Lien court equivalent : https://calendar.app.google/pzvwWAVpPP5ttXTV6 */
+  agenda: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2RYMIvgIoW1L4x4hwsGxpvvaUDxFSR191NQP0g-ykGtixufL8tRGIJnSJy_Dh2ReBjZqrzbhUx',
 
   /* --- 3. Webhook n8n (capture des leads) ---------------------------------
      Reçoit : l'outil « L'œil », le quiz, les CV, les demandes de plaquette. */
@@ -28,5 +25,13 @@ window.OZ_CONFIG = {
      Utilisée par FormSubmit. ⚠️ FormSubmit exige une activation : au tout
      premier envoi, un e-mail de confirmation arrive dans cette boîte et le
      lien doit être cliqué, sinon les messages suivants ne partent jamais. */
-  emailContact: 'aurelia.grino.ozcoaching@gmail.com'
+  emailContact: 'aurelia.grino.ozcoaching@gmail.com',
+
+  /* --- 5. Téléphone --------------------------------------------------------
+     Aurélia ne souhaite pas exposer son portable : le mail est le canal n°1,
+     le téléphone se donne après le premier échange. Le numéro reste
+     uniquement dans les mentions légales (obligation LCEN pour un
+     professionnel). Mettre à true pour le réafficher sur le site. */
+  afficherTelephone: false,
+  telephone: '06 76 92 15 74'
 };

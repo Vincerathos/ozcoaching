@@ -16,7 +16,7 @@ Site vitrine multi-pages pour **OZ Coaching – Aurélia Grino**
 - `oeil-recruteuse.html` — Outil gratuit « L'œil de la recruteuse » (analyse de titre/accroche + import CV PDF)
 - `a-propos.html` — Qui suis-je : 17 ans de terrain, ADN, valeurs, convictions
 - `blog.html` — Page coquille (articles à venir) + capture e-mail
-- `contact.html` — Calendly + formulaire avec routage école / particulier
+- `contact.html` — Google Agenda + formulaire avec routage école / particulier
 - `mentions-legales.html` · `confidentialite.html`
 - `particuliers.html` — redirection vers `carriere.html` (ancienne URL)
 - `entreprises.html` — **conservée hors navigation** (`noindex`), le temps de trancher son sort avec Aurélia
@@ -80,10 +80,23 @@ Référence : `design/charte-graphique-ag.png`
     capturés (visibles dans les exécutions n8n) mais aucun e-mail ne part.
   - Champ `test: true` dans le payload = e-mail 1 seul, pas de séquence.
 
+## Retours d'Aurélia intégrés (02/09/2026)
+- Domaine retenu : **oz-coaching.fr** (ozcoaching.fr étant pris) — propagé partout
+- Prise de RDV : **Google Agenda** et non Calendly. Créneaux « OZ Coaching — Réserver un
+  premier échange ☕ », 30 min. Vérifié : la page publique n'expose que les créneaux ouverts,
+  jamais le contenu de son agenda
+- Son **portable n'est plus affiché** sur le site (le mail est le canal n°1, le téléphone se
+  donne après le premier échange). Il reste dans les mentions légales — obligation LCEN pour
+  un professionnel. Réglable via `afficherTelephone` dans `config.js`
+- « Qui suis-je » : les cabinets de recrutement couvrent désormais « de Paris à Montpellier
+  en passant par Aix-Marseille »
+
 ## À finaliser avant mise en ligne
-- [ ] URL Calendly réelle dans `contact.html`
-- [ ] Domaine + hébergement, puis remplacer `https://www.ozcoaching.fr/` et compléter l'hébergeur
-      dans les mentions légales
+- [ ] Acheter **oz-coaching.fr** + héberger, puis compléter l'hébergeur dans les mentions légales
+- [ ] **Photos** : Aurélia veut des visuels plus parlants (ateliers). Caroline a envoyé un PDF de
+      photos mais elles **ne sont pas libres de droit** — ne pas les publier en l'état
+- [ ] Récupérer la **brochure Écoles corrigée** par Caroline (les « :: » enlevés) et regénérer le PDF
+- [ ] Vérifier la dernière version du **document site web** (Caroline a retiré une recommandation)
 - [ ] Vérifier le domaine dans Resend, puis réactiver les 4 nœuds d'envoi n8n
 - [ ] Trancher le sort de `entreprises.html`
 - [ ] Confirmer avec Aurélia qu'elle détient bien une licence **webfont** pour Neue Montréal

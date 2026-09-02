@@ -166,25 +166,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Calendly : l'URL vient de config.js. Tant qu'elle est vide, on affiche un
-// repli utile (mail + telephone) plutot qu'un cadre blanc.
-window.ozInitCalendly = function () {
-  const hote = document.getElementById('oz-calendly');
+// Prise de RDV : Google Agenda (creneaux publies par Aurelia). L'URL vient
+// de config.js. Si elle est vide, on affiche un repli utile plutot qu'un vide.
+window.ozInitAgenda = function () {
+  const hote = document.getElementById('oz-agenda');
   if (!hote) return;
   const cfg = window.OZ_CONFIG || {};
-  if (!cfg.calendly) {
-    hote.style.height = 'auto';
-    hote.innerHTML = '<p style="padding:28px 32px;color:var(--muted)">Le calendrier en ligne arrive. En attendant, ecrivez a ' +
-      '<a href="mailto:' + (cfg.emailContact || '') + '" style="color:var(--ocean)">' + (cfg.emailContact || '') + '</a> ' +
-      'ou appelez le <a href="tel:+33676921574" style="color:var(--ocean)">06 76 92 15 74</a>.</p>';
+  if (!cfg.agenda) {
+    hote.innerHTML = '<p style="padding:28px 32px;color:var(--muted)">Le calendrier arrive. En attendant, ecrivez a ' +
+      '<a href="mailto:' + (cfg.emailContact || '') + '" style="color:var(--ocean)">' + (cfg.emailContact || '') + '</a>.</p>';
     return;
   }
-  const url = cfg.calendly + (cfg.calendly.includes('?') ? '&' : '?') +
-              'hide_gdpr_banner=1&primary_color=0097B2';
-  if (window.Calendly) {
-    window.Calendly.initInlineWidget({ url, parentElement: hote });
-  }
+  const cadre = document.createElement('iframe');
+  cadre.src = cfg.agenda + '?gv=true';
+  cadre.style.cssText = 'border:0;width:100%;height:660px;display:block';
+  cadre.setAttribute('frameborder', '0');
+  cadre.title = 'Reserver un echange de 30 minutes avec Aurelia Grino';
+  hote.appendChild(cadre);
 };
-document.addEventListener('DOMContentLoaded', () => {
-  if (window.Calendly) window.ozInitCalendly();   // script deja charge (cache)
-});
+document.addEventListener('DOMContentLoaded', window.ozInitAgenda);
