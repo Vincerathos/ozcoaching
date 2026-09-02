@@ -81,9 +81,17 @@
     <h2>Destinataires</h2>
     <p>Vos données ne sont transmises à aucun tiers, à l'exception des prestataires techniques nécessaires au fonctionnement du site : l'hébergeur, l'outil d'automatisation et d'envoi d'e-mails, et l'outil de prise de rendez-vous. Ces prestataires n'utilisent vos données que pour fournir leur service.</p>
 
-    <h2>Cookies</h2>
-    <p>Ce site n'utilise pas de cookies publicitaires. Les seuls dépôts éventuels proviennent des outils tiers intégrés aux pages (module de prise de rendez-vous), et sont nécessaires à leur fonctionnement.</p>
-    <p class="todo">⚙️ À compléter avant mise en ligne selon les outils réellement activés (Google Analytics, pixel LinkedIn, etc.). Si aucun outil de mesure d'audience n'est utilisé, conserver la mention ci-dessus telle quelle.</p>
+    <h2>Cookies et mesure d'audience</h2>
+    <p><strong>Ce site ne dépose aucun cookie publicitaire et n'utilise aucun traceur
+    nécessitant votre consentement.</strong> C'est pourquoi aucun bandeau ne vous est présenté :
+    il n'y a rien à accepter ou à refuser.</p>
+    <p>La fréquentation du site est mesurée avec <strong>Vercel Web Analytics</strong>, un outil
+    qui ne dépose pas de cookie, ne crée pas d'identifiant permanent et ne suit pas les visiteurs
+    d'un site à l'autre. Seules des données agrégées et anonymes sont collectées : nombre de pages
+    vues, page d'origine, type d'appareil et pays. Il est impossible de vous identifier à partir
+    de ces informations.</p>
+    <p>Les seuls autres dépôts éventuels proviennent du module de prise de rendez-vous
+    (Google Agenda) intégré à la page Contact, et sont nécessaires à son fonctionnement.</p>
 
     <h2>Vos droits</h2>
     <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition concernant vos données. Pour l'exercer, écrivez à <a href="mailto:aurelia.grino.ozcoaching@gmail.com">aurelia.grino.ozcoaching@gmail.com</a>. Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).</p>
@@ -113,5 +121,9 @@
 
 <script src="config.js"></script>
 <script src="site.js"></script>
+<!-- Vercel Web Analytics : sans cookies, donnees agregees, pas de suivi
+     inter-sites. Le script n'est servi que par Vercel (404 en local, sans
+     consequence) et il faut activer Analytics dans le projet Vercel. -->
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

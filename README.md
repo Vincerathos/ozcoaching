@@ -17,9 +17,10 @@ Site vitrine multi-pages pour **OZ Coaching – Aurélia Grino**
 - `a-propos.html` — Qui suis-je : 17 ans de terrain, ADN, valeurs, convictions
 - `blog.html` — Page coquille (articles à venir) + capture e-mail
 - `contact.html` — Google Agenda + formulaire avec routage école / particulier
+- `404.html` — page d'erreur personnalisée (2 portes + CTA)
 - `mentions-legales.html` · `confidentialite.html`
 - `particuliers.html` — redirection vers `carriere.html` (ancienne URL)
-- `entreprises.html` — **conservée hors navigation** (`noindex`), le temps de trancher son sort avec Aurélia
+- `entreprises.html` — redirection vers l'accueil (page supprimée : la v3 ne garde que 2 portes)
 
 ## Charte graphique v3
 Référence : `design/charte-graphique-ag.png`
@@ -61,6 +62,15 @@ sur des claviers.
 ⚠️ Les photos envoyées par Caroline (`Exemples d'images.pdf`) **ne sont pas libres de droit**
 hors Canva : elles ne sont pas utilisées ici. À remplacer à terme par de vraies photos
 d'Aurélia en atelier.
+
+## Mesure d'audience
+**Vercel Web Analytics** (`<script defer src="/_vercel/insights/script.js">` sur chaque page).
+Sans cookie, sans identifiant permanent, sans suivi inter-sites : **aucun bandeau de consentement
+n'est nécessaire**, et la politique de confidentialité le documente.
+- ⚠️ À activer dans le projet Vercel (onglet Analytics) après le déploiement, sinon rien n'est collecté.
+- Le script renvoie un 404 en local : normal, il n'est servi que par Vercel.
+- Les **conversions** (quiz, CV, plaquettes, contact) sont déjà tracées côté n8n : l'audience et
+  les conversions se lisent donc à deux endroits complémentaires.
 
 ## Technique
 - HTML/CSS/JS statique, sans dépendance de build
@@ -111,7 +121,6 @@ d'Aurélia en atelier.
 - [ ] Récupérer la **brochure Écoles corrigée** par Caroline (les « :: » enlevés) et regénérer le PDF
 - [ ] Vérifier la dernière version du **document site web** (Caroline a retiré une recommandation)
 - [ ] Vérifier le domaine dans Resend, puis réactiver les 4 nœuds d'envoi n8n
-- [ ] Trancher le sort de `entreprises.html`
 - [ ] Confirmer avec Aurélia qu'elle détient bien une licence **webfont** pour Neue Montréal
       (distincte de la licence bureau) — voir `fonts/README.md`
 - [ ] Nouvelle photo d'Aurélia quand elle l'aura faite (`images/aurelia-2026.jpg` est une
