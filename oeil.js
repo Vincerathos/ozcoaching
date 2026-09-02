@@ -3,10 +3,10 @@
 (() => {
   const WEBHOOK = (window.OZ_CONFIG && window.OZ_CONFIG.webhook) || 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead';
 
-  // ↓↓↓ SEAM CLAUDE — pour brancher l'analyse IA du CV, colle ici l'URL de l'endpoint.
-  // Il reçoit { texte, cible } et doit renvoyer { score, verdict:{t,d}, forces:[], alertes:[], conseils:[] }.
-  // Tant que c'est vide, la voie PDF capture le CV et déclenche un audit humain via n8n.
-  const CV_ANALYZE_ENDPOINT = '';
+  // Analyse IA du CV : l'URL vient de config.js (workflow n8n qui appelle Claude).
+  // Elle reçoit { texte, cible } et renvoie { score, verdict:{t,d}, forces, alertes, conseils }.
+  // Si elle est vide ou si l'appel échoue, on retombe sur l'audit humain par Aurélia.
+  const CV_ANALYZE_ENDPOINT = (window.OZ_CONFIG && window.OZ_CONFIG.analyseCV) || '';
 
   const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
@@ -264,11 +264,25 @@
       cvStatus.innerHTML = statusMsg('#004956', '✓ CV lu — ' + words.toLocaleString('fr-FR') + ' mots détectés.');
       ctx.source = 'cv'; ctx.texte = texte.slice(0, 8000); ctx.cible = cvCible.value.trim(); ctx.analyse = null;
 
-      // Si l'analyse IA est branchée → résultat instantané ; sinon → capture (audit humain).
-      try {
-        const a = await analyserCV(ctx.texte, ctx.cible);
-        if (a) { afficherResultat(a); return; }
-      } catch (e) { /* endpoint indisponible → on bascule sur la capture */ }
+      // Analyse IA si elle est branchée ; sinon (ou si elle échoue) → audit humain.
+      if (CV_ANALYZE_ENDPOINT) {
+        cvStatus.innerHTML = statusMsg('#004956', '✓ CV lu — ' + words.toLocaleString('fr-FR') +
+          ' mots. <strong>Analyse en cours…</strong> (une dizaine de secondes, je le lis en entier)');
+        box.classList.add('scanning');
+        try {
+          const a = await analyserCV(ctx.texte, ctx.cible);
+          box.classList.remove('scanning');
+          if (a && a.verdict) {
+            cvStatus.hidden = true;
+            afficherResultat(a);
+            return;
+          }
+        } catch (e) {
+          box.classList.remove('scanning');
+          cvStatus.innerHTML = statusMsg('#8a6420', "⚠️ L'analyse automatique n'a pas abouti — " +
+            "Aurélia regarde votre CV elle-même. Laissez-lui votre e-mail ci-dessous.");
+        }
+      }
       res.hidden = true;
       cvPending.hidden = false;
       cvPending.scrollIntoView({ behavior: 'smooth', block: 'start' });

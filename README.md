@@ -59,10 +59,12 @@ Référence : `design/charte-graphique-ag.png`
 ## Génération de leads
 - **Outil « L'œil de la recruteuse »**, 2 parcours :
   - *J'écris* : analyse de titre LinkedIn / accroche (scoring 100 % côté client), jauge animée
-  - *J'importe mon CV (PDF)* : extraction du texte via pdf.js, détection des PDF illisibles.
-    Analyse IA **à brancher** : renseigner `CV_ANALYZE_ENDPOINT` en haut de `oeil.js` avec l'URL
-    d'un endpoint qui reçoit `{texte, cible}` et renvoie `{score, verdict:{t,d}, forces, alertes, conseils}`.
-    Tant qu'elle est vide → capture du CV pour **audit humain** par Aurélia.
+  - *J'importe mon CV (PDF)* : extraction du texte via pdf.js, puis **analyse par Claude** ✅
+    (workflow n8n `OZ Coaching — Analyse CV par IA`, ID `pMbciGGc82doOq90`, webhook
+    `/webhook/oz-analyse-cv`). Le modèle joue le rôle d'Aurélia et renvoie score, verdict,
+    forces, alertes et conseils, en citant des éléments précis du CV. ~10 à 20 s par analyse,
+    quelques centimes. Si l'appel échoue ou si `analyseCV` est vidé dans `config.js`,
+    le site retombe automatiquement sur l'audit humain.
 - **Quiz d'orientation** (accueil) : 4 profils → offre recommandée + capture e-mail
 - **Formulaires de documentation** : plaquette écoles, doc carrière, alerte blog.
   Le PDF se **télécharge immédiatement** après l'envoi du formulaire (le visiteur n'attend pas

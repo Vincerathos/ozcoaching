@@ -21,6 +21,12 @@ window.OZ_CONFIG = {
      Reçoit : l'outil « L'œil », le quiz, les CV, les demandes de plaquette. */
   webhook: 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead',
 
+  /* --- 3.bis Analyse de CV par IA -----------------------------------------
+     Workflow n8n « OZ Coaching — Analyse CV par IA » : reçoit {texte, cible}
+     et renvoie {score, verdict:{t,d}, forces, alertes, conseils}.
+     Vider cette valeur pour repasser en audit manuel par Aurélia. */
+  analyseCV: 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-analyse-cv',
+
   /* --- 4. Adresse de réception du formulaire de contact --------------------
      Utilisée par FormSubmit. ⚠️ FormSubmit exige une activation : au tout
      premier envoi, un e-mail de confirmation arrive dans cette boîte et le
