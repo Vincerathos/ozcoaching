@@ -8,7 +8,7 @@
 // La clé ne doit jamais être appelée depuis le navigateur : elle permettrait à
 // n'importe qui d'envoyer du courrier au nom du domaine.
 
-const { construireEmails, CONTACT } = require('./_emails');
+const { construireEmails, CONTACT, NOTIF, BANDEAU_TEST } = require('./_emails');
 
 const EXPEDITEUR = 'Aurélia — OZ Coaching <contact@oz-coaching.fr>';
 const JOURS = { e2: 2, e3: 5, e4: 9 };
@@ -34,6 +34,7 @@ function notificationLead(b, e) {
     : '';
   return `
 <div style="font-family:Arial,Helvetica,sans-serif;color:#231F20;max-width:620px">
+  ${BANDEAU_TEST}
   <p style="background:${e.b2b ? '#EFF6F8' : '#FDF6E9'};border-radius:12px;padding:12px 16px;margin:0 0 18px;font-size:15px">
     <strong>${e.b2b ? '🏫 Lead école (B2B)' : '💼 Lead particulier'}</strong>
   </p>
@@ -115,7 +116,7 @@ module.exports = async (req, res) => {
   try {
     await envoyer(cle, {
       from: 'Site OZ Coaching <contact@oz-coaching.fr>',
-      to: CONTACT,
+      to: NOTIF,
       reply_to: email,
       subject: `[Site OZ] Nouveau lead ${LIBELLES[e.source] || e.source} — ${e.prenom}`,
       html: notificationLead(b, e)

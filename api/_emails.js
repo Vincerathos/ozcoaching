@@ -8,7 +8,26 @@
 // coach. Ils sont corrigés ici vers oz-coaching.fr.
 
 const SITE = 'https://www.oz-coaching.fr';
+
+// Adresse publique d'Aurélia : sert de reply_to sur les e-mails envoyés aux
+// visiteurs, et de destination par défaut des notifications internes.
 const CONTACT = 'aurelia.grino.ozcoaching@gmail.com';
+
+// Où arrivent les notifications internes (nouveau lead, message de contact).
+// Poser EMAIL_NOTIFICATIONS dans les réglages Vercel les détourne vers une autre
+// boîte — le temps de valider la chaîne sans écrire chez la cliente. Retirer la
+// variable les renvoie chez Aurélia : aucun code à modifier pour basculer.
+const NOTIF = (process.env.EMAIL_NOTIFICATIONS || '').trim() || CONTACT;
+const NOTIF_DETOURNEE = NOTIF !== CONTACT;
+
+// Bandeau rappelant que la notification est détournée, pour qu'un e-mail de
+// test ne puisse pas être pris pour un vrai lead.
+const BANDEAU_TEST = NOTIF_DETOURNEE
+  ? `<p style="background:#FDF6E9;border:1.5px solid #E7CE9C;color:#5E4611;border-radius:12px;padding:12px 16px;margin:0 0 18px;font-size:13.5px">
+      ⚠️ <strong>Notification détournée.</strong> EMAIL_NOTIFICATIONS est renseignée : cet e-mail
+      arrive ici au lieu de la boîte d'Aurélia. Retirer la variable dans Vercel pour rétablir.
+    </p>`
+  : '';
 
 const RDV = SITE + '/contact.html#rdv';
 const PLAQUETTES = {
@@ -183,4 +202,4 @@ ${BTN(RDV, 'Je réserve mes 30 minutes offertes')}
   return { email, prenom, source, profil, doc, orga, b2b, e1s, e1h, e2s, e2h, e3s, e3h, e4s, e4h };
 }
 
-module.exports = { construireEmails, CONTACT, SITE };
+module.exports = { construireEmails, CONTACT, SITE, NOTIF, NOTIF_DETOURNEE, BANDEAU_TEST };

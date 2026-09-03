@@ -6,7 +6,7 @@
 //
 // Variable d'environnement requise : RESEND_API_KEY.
 
-const { CONTACT, SITE } = require('./_emails');
+const { CONTACT, SITE, NOTIF, BANDEAU_TEST } = require('./_emails');
 
 const EXPEDITEUR = 'Site OZ Coaching <contact@oz-coaching.fr>';
 
@@ -56,6 +56,7 @@ module.exports = async (req, res) => {
   //    directement depuis sa boîte, sans copier l'adresse à la main.
   const pourAurelia = `
 <div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.65;color:#231F20">
+  ${BANDEAU_TEST}
   <p style="background:${ecole ? '#EFF6F8' : '#FDF6E9'};border-radius:12px;padding:12px 16px;margin:0 0 18px">
     <strong>${ecole ? '🏫 Une école' : '💼 Un particulier'}</strong>
     ${orga ? ' — ' + esc(orga) : ''}
@@ -73,7 +74,7 @@ module.exports = async (req, res) => {
   try {
     await envoyer(cle, {
       from: EXPEDITEUR,
-      to: CONTACT,
+      to: NOTIF,
       reply_to: email,
       subject: `[Site OZ] ${ecole ? 'École' : 'Particulier'} — ${nom}`,
       html: pourAurelia
