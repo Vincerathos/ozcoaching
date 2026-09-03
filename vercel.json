@@ -2,6 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
   "cleanUrls": false,
+  "functions": {
+    "api/analyse-cv.js": { "maxDuration": 60 }
+  },
   "redirects": [
     { "source": "/particuliers.html", "destination": "/carriere.html", "permanent": true },
     { "source": "/entreprises.html", "destination": "/", "permanent": true }

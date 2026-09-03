@@ -28,15 +28,18 @@ window.OZ_CONFIG = {
      plus consulter, sécuriser ou purger. (Détail technique dans le README, qui
      n'est pas publié.)
 
-     Tant que ces valeurs sont vides, les formulaires basculent proprement sur
-     le contact par e-mail et l'outil « L'œil » repasse en audit humain.
-     À remplacer par les fonctions Vercel du site (même domaine, même compte). */
-  webhook: '',
+     Remplacé le 03/09/2026 par une fonction du site lui-même (dossier /api),
+     hébergée sur le même domaine et le même compte : plus aucune dépendance à
+     une infrastructure tierce. Les clés d'API vivent dans les variables
+     d'environnement Vercel, jamais dans ce fichier — il est public.
+
+     Vider cette valeur bascule les formulaires sur le contact par e-mail. */
+  webhook: '/api/lead',
 
   /* --- 3.bis Analyse de CV par IA -----------------------------------------
      Reçoit {texte, cible} et renvoie {score, verdict:{t,d}, forces, alertes,
      conseils}. Vide = audit manuel par Aurélia (repli automatique). */
-  analyseCV: '',
+  analyseCV: '/api/analyse-cv',
 
   /* --- 4. Adresse de réception du formulaire de contact --------------------
      Utilisée par FormSubmit. ⚠️ FormSubmit exige une activation : au tout

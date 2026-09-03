@@ -309,31 +309,39 @@
       return p;
     }
 
+    // Repli quand la capture est indisponible : on oriente vers l'e-mail
+    // plutôt que de laisser un formulaire qui ne mène nulle part.
+    function replierSurEmail(f) {
+      const mail = (window.OZ_CONFIG && window.OZ_CONFIG.emailContact) || '';
+      const p = document.createElement('p');
+      p.style.cssText = 'margin-top:16px;background:#FDF6E9;border:1.5px solid #E7CE9C;color:#5E4611;' +
+        'border-radius:14px;padding:14px 18px;font-size:14.5px;line-height:1.6';
+      p.innerHTML = 'Le formulaire est momentanément indisponible. Écrivez directement à ' +
+        '<a href="mailto:' + mail + '" style="color:#0097B2;font-weight:500">' + mail + '</a>, ' +
+        'Aurélia vous répond en personne.';
+      f.hidden = true;
+      f.parentNode.insertBefore(p, f.nextSibling);
+    }
+
     function wireForm(formId, sentId) {
       const f = document.getElementById(formId);
       if (!f) return;
       f.addEventListener('submit', async ev => {
         ev.preventDefault();
         if (f.website.value) return; // honeypot
-        if (!WEBHOOK) {
-          const mail = (window.OZ_CONFIG && window.OZ_CONFIG.emailContact) || '';
-          const p = document.createElement('p');
-          p.style.cssText = 'margin-top:16px;background:#FDF6E9;border:1.5px solid #E7CE9C;color:#5E4611;' +
-            'border-radius:14px;padding:14px 18px;font-size:14.5px;line-height:1.6';
-          p.innerHTML = 'Le formulaire est momentanément indisponible. Écrivez directement à ' +
-            '<a href="mailto:' + mail + '" style="color:#0097B2;font-weight:500">' + mail + '</a>, ' +
-            'Aurélia vous répond en personne.';
-          f.hidden = true;
-          f.parentNode.insertBefore(p, f.nextSibling);
-          return;
-        }
+        if (!WEBHOOK) { replierSurEmail(f); return; }
         const btn = f.querySelector('button[type=submit]');
         btn.disabled = true; btn.textContent = 'Envoi en cours…';
         try {
-          await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(buildPayload(f)) });
+          const r = await fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(buildPayload(f)) });
+          if (!r.ok) throw new Error('envoi');
           f.hidden = true;
           document.getElementById(sentId).hidden = false;
         } catch {
+          // Deuxième échec : on donne l'adresse directe plutôt que de
+          // laisser la personne cliquer indéfiniment.
+          if (f.dataset.echec) { replierSurEmail(f); return; }
+          f.dataset.echec = '1';
           btn.disabled = false; btn.textContent = 'Réessayer l\'envoi';
         }
       });

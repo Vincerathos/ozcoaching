@@ -57,15 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const label = btn ? btn.textContent : '';
     if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
     try {
-      await fetch(OZ_WEBHOOK, {
+      const r = await fetch(OZ_WEBHOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(Object.assign({ page: location.href }, payload))
       });
+      if (!r.ok) throw new Error('envoi');
       form.hidden = true;
       const sent = document.getElementById(sentId);
       if (sent) sent.hidden = false;
     } catch {
+      // Deuxième échec : inutile de faire tourner la personne en rond,
+      // on lui donne l'adresse directe.
+      if (form.dataset.echec) return contactDirect(form);
+      form.dataset.echec = '1';
       if (btn) { btn.disabled = false; btn.textContent = 'Réessayer l’envoi'; }
     }
   }
