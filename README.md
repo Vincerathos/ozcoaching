@@ -133,17 +133,32 @@ n'est nécessaire**, et la politique de confidentialité le documente.
 - « Qui suis-je » : les cabinets de recrutement couvrent désormais « de Paris à Montpellier
   en passant par Aix-Marseille »
 
-## Informations légales (transmises par Aurélia le 03/09/2026)
-OZ Coaching est une **SARL** (et non une entreprise individuelle, comme supposé initialement) :
-SIRET 920 800 505 00017, TVA intracommunautaire **FR 25 920 800 505**. Mentions légales et
-politique de confidentialité corrigées en conséquence.
+## Informations légales — complètes ✅
+Vérifiées au RCS (source Pappers, 03/09/2026). Le site désignait à tort une *entreprise
+individuelle* : OZ COACHING est en réalité une société.
 
-⚠️ Deux mentions restent **obligatoires pour une SARL** et manquent encore : le **capital social**
-et la **ville du greffe RCS**. Les deux figurent sur le Kbis. Un bloc `.todo` les signale sur la page.
+| | |
+|---|---|
+| Dénomination | OZ COACHING |
+| Forme juridique | **EURL** (entreprise unipersonnelle à responsabilité limitée) |
+| Capital social | 1 000 € |
+| RCS | Nîmes 920 800 505 (immatriculée le 26/10/2022) |
+| SIRET (siège) | 920 800 505 00017 |
+| TVA intracommunautaire | FR 25 920 800 505 |
+| Gérante | Aurélia Grino |
+| APE/NAF | 70.22Z |
+| Création | 17/10/2022 |
+
+Reportées dans `mentions-legales.html` (plus aucun bloc `.todo`), dans le responsable de
+traitement de `confidentialite.html`, et dans le JSON-LD de l'accueil (`legalName`, `vatID`,
+`taxID`, `foundingDate`).
+
+> ⚠️ **Conséquence pour l'achat du domaine** : le titulaire doit être **OZ COACHING, la société**
+> (avec son SIREN), et non Aurélia Grino en tant que personne physique — sinon le titulaire du
+> domaine ne correspond plus à l'éditeur déclaré du site.
 
 ## À finaliser avant mise en ligne
-- [ ] Récupérer le **capital social** et le **RCS (ville)** sur le Kbis d'Aurélia
-- [ ] Acheter **oz-coaching.fr** (3 ans, réglés par Aurélia) et déployer
+- [ ] Acheter **oz-coaching.fr** (3 ans, réglés par Aurélia) au nom d'**OZ COACHING**, puis déployer
 - [ ] **Photos** : Aurélia veut des visuels plus parlants (ateliers). Caroline a envoyé un PDF de
       photos mais elles **ne sont pas libres de droit** — ne pas les publier en l'état
 - [ ] Récupérer la **brochure Écoles corrigée** par Caroline (les « :: » enlevés) et regénérer le PDF
