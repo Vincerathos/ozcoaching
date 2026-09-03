@@ -92,7 +92,12 @@ n'est nécessaire**, et la politique de confidentialité le documente.
 - Responsive (mobile-first, breakpoints 600 / 960 px), SEO (JSON-LD, sitemap, OG), RGPD
 
 ## Génération de leads
-- **Outil « L'œil de la recruteuse »**, 2 parcours :
+- **Outil « L'œil de la recruteuse »** — repositionné en **premier filtre IA** à la demande
+  d'Aurélia (03/09/2026) : l'outil ne doit pas se substituer à son discours. Le cadrage
+  (« ce n'est pas un coaching CV », « l'IA fait le premier tri, le coaching permet de faire les
+  bons choix ») apparaît à **trois** endroits — encart avant l'outil, rappel sous les résultats,
+  bloc CTA final — plus le teaser de l'accueil et les métadonnées. Style : `.avert` / `.avert-mini`.
+  2 parcours :
   - *J'écris* : analyse de titre LinkedIn / accroche (scoring 100 % côté client), jauge animée
   - *J'importe mon CV (PDF)* : extraction du texte via pdf.js, puis **analyse par Claude** ✅
     (workflow n8n `OZ Coaching — Analyse CV par IA`, ID `pMbciGGc82doOq90`, webhook
@@ -128,8 +133,17 @@ n'est nécessaire**, et la politique de confidentialité le documente.
 - « Qui suis-je » : les cabinets de recrutement couvrent désormais « de Paris à Montpellier
   en passant par Aix-Marseille »
 
+## Informations légales (transmises par Aurélia le 03/09/2026)
+OZ Coaching est une **SARL** (et non une entreprise individuelle, comme supposé initialement) :
+SIRET 920 800 505 00017, TVA intracommunautaire **FR 25 920 800 505**. Mentions légales et
+politique de confidentialité corrigées en conséquence.
+
+⚠️ Deux mentions restent **obligatoires pour une SARL** et manquent encore : le **capital social**
+et la **ville du greffe RCS**. Les deux figurent sur le Kbis. Un bloc `.todo` les signale sur la page.
+
 ## À finaliser avant mise en ligne
-- [ ] Acheter **oz-coaching.fr** + héberger, puis compléter l'hébergeur dans les mentions légales
+- [ ] Récupérer le **capital social** et le **RCS (ville)** sur le Kbis d'Aurélia
+- [ ] Acheter **oz-coaching.fr** (3 ans, réglés par Aurélia) et déployer
 - [ ] **Photos** : Aurélia veut des visuels plus parlants (ateliers). Caroline a envoyé un PDF de
       photos mais elles **ne sont pas libres de droit** — ne pas les publier en l'état
 - [ ] Récupérer la **brochure Écoles corrigée** par Caroline (les « :: » enlevés) et regénérer le PDF

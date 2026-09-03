@@ -334,3 +334,19 @@ img,svg,video{max-width:100%}
   .nav-cta{display:none}
   .brand img{height:38px;width:auto}
 }
+
+/* Encart de cadrage de l'outil : ce que le filtre IA est, et ce qu'il n'est pas.
+   Ambre clair sur texte foncé — lisible, et volontairement distinct de la charte
+   pour qu'on ne le lise pas comme un argument de vente de plus. */
+.avert{background:#FDF6E9;border:1.5px solid #E7CE9C;border-left-width:5px;
+  border-radius:16px;padding:22px 26px;margin:26px auto 0;color:#5E4611}
+.avert p{margin:0 0 10px;font-size:15.5px;line-height:1.62}
+.avert p:last-child{margin-bottom:0}
+.avert strong{color:#4A3708}
+.avert-t{font-weight:600;font-size:16.5px !important;color:#4A3708}
+.avert-p{margin-top:14px !important;padding-top:14px;border-top:1px solid #EBDCBC;
+  font-family:var(--display);font-size:18px !important;color:#4A3708}
+.avert-mini{background:#FDF6E9;border:1.5px solid #E7CE9C;border-radius:14px;
+  padding:16px 20px;margin-top:26px;color:#5E4611;font-size:14.5px;line-height:1.6}
+.avert-mini strong{color:#4A3708}
+@media(max-width:600px){.avert{padding:18px 20px}}
