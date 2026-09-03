@@ -157,8 +157,25 @@ traitement de `confidentialite.html`, et dans le JSON-LD de l'accueil (`legalNam
 > (avec son SIREN), et non Aurélia Grino en tant que personne physique — sinon le titulaire du
 > domaine ne correspond plus à l'éditeur déclaré du site.
 
-## À finaliser avant mise en ligne
-- [ ] Acheter **oz-coaching.fr** (3 ans, réglés par Aurélia) au nom d'**OZ COACHING**, puis déployer
+## En ligne ✅ — https://www.oz-coaching.fr (déployé le 03/09/2026)
+Vercel, projet `ozcoaching`, déploiement automatique sur `main`. DNS géré chez Hostinger
+(nameservers `*.dns-parking.com`), volontairement **pas** délégué à Vercel : les enregistrements
+SPF/DKIM de Resend et d'éventuels MX pour `contact@oz-coaching.fr` doivent rester gérables au
+même endroit.
+
+| Enregistrement | Valeur |
+|---|---|
+| `A` `@` | `216.198.79.1` |
+| `CNAME` `www` | `aa24ddb499a6dd18.vercel-dns-017.com.` |
+
+`www` est le domaine **principal** (tous les canonicals et le sitemap le portent) ; l'apex
+redirige en 308 vers `www`. Certificat Let's Encrypt émis automatiquement.
+
+Vérifié en production : redirections 308 (apex → www, `particuliers.html` → `carriere.html`,
+`entreprises.html` → `/`), en-têtes de sécurité, cache immuable sur les polices, aucune erreur
+console — et les fichiers internes (`*.md`, `redesign/`, `idees.html`) renvoient bien un **404**.
+
+## À finaliser
 - [ ] **Photos** : Aurélia veut des visuels plus parlants (ateliers). Caroline a envoyé un PDF de
       photos mais elles **ne sont pas libres de droit** — ne pas les publier en l'état
 - [ ] Récupérer la **brochure Écoles corrigée** par Caroline (les « :: » enlevés) et regénérer le PDF
