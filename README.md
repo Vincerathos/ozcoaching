@@ -175,6 +175,38 @@ Vérifié en production : redirections 308 (apex → www, `particuliers.html` �
 `entreprises.html` → `/`), en-têtes de sécurité, cache immuable sur les polices, aucune erreur
 console — et les fichiers internes (`*.md`, `redesign/`, `idees.html`) renvoient bien un **404**.
 
+## Back-end — fonctions Vercel (`/api`)
+Le site était relié à une instance **n8n appartenant à l'ancienne entreprise du
+prestataire**, devenue inaccessible mais **toujours en écoute** : elle a reçu des e-mails
+de prospects et des CV entiers que plus personne ne pouvait consulter ni purger. Les
+webhooks ont été coupés le 03/09/2026 et remplacés par deux fonctions du site lui-même.
+Leçon retenue : **aucune URL de destination codée en dur** dans le front — si `config.js`
+est vide, les formulaires basculent sur le contact par e-mail plutôt que d'écrire à
+l'aveugle vers une adresse que plus personne ne surveille.
+
+| Fichier | Rôle |
+|---|---|
+| `api/lead.js` | Capture de lead → e-mail 1 immédiat + relances J+2 / J+5 / J+9 |
+| `api/analyse-cv.js` | Premier filtre IA sur le CV (Claude) |
+| `api/_emails.js` | Contenu des 4 e-mails. Le préfixe `_` empêche Vercel d'en faire une route |
+
+**Les relances ne dépendent plus d'un automate allumé** : elles sont programmées chez
+Resend dès l'arrivée du lead (`scheduled_at`), donc elles partent même si plus rien ne
+tourne côté site. C'est exactement la panne que l'on vient de subir avec n8n.
+
+### Variables d'environnement (réglages Vercel — jamais dans le dépôt, qui est public)
+| Variable | Utilité | Sans elle |
+|---|---|---|
+| `RESEND_API_KEY` | Envoi des e-mails | `503 non_configure` → le formulaire propose l'e-mail d'Aurélia |
+| `ANTHROPIC_API_KEY` | Analyse du CV | `503` → repli automatique sur l'audit humain |
+
+⚠️ Sur Vercel, une variable ajoutée ne s'applique **qu'au déploiement suivant** :
+penser à relancer un *Redeploy* après l'avoir posée.
+
+`maxDuration` est porté à 60 s pour `analyse-cv` (l'appel au modèle prend 10 à 20 s).
+Si la limite du plan Hobby s'avère plus basse, basculer cette fonction sur un modèle
+plus rapide plutôt que d'allonger l'attente côté visiteur.
+
 ## À finaliser
 - [ ] **Photos** : Aurélia veut des visuels plus parlants (ateliers). Caroline a envoyé un PDF de
       photos mais elles **ne sont pas libres de droit** — ne pas les publier en l'état
