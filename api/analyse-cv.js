@@ -84,7 +84,9 @@ module.exports = async (req, res) => {
       // Le statut renvoyé par le fournisseur est remonté tel quel : il dit
       // immédiatement s'il s'agit d'une clé refusée (401), d'une requête
       // invalide (400) ou d'un quota (429). Aucun secret n'y transite.
-      return res.status(502).json({ erreur: 'analyse_indisponible', amont: r.status });
+      let message = '';
+      try { message = (JSON.parse(detail).error || {}).message || ''; } catch (e) { message = detail; }
+      return res.status(502).json({ erreur: 'analyse_indisponible', amont: r.status, message: message.slice(0, 200) });
     }
     reponse = await r.json();
   } catch (err) {
