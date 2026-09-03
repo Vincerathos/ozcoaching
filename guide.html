@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Documentation remise a Aurelia, volontairement tenue a l ecart du site :
+     aucun lien n y mene, elle est absente du sitemap, et noindex empeche son
+     referencement. Seule une personne disposant de l adresse peut l ouvrir. -->
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="images/favicon-oz-v3.png" type="image/png" />
+<style>
+/* Polices du site, servies depuis ce domaine : aucune requete vers un tiers,
+   donc aucune adresse IP de visiteur transmise (RGPD). */
+@font-face{font-family:'Neue Montreal';src:url('fonts/NeueMontreal-Light.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Neue Montreal';src:url('fonts/NeueMontreal-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Neue Montreal';src:url('fonts/NeueMontreal-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Neue Montreal';src:url('fonts/NeueMontreal-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Znikomit';src:url('fonts/Znikomit.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Manrope';src:url('fonts/Manrope-Variable.woff2') format('woff2');font-weight:200 800;font-style:normal;font-display:swap}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<title>OZ Coaching, mode d'emploi</title>
+<style>
+  :root{
+    --fond:#F6F4F0;
+    --papier:#FFFFFF;
+    --encre:#231F20;
+    --texte:#3F4243;
+    --doux:#767D80;
+    --petrole:#004956;
+    --petrole-txt:#004956;
+    --cyan:#0097B2;
+    --cyan-doux:#E2F1F5;
+    --ligne:#E3E0DA;
+    --ligne-fine:#EDEAE4;
+    --ambre-f:#FDF6E9;
+    --ambre-b:#E7CE9C;
+    --ambre-t:#6B5218;
+    --vert-f:#EAF3EC;
+    --vert-t:#2C6238;
+    --brique-f:#FBEEE9;
+    --brique-t:#A2482A;
+    --ombre:0 1px 2px rgba(35,31,32,.04), 0 8px 24px -12px rgba(0,73,86,.13);
+    --r:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --fond:#111B1E;
+      --papier:#18262A;
+      --encre:#F1EEE8;
+      --texte:#C3C8C7;
+      --doux:#8B9497;
+      --petrole:#0B3D48;
+      --petrole-txt:#7FCBDB;
+      --cyan:#2FAAC4;
+      --cyan-doux:#123138;
+      --ligne:#27383D;
+      --ligne-fine:#1F2E33;
+      --ambre-f:#2A2113;
+      --ambre-b:#5E4A22;
+      --ambre-t:#E3C68F;
+      --vert-f:#14291A;
+      --vert-t:#8FCB9E;
+      --brique-f:#2C1A14;
+      --brique-t:#E0A085;
+      --ombre:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --fond:#111B1E;
+    --papier:#18262A;
+    --encre:#F1EEE8;
+    --texte:#C3C8C7;
+    --doux:#8B9497;
+    --petrole:#0B3D48;
+    --petrole-txt:#7FCBDB;
+    --cyan:#2FAAC4;
+    --cyan-doux:#123138;
+    --ligne:#27383D;
+    --ligne-fine:#1F2E33;
+    --ambre-f:#2A2113;
+    --ambre-b:#5E4A22;
+    --ambre-t:#E3C68F;
+    --vert-f:#14291A;
+    --vert-t:#8FCB9E;
+    --brique-f:#2C1A14;
+    --brique-t:#E0A085;
+    --ombre:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--fond);
+    color:var(--texte);
+    font-family:'Neue Montreal','Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+    font-size:16px;
+    line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    color:var(--encre);
+    text-wrap:balance;
+    margin:0;
+    line-height:1.15;
+  }
+  /* Znikomit est une display : le site la réserve aux titres de héros, où sa
+     finesse tient. En dessous de cette taille elle se délave — les titres de
+     section prennent donc Neue Montreal, comme le reste du site. */
+  h1{font-family:'Znikomit','Neue Montreal','Manrope',system-ui,sans-serif;font-weight:400}
+  h2,h3,h4{font-family:'Neue Montreal','Manrope',system-ui,sans-serif}
+  p{margin:0}
+  a{color:var(--cyan)}
+  code,.mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:.88em}
+  code{background:var(--cyan-doux);color:var(--petrole-txt);padding:1px 6px;border-radius:5px;white-space:nowrap}
+
+  /* ---------- ossature ---------- */
+  .page{max-width:1180px;margin:0 auto;padding:0 26px 90px}
+  .layout{display:grid;grid-template-columns:212px minmax(0,1fr);gap:56px;align-items:start}
+
+  /* ---------- en-tête ---------- */
+  .hero{padding:64px 0 40px;border-bottom:1px solid var(--ligne)}
+  .eyebrow{
+    font-family:'Neue Montreal','Manrope',system-ui,sans-serif;
+    font-size:11px;font-weight:600;letter-spacing:.19em;text-transform:uppercase;
+    color:var(--cyan);margin-bottom:16px;
+  }
+  .hero h1{font-size:clamp(38px,6vw,62px);font-weight:700;letter-spacing:-.015em}
+  .hero .sous{max-width:62ch;margin-top:20px;font-size:18px;color:var(--texte)}
+  .hero .meta{
+    margin-top:30px;display:flex;flex-wrap:wrap;gap:10px 22px;
+    font-size:13.5px;color:var(--doux);
+  }
+  .hero .meta b{color:var(--encre);font-weight:600}
+
+  /* ---------- sommaire ---------- */
+  nav.toc{position:sticky;top:26px;padding-top:52px}
+  nav.toc .t{
+    font-family:'Neue Montreal','Manrope',system-ui,sans-serif;
+    font-size:10.5px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
+    color:var(--doux);margin-bottom:14px;
+  }
+  nav.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+  nav.toc a{
+    display:block;padding:6px 0 6px 13px;font-size:14px;line-height:1.4;
+    color:var(--texte);text-decoration:none;
+    border-left:2px solid var(--ligne);transition:border-color .18s,color .18s;
+  }
+  nav.toc a:hover{color:var(--petrole-txt);border-left-color:var(--cyan)}
+
+  /* ---------- sections ---------- */
+  section{padding-top:52px;scroll-margin-top:22px}
+  section > h2{
+    font-size:clamp(25px,3.2vw,33px);font-weight:700;letter-spacing:-.01em;
+    padding-bottom:14px;border-bottom:1px solid var(--ligne);
+  }
+  .intro{max-width:66ch;margin-top:18px;font-size:16.5px}
+  .corps{max-width:66ch;display:flex;flex-direction:column;gap:16px;margin-top:16px}
+  h3{font-size:19px;font-weight:600;margin-top:34px;}
+  h3 + p{margin-top:10px}
+
+  /* ---------- tuiles de synthèse ---------- */
+  .chiffres{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:1px;
+    background:var(--ligne);border:1px solid var(--ligne);border-radius:var(--r);overflow:hidden;margin-top:30px}
+  .chiffres div{background:var(--papier);padding:20px 22px}
+  .chiffres .n{font-family:'Neue Montreal','Manrope',system-ui,sans-serif;
+    font-size:31px;font-weight:700;color:var(--petrole-txt);line-height:1;font-variant-numeric:tabular-nums}
+  .chiffres .l{margin-top:7px;font-size:13px;color:var(--doux);line-height:1.4}
+
+  /* ---------- listes de pages ---------- */
+  .pages{margin-top:26px;display:flex;flex-direction:column}
+  .pages > div{
+    display:grid;grid-template-columns:190px minmax(0,1fr);gap:26px;
+    padding:15px 0;border-top:1px solid var(--ligne-fine);align-items:baseline;
+  }
+  .pages > div:first-child{border-top:0}
+  .pages .nom{font-weight:600;color:var(--encre);font-size:15px}
+  .pages .nom span{display:block;font-weight:400;font-size:12.5px;color:var(--doux);margin-top:2px}
+  .pages .quoi{font-size:15px}
+
+  /* ---------- flux : ce qui se passe ---------- */
+  .flux{margin-top:24px;display:flex;flex-direction:column;gap:14px}
+  .etape{
+    display:grid;grid-template-columns:26px minmax(0,1fr);gap:16px;align-items:start;
+  }
+  .etape .pastille{
+    width:26px;height:26px;border-radius:50%;background:var(--cyan-doux);
+    color:var(--petrole-txt);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;font-weight:500;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;
+  }
+  .etape .txt{font-size:15.5px}
+  .etape b{color:var(--encre);font-weight:600}
+
+  /* ---------- encarts ---------- */
+  .note{
+    margin-top:24px;border-radius:var(--r);padding:17px 21px;font-size:15px;line-height:1.62;
+    background:var(--ambre-f);border:1px solid var(--ambre-b);color:var(--ambre-t);
+  }
+  .note b{color:var(--ambre-t)}
+  .note.calme{background:var(--cyan-doux);border-color:transparent;color:var(--texte)}
+  .note.calme b{color:var(--petrole-txt)}
+  .note .titre{font-weight:700;display:block;margin-bottom:5px}
+
+  /* ---------- reproduction d'e-mail ---------- */
+  .mail{
+    margin-top:26px;border-radius:var(--r);overflow:hidden;
+    border:1px solid var(--ligne);box-shadow:var(--ombre);background:#FFFFFF;
+  }
+  .mail .chrome{
+    display:flex;align-items:center;gap:9px;padding:11px 16px;
+    background:#EFEDE8;border-bottom:1px solid #DEDBD4;
+  }
+  .mail .chrome i{width:9px;height:9px;border-radius:50%;background:#C9C5BC;display:block}
+  .mail .chrome .obj{
+    margin-left:6px;font-size:12.5px;color:#5C5F60;font-weight:600;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .mail .from{
+    padding:13px 22px;border-bottom:1px solid #EBE8E2;background:#fff;
+    font-size:12.5px;color:#7A7F80;
+  }
+  .mail .from b{color:#231F20}
+  /* Le corps reproduit un e-mail réel : il garde ses couleurs d'origine dans les
+     deux thèmes, comme le ferait une capture d'écran. */
+  .mail .corps{background:#F6F4F0;padding:22px 18px;color:#231F20}
+  .mail .carte{
+    max-width:520px;margin:0 auto;background:#fff;border:1px solid #E4E2DD;
+    border-radius:16px;overflow:hidden;
+  }
+  .mail .bandeau{background:#004956;padding:17px 26px}
+  .mail .bandeau .sur{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#8FD3E0;
+    font-family:'Neue Montreal','Manrope',system-ui,sans-serif;font-weight:600}
+  .mail .bandeau .tit{font-family:'Neue Montreal','Manrope',system-ui,sans-serif;
+    font-size:19px;font-weight:700;color:#fff;margin-top:3px;line-height:1.25}
+  .mail .dedans{padding:22px 26px 26px}
+  .mail .badge{
+    background:#FDF6E9;border-radius:11px;padding:11px 15px;font-size:14px;color:#3A3B3C;
+    font-weight:700;margin-bottom:17px;
+  }
+  .mail .badge.ecole{background:#EFF6F8}
+  .mail .score{
+    display:inline-block;background:#E2F1F5;border-radius:13px;padding:12px 22px;
+    text-align:center;margin-bottom:18px;
+  }
+  .mail .score .v{font-family:'Neue Montreal','Manrope',system-ui,sans-serif;
+    font-size:29px;font-weight:700;color:#0097B2;line-height:1;font-variant-numeric:tabular-nums}
+  .mail .score .v small{font-size:15px;color:#004956;font-weight:700}
+  .mail .score .d{font-size:12.5px;color:#004956;margin-top:3px}
+  .mail table.infos{border-collapse:collapse;width:100%}
+  .mail table.infos td{padding:6px 0;font-size:13.5px;vertical-align:top}
+  .mail table.infos td.k{color:#8A8F91;padding-right:16px;white-space:nowrap;width:1%}
+  .mail table.infos td.v{color:#231F20;font-weight:700}
+  .mail .surtitre{
+    font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8A8F91;
+    margin:20px 0 8px;font-family:'Neue Montreal','Manrope',system-ui,sans-serif;font-weight:600;
+  }
+  .mail .bloc{
+    background:#EFF6F8;border-left:4px solid #0097B2;border-radius:0 11px 11px 0;
+    padding:13px 17px;font-size:13.5px;line-height:1.6;color:#3A3B3C;
+  }
+  .mail .bloc.rouge{background:#FBEEE9;border-left-color:#C4643F}
+  .mail .bloc span{display:block}
+  .mail .bloc span + span{margin-top:7px}
+  .mail .bouton{
+    display:block;width:fit-content;margin:23px auto 4px;background:#0097B2;color:#fff;
+    border-radius:40px;padding:12px 27px;font-size:14px;font-weight:700;text-decoration:none;
+  }
+  .mail .pied{
+    margin-top:20px;padding-top:14px;border-top:1px solid #E9E7E2;
+    font-size:12px;color:#8A8F91;text-align:center;line-height:1.55;
+  }
+  .mail .legende{
+    padding:11px 20px;background:var(--papier);border-top:1px solid var(--ligne);
+    font-size:12.5px;color:var(--doux);
+  }
+
+  /* ---------- séquence ---------- */
+  .sequence{margin-top:26px;display:flex;flex-direction:column}
+  .sequence > div{
+    display:grid;grid-template-columns:78px minmax(0,1fr);gap:24px;
+    padding:17px 0;border-top:1px solid var(--ligne-fine);
+  }
+  .sequence > div:first-child{border-top:0}
+  .sequence .quand{
+    font-family:'Neue Montreal','Manrope',system-ui,sans-serif;
+    font-weight:700;font-size:16px;color:var(--petrole-txt);
+  }
+  .sequence .quand span{display:block;font-family:'Manrope',sans-serif;font-weight:400;
+    font-size:12px;color:var(--doux);margin-top:1px}
+  .sequence .quoi b{color:var(--encre);font-weight:600;display:block;margin-bottom:3px;font-size:15.5px}
+  .sequence .quoi p{font-size:14.5px}
+
+  /* ---------- qui fait quoi ---------- */
+  .tableau{width:100%;border-collapse:collapse;margin-top:24px;font-size:14.5px}
+  .tableau th{
+    text-align:left;font-family:'Neue Montreal','Manrope',system-ui,sans-serif;
+    font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--doux);
+    font-weight:600;padding:0 16px 10px 0;border-bottom:1px solid var(--ligne);
+  }
+  .tableau td{padding:12px 16px 12px 0;border-bottom:1px solid var(--ligne-fine);vertical-align:top}
+  .tableau td:first-child{color:var(--encre);font-weight:600;width:34%}
+  .puce{
+    display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;
+    white-space:nowrap;
+  }
+  .puce.ok{background:var(--vert-f);color:var(--vert-t)}
+  .puce.attente{background:var(--ambre-f);color:var(--ambre-t)}
+
+  .scroll{overflow-x:auto}
+
+  footer{
+    margin-top:76px;padding-top:26px;border-top:1px solid var(--ligne);
+    font-size:13.5px;color:var(--doux);display:flex;flex-wrap:wrap;gap:8px 26px;
+  }
+
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr;gap:0}
+    nav.toc{position:static;padding:34px 0 0;border-bottom:1px solid var(--ligne);padding-bottom:22px}
+    nav.toc ol{flex-direction:row;flex-wrap:wrap;gap:6px 8px}
+    nav.toc a{border-left:0;border:1px solid var(--ligne);border-radius:20px;padding:5px 13px;font-size:13px}
+    .pages > div{grid-template-columns:1fr;gap:4px}
+    .hero{padding:44px 0 30px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="page">
+
+  <header class="hero">
+    <p class="eyebrow">Guide de ton site — septembre 2026</p>
+    <h1>Ton site travaille pour toi. Voici comment.</h1>
+    <p class="sous">Tout ce que <b>www.oz-coaching.fr</b> fait quand tu n'y es pas : ce qu'un visiteur peut y faire,
+      ce qui arrive dans ta boîte mail, et ce qui part automatiquement de ta part. Aucune manipulation de ta
+      part n'est nécessaire — ce document est là pour que tu saches ce qui se passe.</p>
+    <p class="meta">
+      <span><b>10</b> pages</span>
+      <span><b>4</b> façons de laisser ses coordonnées</span>
+      <span><b>4</b> e-mails de relance automatiques</span>
+      <span><b>0</b> manipulation quotidienne</span>
+    </p>
+  </header>
+
+  <div class="layout">
+
+    <nav class="toc">
+      <p class="t">Sommaire</p>
+      <ol>
+        <li><a href="#pages">Les pages</a></li>
+        <li><a href="#capter">Comment on te laisse ses coordonnées</a></li>
+        <li><a href="#recois">Ce que tu reçois</a></li>
+        <li><a href="#part">Ce qui part de ta part</a></li>
+        <li><a href="#oeil">L'œil de la recruteuse</a></li>
+        <li><a href="#rdv">La prise de rendez-vous</a></li>
+        <li><a href="#audience">Ton audience</a></li>
+        <li><a href="#donnees">Tes données, tes obligations</a></li>
+        <li><a href="#reste">Qui fait quoi</a></li>
+      </ol>
+    </nav>
+
+    <main>
+
+      <!-- ============ PAGES ============ -->
+      <section id="pages">
+        <h2>Les pages</h2>
+        <p class="intro">Le site s'organise autour de <b>deux portes</b>, comme prévu dans le document de Caroline :
+          les écoles supérieures d'un côté, l'accompagnement carrière de l'autre. Tout le reste sert ces deux entrées.</p>
+
+        <div class="pages">
+          <div>
+            <p class="nom">Accueil<span>oz-coaching.fr</span></p>
+            <p class="quoi">Ton positionnement, les deux portes, le quiz, l'outil « L'œil », tes chiffres,
+              ta méthode et les témoignages.</p>
+          </div>
+          <div>
+            <p class="nom">Écoles supérieures<span>/ecoles.html</span></p>
+            <p class="quoi">L'écosystème alternance à 360°, les formats d'intervention, le volet Career Center
+              et Qualiopi, tes réalisations.</p>
+          </div>
+          <div>
+            <p class="nom">Accompagnement carrière<span>/carriere.html</span></p>
+            <p class="quoi">Cadres et dirigeants, transitions, leadership au féminin, le parcours Ikigaï,
+              et une FAQ qui répond aux objections avant l'appel.</p>
+          </div>
+          <div>
+            <p class="nom">L'œil de la recruteuse<span>/oeil-recruteuse.html</span></p>
+            <p class="quoi">Ton outil gratuit. Un premier filtre IA sur un CV ou un titre LinkedIn.</p>
+          </div>
+          <div>
+            <p class="nom">Qui suis-je<span>/a-propos.html</span></p>
+            <p class="quoi">Tes 17 ans de terrain, ton ADN, tes valeurs et tes convictions.</p>
+          </div>
+          <div>
+            <p class="nom">Blog<span>/blog.html</span></p>
+            <p class="quoi">Prêt à accueillir tes articles. En attendant, il capte les adresses de
+              ceux qui veulent être prévenus.</p>
+          </div>
+          <div>
+            <p class="nom">Contact<span>/contact.html</span></p>
+            <p class="quoi">Ton agenda pour réserver un créneau, et un formulaire qui distingue
+              les écoles des particuliers.</p>
+          </div>
+          <div>
+            <p class="nom">Mentions légales · Confidentialité<span>+ une page 404 sur mesure</span></p>
+            <p class="quoi">Les pages obligatoires, à jour de tes informations RCS.</p>
+          </div>
+        </div>
+
+        <div class="note calme">
+          <span class="titre">Les anciennes adresses continuent de fonctionner</span>
+          La page « Entreprises » a disparu et « Particuliers » est devenue « Accompagnement carrière ».
+          Quelqu'un qui a gardé un ancien lien n'atterrit pas sur une erreur : il est redirigé vers la bonne page,
+          et Google transfère progressivement le référencement acquis.
+        </div>
+      </section>
+
+      <!-- ============ CAPTER ============ -->
+      <section id="capter">
+        <h2>Comment on te laisse ses coordonnées</h2>
+        <p class="intro">Quatre chemins mènent à toi. Chacun s'adresse à un moment différent :
+          on ne demande pas la même chose à quelqu'un qui découvre ton métier qu'à un directeur d'école
+          qui cherche déjà un intervenant.</p>
+
+        <h3>Le quiz d'orientation</h3>
+        <p>Sur l'accueil. Quelques questions, puis un résultat personnalisé selon quatre profils :
+          <b>représente une école</b>, <b>en poste et cherche un nouvel élan</b>, <b>en quête de sens</b>,
+          ou <b>étudiant / jeune diplômé</b>. Chacun reçoit un plan d'action en cinq étapes adapté à sa situation —
+          l'Ikigaï pour la quête de sens, la stratégie d'alternance pour l'étudiant.</p>
+
+        <h3>L'œil de la recruteuse</h3>
+        <p>Ton outil signature. Le visiteur colle son titre LinkedIn ou importe son CV, et reçoit un premier
+          retour. C'est le plus engageant : quelqu'un qui vient de voir ses points faibles est nettement
+          plus réceptif à un accompagnement. <a href="#oeil">Détail plus bas</a>.</p>
+
+        <h3>Les demandes de documentation</h3>
+        <p>Ta plaquette écoles, ta documentation carrière, ou l'alerte « préviens-moi » du blog.
+          Le PDF se télécharge <b>immédiatement</b> après l'envoi du formulaire — la personne n'attend pas
+          sa boîte mail — et le lien lui est aussi envoyé par e-mail, pour qu'elle le retrouve plus tard.</p>
+
+        <h3>Le formulaire de contact</h3>
+        <p>Le plus direct. Il demande d'abord si la personne représente une école ou est un particulier,
+          et adapte les champs : une école se voit proposer d'indiquer son établissement.</p>
+      </section>
+
+      <!-- ============ CE QUE TU REÇOIS ============ -->
+      <section id="recois">
+        <h2>Ce que tu reçois</h2>
+        <p class="intro">À chaque fois qu'une de ces quatre choses se produit, <b>tu reçois un e-mail</b>.
+          Tu n'as aucun tableau de bord à consulter, aucun outil à ouvrir : tout arrive dans ta boîte
+          habituelle. Voici exactement à quoi ils ressemblent.</p>
+
+        <h3>Quand quelqu'un laisse ses coordonnées</h3>
+        <p>Tu reçois un récapitulatif avec ce qu'il faut savoir pour rappeler la personne.
+          Si elle est passée par l'œil, son score et les points relevés sont dedans : tu sais quoi lui dire
+          avant même de décrocher.</p>
+
+        <div class="mail">
+          <div class="chrome">
+            <i></i><i></i><i></i>
+            <span class="obj">[Site OZ] Nouveau lead de l'outil « L'œil » — Camille</span>
+          </div>
+          <div class="from">De <b>Site OZ Coaching</b> &lt;contact@oz-coaching.fr&gt; — à moi</div>
+          <div class="corps">
+            <div class="carte">
+              <div class="bandeau">
+                <p class="sur">Nouveau lead</p>
+                <p class="tit">Camille vient de laisser ses coordonnées</p>
+              </div>
+              <div class="dedans">
+                <p class="badge">💼 Lead particulier</p>
+                <div class="score">
+                  <p class="v">74<small>/100</small></p>
+                  <p class="d">Bonne base, il manque les preuves</p>
+                </div>
+                <table class="infos">
+                  <tr><td class="k">Prénom</td><td class="v">Camille</td></tr>
+                  <tr><td class="k">E-mail</td><td class="v">camille@example.fr</td></tr>
+                  <tr><td class="k">Origine</td><td class="v">Outil « L'œil de la recruteuse »</td></tr>
+                </table>
+                <p class="surtitre">Points forts relevés</p>
+                <div class="bloc">
+                  <span>• Un intitulé de poste clair dès la première ligne</span>
+                  <span>• Trois résultats chiffrés dans la dernière expérience</span>
+                </div>
+                <p class="surtitre">Alertes relevées</p>
+                <div class="bloc rouge">
+                  <span>• Deux mots creux : « dynamique », « rigoureuse »</span>
+                  <span>• Un trou de 14 mois non expliqué en 2023</span>
+                </div>
+                <a class="bouton" href="#recois">Écrire à Camille</a>
+                <p class="pied">Camille vient de recevoir son e-mail, et recevra automatiquement
+                  trois relances à J+2, J+5 et J+9.</p>
+              </div>
+            </div>
+          </div>
+          <p class="legende">Reproduction fidèle. Un lead école affiche à la place son établissement
+            et le document demandé.</p>
+        </div>
+
+        <div class="note calme">
+          <span class="titre">Tu réponds en cliquant simplement sur « Répondre »</span>
+          Ces e-mails arrivent de ton adresse de site, mais ils sont configurés pour que ta réponse
+          parte <b>directement à la personne</b>. Tu n'as jamais besoin de recopier une adresse.
+        </div>
+
+        <h3>Quand quelqu'un écrit via le formulaire de contact</h3>
+        <p>Le message t'arrive mis en forme, avec la nature du contact indiquée en haut : une école
+          ou un particulier. C'est ce qui te permet de savoir en un coup d'œil si tu ouvres un dossier
+          B2B ou un accompagnement individuel.</p>
+
+        <div class="mail">
+          <div class="chrome">
+            <i></i><i></i><i></i>
+            <span class="obj">[Site OZ] École — Paul Mercier</span>
+          </div>
+          <div class="from">De <b>Site OZ Coaching</b> &lt;contact@oz-coaching.fr&gt; — à moi</div>
+          <div class="corps">
+            <div class="carte">
+              <div class="bandeau">
+                <p class="sur">Formulaire de contact</p>
+                <p class="tit">Paul vous a écrit</p>
+              </div>
+              <div class="dedans">
+                <p class="badge ecole">🏫 Une école<br>
+                  <span style="font-weight:400;color:#8A8F91;font-size:13px">CFA Rocket — Montpellier</span></p>
+                <p style="font-size:18px;font-weight:700;margin-bottom:2px;color:#231F20">Paul Mercier</p>
+                <p style="font-size:14px;margin-bottom:18px"><a href="#recois" style="color:#0097B2;text-decoration:none">p.mercier@cfa-rocket.fr</a></p>
+                <p class="surtitre">Son message</p>
+                <div class="bloc" style="background:#F6F4F0">
+                  Bonjour Aurélia, nous cherchons un intervenant pour nos ateliers TRE avant la rentrée
+                  de septembre. Nos taux de placement en BTS stagnent et notre audit Qualiopi est en février.
+                  Auriez-vous des disponibilités pour en discuter&nbsp;?
+                </div>
+                <a class="bouton" href="#recois">Répondre à Paul</a>
+                <p class="pied">Notification automatique du site oz-coaching.fr<br>
+                  Répondez à ce message : votre réponse partira directement à la personne.</p>
+              </div>
+            </div>
+          </div>
+          <p class="legende">La personne reçoit de son côté un accusé de réception qui annonce
+            une réponse sous 48 h ouvrées.</p>
+        </div>
+      </section>
+
+      <!-- ============ CE QUI PART ============ -->
+      <section id="part">
+        <h2>Ce qui part de ta part</h2>
+        <p class="intro">Chaque personne qui laisse ses coordonnées entre dans une séquence de quatre e-mails,
+          signés de ton nom, écrits dans ta voix. Ils partent tout seuls, aux bons moments.
+          <b>Tu n'as rien à faire</b> — mais tu dois savoir ce qu'ils disent, parce que la personne
+          y fera référence quand tu l'auras au téléphone.</p>
+
+        <div class="sequence">
+          <div>
+            <p class="quand">Tout de suite<span>immédiat</span></p>
+            <div class="quoi">
+              <b>Ce qu'elle est venue chercher</b>
+              <p>Son rapport, son plan d'action, sa plaquette — selon le chemin emprunté. Plus, pour l'œil,
+                ta checklist des 12 détails que tu vérifiais en cabinet avant même de regarder les diplômes.</p>
+            </div>
+          </div>
+          <div>
+            <p class="quand">J+2<span>deux jours après</span></p>
+            <div class="quoi">
+              <b>Ton histoire</b>
+              <p>Pourquoi tu es passée de l'autre côté de la table après sept ans en cabinet.
+                Pour une école, c'est une version différente : pourquoi tu travailles à trois niveaux —
+                l'apprenant, le maître d'apprentissage et l'établissement.</p>
+            </div>
+          </div>
+          <div>
+            <p class="quand">J+5<span>cinq jours après</span></p>
+            <div class="quoi">
+              <b>La preuve</b>
+              <p>Les témoignages de Mallory et de Jean, et une réponse honnête aux deux objections
+                les plus fréquentes : « je n'ai pas le temps » et « je ne sais pas encore ce que je veux ».
+                Pour une école : l'e-portfolio, les MOOCs, les livrets tuteur.</p>
+            </div>
+          </div>
+          <div>
+            <p class="quand">J+9<span>neuf jours après</span></p>
+            <div class="quoi">
+              <b>L'invitation</b>
+              <p>Le dernier message, qui annonce clairement qu'il est le dernier, et propose les
+                30 minutes offertes. Aucune relance au-delà.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <span class="titre">Aucun tarif n'apparaît nulle part</span>
+          Ni sur le site, ni dans les e-mails. Tout est présenté « sur devis, après un premier échange »,
+          conformément à ton positionnement. C'est un choix assumé : il t'oblige à parler à la personne
+          avant de chiffrer, ce qui est exactement ta méthode.
+        </div>
+
+        <div class="note calme">
+          <span class="titre">Ces e-mails partent même si tout le reste s'arrête</span>
+          Les trois relances sont programmées dès l'arrivée du contact, chez le service qui envoie
+          le courrier. Elles ne dépendent d'aucune machine qui devrait rester allumée. Si le site tombait
+          demain, les personnes déjà inscrites recevraient quand même leurs messages.
+        </div>
+      </section>
+
+      <!-- ============ L'ŒIL ============ -->
+      <section id="oeil">
+        <h2>L'œil de la recruteuse</h2>
+        <p class="intro">Ton outil gratuit, et le meilleur argument du site : il donne quelque chose
+          d'utile avant de demander quoi que ce soit. Il fonctionne de deux façons.</p>
+
+        <h3>« J'écris mon texte »</h3>
+        <p>La personne colle son titre LinkedIn ou son accroche de CV. L'analyse se fait
+          <b>dans son navigateur</b>, instantanément : rien n'est envoyé nulle part tant qu'elle ne
+          laisse pas son adresse. L'outil repère les chiffres, les verbes d'action, les mots creux
+          (« dynamique », « motivé », « rigoureux »), la longueur, la structure.</p>
+
+        <h3>« J'importe mon CV »</h3>
+        <p>Le texte du PDF est lu, puis analysé par une IA <b>paramétrée à partir de ton expérience</b> :
+          elle joue ton rôle, vouvoie la personne, et cite des éléments précis de son CV plutôt que
+          des conseils génériques. Le barème est le tien — au-dessus de 80, tu t'arrêtais dessus en cabinet ;
+          en dessous de 40, le CV ne passait pas le tri.</p>
+
+        <div class="note">
+          <span class="titre">Ton cadrage est repris à trois endroits</span>
+          Tu voulais que l'outil ne remplace pas ton discours. Le message « ⚠️ ce n'est pas un coaching CV »
+          apparaît <b>avant</b> l'outil, <b>juste sous les résultats</b> — le moment où l'on pourrait prendre
+          un score pour un verdict — et dans le bloc final, qui reprend ta formule :
+          <b>« L'IA fait le premier tri. Le coaching permet de faire les bons choix. »</b>
+          Les partages sur LinkedIn annoncent eux aussi « un premier filtre IA », jamais un verdict.
+        </div>
+
+        <div class="note calme">
+          <span class="titre">Si l'IA est indisponible, personne ne voit d'erreur</span>
+          L'outil bascule tout seul sur un audit humain : la personne te laisse son CV, et tu lui reviens
+          sous 48 h. C'est un repli volontaire — mieux vaut te passer la main qu'afficher une analyse
+          approximative sous ton nom.
+        </div>
+      </section>
+
+      <!-- ============ RDV ============ -->
+      <section id="rdv">
+        <h2>La prise de rendez-vous</h2>
+        <p class="intro">Ton Google Agenda est intégré directement dans la page contact.
+          Les visiteurs réservent un créneau de 30 minutes sans t'écrire, et le rendez-vous apparaît
+          dans ton agenda comme n'importe quel autre.</p>
+        <p class="corps">Sur ta question de confidentialité : <b>la page publique ne montre que tes créneaux ouverts</b>.
+          Personne ne voit le contenu de ton agenda, ni tes autres rendez-vous, ni leurs intitulés.
+          Un créneau que tu n'as pas ouvert n'existe pas pour le visiteur.</p>
+        <p class="corps">Tous les boutons « Réserver un échange » du site et des e-mails pointent vers cette page.
+          C'est le seul endroit à mettre à jour si tu changes un jour d'outil de réservation.</p>
+      </section>
+
+      <!-- ============ AUDIENCE ============ -->
+      <section id="audience">
+        <h2>Ton audience</h2>
+        <p class="intro">Le site mesure sa fréquentation : combien de personnes viennent, par quelles pages
+          elles entrent, d'où elles arrivent. Tu y accèdes quand tu veux, et c'est une information utile
+          pour savoir ce qui intéresse vraiment ton public.</p>
+        <p class="corps">La mesure est <b>sans cookie</b> et sans suivi d'une personne d'un site à l'autre.
+          C'est pour cette raison que ton site n'affiche <b>aucun bandeau « acceptez les cookies »</b> :
+          il n'en dépose pas. C'est plus agréable à la visite, et c'est un point de conformité en moins
+          à gérer.</p>
+        <p class="corps">À côté de ça, les contacts eux-mêmes se comptent dans ta boîte mail :
+          chaque lead, chaque message. Les deux se complètent — l'audience te dit ce qui attire,
+          ta boîte mail te dit ce qui convertit.</p>
+      </section>
+
+      <!-- ============ DONNÉES ============ -->
+      <section id="donnees">
+        <h2>Tes données, tes obligations</h2>
+        <p class="intro">Tu es responsable de traitement au sens du RGPD : les données laissées sur le site
+          sont sous ta responsabilité. Voici où elles sont, et ce que le site fait pour te protéger.</p>
+
+        <div class="flux">
+          <div class="etape">
+            <span class="pastille">1</span>
+            <p class="txt"><b>Les coordonnées arrivent chez toi.</b> Elles transitent par le service qui envoie
+              les e-mails et n'alimentent aucune base de données tierce. Pas de fichier client caché quelque part.</p>
+          </div>
+          <div class="etape">
+            <span class="pastille">2</span>
+            <p class="txt"><b>Les CV ne sont pas conservés.</b> Le texte est analysé puis oublié. Le fichier PDF,
+              lui, ne quitte jamais le navigateur du visiteur.</p>
+          </div>
+          <div class="etape">
+            <span class="pastille">3</span>
+            <p class="txt"><b>Chaque e-mail porte un lien de désinscription.</b> Un clic, et la personne
+              sort de la séquence.</p>
+          </div>
+          <div class="etape">
+            <span class="pastille">4</span>
+            <p class="txt"><b>Les polices sont hébergées sur ton site.</b> Un détail invisible mais réel :
+              aucune adresse IP de visiteur n'est transmise à Google au chargement des pages.</p>
+          </div>
+        </div>
+
+        <p class="corps" style="margin-top:26px">Tes mentions légales sont complètes et à jour :
+          OZ COACHING, EURL au capital de 1 000 €, RCS de Nîmes, avec ton numéro de TVA et l'hébergeur déclaré.
+          La politique de confidentialité désigne bien <b>la société</b> comme responsable de traitement,
+          et non toi à titre personnel — c'est la forme correcte dès lors que tu exerces en société.</p>
+      </section>
+
+      <!-- ============ QUI FAIT QUOI ============ -->
+      <section id="reste">
+        <h2>Qui fait quoi</h2>
+        <p class="intro">Le site est en ligne et fonctionne. Voici la répartition, pour qu'il n'y ait
+          pas de zone floue.</p>
+
+        <div class="scroll">
+          <table class="tableau">
+            <thead>
+              <tr><th>Quoi</th><th>Qui</th><th>Où ça en est</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Le nom de domaine</td>
+                <td>À ton nom — c'est ton bien. Tu peux emmener le site ailleurs quand tu veux.</td>
+                <td><span class="puce ok">En place</span></td>
+              </tr>
+              <tr>
+                <td>L'hébergement</td>
+                <td>Géré par Vincent</td>
+                <td><span class="puce ok">En place</span></td>
+              </tr>
+              <tr>
+                <td>Les contenus et les e-mails</td>
+                <td>Écrits d'après tes documents et validés par toi</td>
+                <td><span class="puce ok">En ligne</span></td>
+              </tr>
+              <tr>
+                <td>Répondre aux contacts</td>
+                <td>Toi — c'est le seul geste quotidien</td>
+                <td><span class="puce ok">Ça arrive dans ta boîte</span></td>
+              </tr>
+              <tr>
+                <td>Tes créneaux de rendez-vous</td>
+                <td>Toi, dans ton Google Agenda</td>
+                <td><span class="puce ok">Connecté</span></td>
+              </tr>
+              <tr>
+                <td>Les articles du blog</td>
+                <td>Toi, quand tu voudras t'y mettre</td>
+                <td><span class="puce attente">La page attend</span></td>
+              </tr>
+              <tr>
+                <td>Les photos d'ateliers</td>
+                <td>Toi — de vraies photos vaudront mieux que les images actuelles</td>
+                <td><span class="puce attente">À fournir</span></td>
+              </tr>
+              <tr>
+                <td>La plaquette Écoles corrigée</td>
+                <td>Caroline</td>
+                <td><span class="puce attente">En attente</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note calme">
+          <span class="titre">Une seule chose à retenir</span>
+          Tu n'as <b>rien à faire tourner, rien à surveiller</b>. Le site capte, écrit, relance et prévient
+          tout seul. Ton seul geste, c'est de répondre aux e-mails qui arrivent — et c'est bien
+          le seul qui ne s'automatise pas.
+        </div>
+      </section>
+
+      <footer>
+        <span>OZ Coaching — Aurélia Grino</span>
+        <span>www.oz-coaching.fr</span>
+        <span>Guide rédigé par Vincent Bélicot, septembre 2026</span>
+      </footer>
+
+    </main>
+  </div>
+</div>
+
+</body>
+</html>
