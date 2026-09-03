@@ -168,7 +168,7 @@ ${BTN(RDV, 'Réserver mon premier échange (30 min)')}
     e1h = wrap(`Votre plan d'action par Aurélia — et la première étape à faire dès aujourd'hui.`, `
 <p>${esc(prenom)},</p>
 <p><strong>${plan.t}</strong></p>
-<p>Comme promis, voici l'essentiel. ${b2b ? `Des formats concrets, éprouvés dans une dizaine d'établissements.` : `Les 5 étapes que je ferais à votre place, dans cet ordre.`}</p>
+<p>Comme promis, voici l'essentiel. ${b2b ? `Des formats concrets, éprouvés dans plus de 10 établissements.` : `Les 5 étapes que je ferais à votre place, dans cet ordre.`}</p>
 ${liste(plan.p.map((x, i) => (i + 1) + '. ' + x), '#EFF6F8', '')}
 <p>${b2b ? `Chaque intervention est construite sur mesure et chiffrée sur devis. Le plus simple pour en parler : 30 minutes de visio, sans engagement.` : `L'étape 1 se fait dès aujourd'hui. Et si vous voulez gagner des semaines sur les suivantes, parlons-en de vive voix — c'est offert.`}</p>
 ${BTN(RDV, b2b ? 'Réserver un rendez-vous stratégique' : 'Réserver mon échange offert (30 min)')}
