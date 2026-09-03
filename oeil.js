@@ -1,7 +1,9 @@
 // OZ Coaching — L'œil de la recruteuse
 // Deux parcours : (A) analyse de texte 100 % côté navigateur ; (B) upload CV PDF.
 (() => {
-  const WEBHOOK = (window.OZ_CONFIG && window.OZ_CONFIG.webhook) || 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead';
+  // Aucune valeur de repli en dur : un repli enverrait des CV vers une destination
+  // que personne ne controle plus. Vide => bascule sur le contact par e-mail.
+  const WEBHOOK = (window.OZ_CONFIG && window.OZ_CONFIG.webhook) || '';
 
   // Analyse IA du CV : l'URL vient de config.js (workflow n8n qui appelle Claude).
   // Elle reçoit { texte, cible } et renvoie { score, verdict:{t,d}, forces, alertes, conseils }.
@@ -313,6 +315,18 @@
       f.addEventListener('submit', async ev => {
         ev.preventDefault();
         if (f.website.value) return; // honeypot
+        if (!WEBHOOK) {
+          const mail = (window.OZ_CONFIG && window.OZ_CONFIG.emailContact) || '';
+          const p = document.createElement('p');
+          p.style.cssText = 'margin-top:16px;background:#FDF6E9;border:1.5px solid #E7CE9C;color:#5E4611;' +
+            'border-radius:14px;padding:14px 18px;font-size:14.5px;line-height:1.6';
+          p.innerHTML = 'Le formulaire est momentanément indisponible. Écrivez directement à ' +
+            '<a href="mailto:' + mail + '" style="color:#0097B2;font-weight:500">' + mail + '</a>, ' +
+            'Aurélia vous répond en personne.';
+          f.hidden = true;
+          f.parentNode.insertBefore(p, f.nextSibling);
+          return;
+        }
         const btn = f.querySelector('button[type=submit]');
         btn.disabled = true; btn.textContent = 'Envoi en cours…';
         try {

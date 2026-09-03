@@ -1,6 +1,9 @@
 // OZ Coaching — interactions communes
-// URL definie dans config.js ; la valeur en dur reste un filet de securite
-const OZ_WEBHOOK = (window.OZ_CONFIG && window.OZ_CONFIG.webhook) || 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead';
+// L'URL de capture vient UNIQUEMENT de config.js : aucune valeur de repli en dur.
+// Un repli coderait une destination que personne ne controle plus (cf. l'ancienne
+// instance n8n) et y enverrait des donnees personnelles a l'insu de tous.
+// Si elle est vide, les formulaires basculent sur le contact par e-mail.
+const OZ_WEBHOOK = (window.OZ_CONFIG && window.OZ_CONFIG.webhook) || '';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Menu mobile
@@ -32,9 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: .5 });
   document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 
+  // Repli affiché quand aucune destination de capture n'est configurée :
+  // mieux vaut orienter vers l'e-mail que faire échouer l'envoi en silence.
+  function contactDirect(form) {
+    const mail = (window.OZ_CONFIG && window.OZ_CONFIG.emailContact) || '';
+    const p = document.createElement('p');
+    p.style.cssText = 'margin-top:16px;background:#FDF6E9;border:1.5px solid #E7CE9C;color:#5E4611;' +
+      'border-radius:14px;padding:14px 18px;font-size:14.5px;line-height:1.6';
+    p.innerHTML = 'Le formulaire est momentanément indisponible. Écrivez directement à ' +
+      '<a href="mailto:' + mail + '" style="color:#0097B2;font-weight:500">' + mail + '</a>, ' +
+      'Aurélia vous répond en personne.';
+    form.hidden = true;
+    form.parentNode.insertBefore(p, form.nextSibling);
+  }
+
   // Envoi générique vers le webhook (capture de lead)
   async function envoyerLead(form, payload, sentId) {
     if (form.website && form.website.value) return; // honeypot
+    if (!OZ_WEBHOOK) return contactDirect(form);
     const btn = form.querySelector('button[type=submit]');
     const label = btn ? btn.textContent : '';
     if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours…'; }

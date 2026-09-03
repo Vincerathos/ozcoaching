@@ -17,15 +17,25 @@ window.OZ_CONFIG = {
      Lien court equivalent : https://calendar.app.google/pzvwWAVpPP5ttXTV6 */
   agenda: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2RYMIvgIoW1L4x4hwsGxpvvaUDxFSR191NQP0g-ykGtixufL8tRGIJnSJy_Dh2ReBjZqrzbhUx',
 
-  /* --- 3. Webhook n8n (capture des leads) ---------------------------------
-     Reçoit : l'outil « L'œil », le quiz, les CV, les demandes de plaquette. */
-  webhook: 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-coaching-lead',
+  /* --- 3. Capture des leads ------------------------------------------------
+     Reçoit : l'outil « L'œil », le quiz, les CV, les demandes de plaquette.
+
+     ⚠️ COUPÉ LE 03/09/2026. Ces deux endpoints pointaient vers une instance n8n
+     (n8n.srv1136474.hstgr.cloud) hébergée par l'ancienne entreprise de Vincent,
+     à laquelle il n'a plus accès. Les webhooks y répondaient encore : chaque
+     formulaire y envoyait le prénom et l'e-mail d'un prospect, et chaque import
+     de CV son contenu intégral — vers un tiers que ni Aurélia (responsable de
+     traitement) ni Vincent ne pouvaient plus consulter, sécuriser ou purger.
+
+     Tant que ces valeurs sont vides, les formulaires basculent proprement sur
+     le contact par e-mail et l'outil « L'œil » repasse en audit humain.
+     À remplacer par les fonctions Vercel du site (même domaine, même compte). */
+  webhook: '',
 
   /* --- 3.bis Analyse de CV par IA -----------------------------------------
-     Workflow n8n « OZ Coaching — Analyse CV par IA » : reçoit {texte, cible}
-     et renvoie {score, verdict:{t,d}, forces, alertes, conseils}.
-     Vider cette valeur pour repasser en audit manuel par Aurélia. */
-  analyseCV: 'https://n8n.srv1136474.hstgr.cloud/webhook/oz-analyse-cv',
+     Reçoit {texte, cible} et renvoie {score, verdict:{t,d}, forces, alertes,
+     conseils}. Vide = audit manuel par Aurélia (repli automatique). */
+  analyseCV: '',
 
   /* --- 4. Adresse de réception du formulaire de contact --------------------
      Utilisée par FormSubmit. ⚠️ FormSubmit exige une activation : au tout
