@@ -1,4 +1,4 @@
-// Construction des 4 e-mails de la séquence OZ Coaching.
+﻿// Construction des 4 e-mails de la séquence OZ Coaching.
 //
 // Porté depuis le workflow n8n devenu inaccessible, à contenu rédactionnel
 // identique. Le préfixe « _ » empêche Vercel d'exposer ce fichier comme route :
@@ -23,10 +23,9 @@ const NOTIF_DETOURNEE = NOTIF !== CONTACT;
 // Bandeau rappelant que la notification est détournée, pour qu'un e-mail de
 // test ne puisse pas être pris pour un vrai lead.
 const BANDEAU_TEST = NOTIF_DETOURNEE
-  ? `<p style="background:#FDF6E9;border:1.5px solid #E7CE9C;color:#5E4611;border-radius:12px;padding:12px 16px;margin:0 0 18px;font-size:13.5px">
-      ⚠️ <strong>Notification détournée.</strong> EMAIL_NOTIFICATIONS est renseignée : cet e-mail
-      arrive ici au lieu de la boîte d'Aurélia. Retirer la variable dans Vercel pour rétablir.
-    </p>`
+  ? `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 22px"><tr><td style="background:#FDF6E9;border:1.5px solid #E7CE9C;border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.55;color:#5E4611">
+      ⚠️ <strong>Notification détournée.</strong> <code style="font-size:12px">EMAIL_NOTIFICATIONS</code> est renseignée&nbsp;: cet e-mail arrive ici au lieu de la boîte d'Aurélia. Retirer la variable dans Vercel pour rétablir.
+    </td></tr></table>`
   : '';
 
 const RDV = SITE + '/contact.html#rdv';
@@ -42,6 +41,42 @@ const esc = s => ('' + (s == null ? '' : s))
 const BTN = (url, txt) => `<p style="text-align:center;margin:28px 0"><a href="${url}" style="background:#0097B2;color:#fff;font-size:16px;font-weight:bold;text-decoration:none;padding:15px 34px;border-radius:40px;display:inline-block">${txt}</a></p>`;
 
 const wrap = (preheader, corps) => `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;background:#F6F4F0;font-family:Arial,Helvetica,sans-serif;color:#231F20"><div style="display:none;max-height:0;overflow:hidden;opacity:0">${esc(preheader)}</div><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F6F4F0;padding:24px 12px"><tr><td align="center"><table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#fff;border-radius:20px;border:1px solid #E4E2DD;overflow:hidden"><tr><td style="padding:30px 40px 6px 40px;text-align:center"><span style="font-size:24px;font-weight:bold;color:#231F20">Oz Coaching</span><br><span style="font-size:11px;letter-spacing:2px;color:#004956">RÉVÉLATRICE DES TALENTS DE DEMAIN</span></td></tr><tr><td style="padding:18px 40px 8px 40px;font-size:15.5px;line-height:1.7;color:#3A3B3C">${corps}</td></tr><tr><td style="padding:22px 40px 26px 40px;font-size:12px;color:#8A8F91;border-top:1px solid #E9E7E2;text-align:center">Aurélia Grino — ingénierie pédagogique &amp; employabilité · accompagnement carrière<br>Montpellier, Nîmes &amp; visio · <a href="https://www.linkedin.com/in/aureliagrino/" style="color:#0097B2">LinkedIn</a> · <a href="${UNSUB}" style="color:#8A8F91">Se désinscrire</a></td></tr></table></td></tr></table></body></html>`;
+
+// ---------------------------------------------------------------------------
+// Gabarit des notifications internes (nouveau lead, message de contact).
+// Les clients mail ignorent les feuilles de style et la mise en page moderne :
+// tout passe par des tables et du style en ligne, comme pour les e-mails
+// visiteurs. Largeur bornée à 600 px, mais fluide en dessous pour le mobile.
+// ---------------------------------------------------------------------------
+const PETROLE = '#004956';
+const CYAN = '#0097B2';
+
+// Bouton d'action principal (répondre à la personne).
+const BTN_INTERNE = (url, txt) => `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:26px auto 6px"><tr><td style="background:${CYAN};border-radius:40px"><a href="${url}" style="display:inline-block;padding:13px 30px;color:#ffffff;font-size:15px;font-weight:bold;text-decoration:none">${txt}</a></td></tr></table>`;
+
+// Encart d'information (badge, bloc citation…).
+const ENCART = (corps, fond, bordure) => `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px"><tr><td style="background:${fond};border-left:4px solid ${bordure};border-radius:0 12px 12px 0;padding:14px 18px;font-size:14.5px;line-height:1.6;color:#3A3B3C">${corps}</td></tr></table>`;
+
+function wrapInterne(surtitre, titre, corps) {
+  return `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#F6F4F0;font-family:Arial,Helvetica,sans-serif;color:#231F20">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F6F4F0;padding:26px 12px">
+  <tr><td align="center">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:20px;border:1px solid #E4E2DD;overflow:hidden">
+      <tr><td style="background:${PETROLE};padding:22px 34px">
+        <span style="font-size:10.5px;letter-spacing:2.4px;color:#8FD3E0;text-transform:uppercase">${esc(surtitre)}</span><br>
+        <span style="font-size:21px;font-weight:bold;color:#ffffff;line-height:1.35">${esc(titre)}</span>
+      </td></tr>
+      <tr><td style="padding:28px 34px 30px 34px">${corps}</td></tr>
+      <tr><td style="padding:18px 34px 24px 34px;border-top:1px solid #E9E7E2;font-size:12px;line-height:1.6;color:#8A8F91;text-align:center">
+        Notification automatique du site <a href="${SITE}" style="color:${CYAN};text-decoration:none">oz-coaching.fr</a><br>
+        Répondez à ce message : votre réponse partira directement à la personne.
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</body></html>`;
+}
 
 const liste = (arr, coul, ico) => (arr && arr.length
   ? '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">' + arr.map(x =>
@@ -202,4 +237,86 @@ ${BTN(RDV, 'Je réserve mes 30 minutes offertes')}
   return { email, prenom, source, profil, doc, orga, b2b, e1s, e1h, e2s, e2h, e3s, e3h, e4s, e4h };
 }
 
-module.exports = { construireEmails, CONTACT, SITE, NOTIF, NOTIF_DETOURNEE, BANDEAU_TEST };
+// ---------------------------------------------------------------------------
+// Notification interne : le récapitulatif qu'Aurélia reçoit à chaque lead.
+// Vit ici, avec les autres contenus d'e-mails, plutôt que dans le gestionnaire
+// de requête : c'est de la rédaction, et c'est ainsi testable sans rien envoyer.
+// ---------------------------------------------------------------------------
+// Libellés de l'objet de l'e-mail (« Nouveau lead … »).
+const LIBELLES = {
+  outil: "de l'outil « L'œil »",
+  quiz: 'du quiz',
+  cv: '— CV importé',
+  doc: '— demande de documentation'
+};
+
+// Les mêmes valeurs, lisibles telles quelles dans le tableau récapitulatif :
+// « — demande de documentation » ou « ecoles » n'y voulaient rien dire.
+const ORIGINES = {
+  outil: "Outil « L'œil de la recruteuse »",
+  quiz: "Quiz d'orientation",
+  cv: 'Import de CV',
+  doc: 'Demande de documentation'
+};
+const DOCS = {
+  ecoles: 'Plaquette écoles supérieures',
+  carriere: 'Documentation accompagnement carrière',
+  blog: 'Alerte nouveaux articles'
+};
+const PROFILS = {
+  ecole: 'Représente une école',
+  actif: 'En poste, cherche un nouvel élan',
+  sens: 'En quête de sens',
+  etudiant: 'Étudiant ou jeune diplômé'
+};
+
+// Récapitulatif envoyé à Aurélia : ce qu'elle doit savoir pour rappeler la
+// personne, y compris ce que la séquence automatique va lui écrire ensuite.
+function notificationLead(b, e) {
+  const ligne = (l, v) => v
+    ? `<tr><td style="padding:7px 16px 7px 0;color:#8A8F91;font-size:13px;white-space:nowrap;vertical-align:top">${l}</td><td style="padding:7px 0;font-size:14.5px;color:#231F20"><strong>${esc(v)}</strong></td></tr>`
+    : '';
+  const bloc = (titre, arr, fond, bordure) => (arr && arr.length)
+    ? `<p style="margin:22px 0 8px;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#8A8F91">${titre}</p>` +
+      ENCART(arr.map((x, i) => `<span style="display:block;margin-top:${i ? '8px' : '0'}">• ${esc(x)}</span>`).join(''), fond, bordure)
+    : '';
+
+  // Le score mérite d'être vu immédiatement : c'est ce qui oriente la relance.
+  const score = b.score != null
+    ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 22px"><tr><td style="background:#E2F1F5;border-radius:14px;padding:14px 24px;text-align:center">
+        <span style="font-size:32px;font-weight:bold;color:${CYAN};line-height:1">${esc(b.score)}<span style="font-size:16px;color:#004956">/100</span></span>
+        ${b.verdict ? `<br><span style="font-size:13px;color:#004956">${esc(b.verdict)}</span>` : ''}
+      </td></tr></table>`
+    : '';
+
+  return `${BANDEAU_TEST}
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 22px">
+    <tr><td style="background:${e.b2b ? '#EFF6F8' : '#FDF6E9'};border-radius:12px;padding:14px 18px;font-size:15.5px;color:#3A3B3C">
+      <strong>${e.b2b ? '🏫 Lead école (B2B)' : '💼 Lead particulier'}</strong>
+    </td></tr>
+  </table>
+  ${score}
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+    ${ligne('Prénom', e.prenom)}
+    ${ligne('E-mail', e.email)}
+    ${ligne('Origine', ORIGINES[e.source] || e.source)}
+    ${ligne('Profil', PROFILS[e.profil] || e.profil)}
+    ${ligne('Document', DOCS[e.doc] || e.doc)}
+    ${ligne('Établissement', e.orga)}
+    ${ligne('Page', b.page)}
+  </table>
+  ${bloc('Points forts relevés', b.forces, '#EFF6F8', CYAN)}
+  ${bloc('Alertes relevées', b.alertes, '#FBEEE9', '#C4643F')}
+  ${BTN_INTERNE('mailto:' + esc(e.email), 'Écrire à ' + esc(e.prenom))}
+  <p style="margin:22px 0 0;padding-top:16px;border-top:1px solid #E9E7E2;font-size:12.5px;line-height:1.6;color:#8A8F91;text-align:center">
+    ${e.prenom} vient de recevoir son e-mail, et recevra automatiquement trois relances à J+2, J+5 et J+9.
+  </p>`;
+}
+
+module.exports = {
+  construireEmails, CONTACT, SITE,
+  NOTIF, NOTIF_DETOURNEE, BANDEAU_TEST,
+  wrapInterne, BTN_INTERNE, ENCART, esc, CYAN, PETROLE,
+  wrap, BTN, RDV,
+  notificationLead, LIBELLES
+};
