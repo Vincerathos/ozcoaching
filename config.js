@@ -41,10 +41,14 @@ window.OZ_CONFIG = {
      conseils}. Vide = audit manuel par Aurélia (repli automatique). */
   analyseCV: '/api/analyse-cv',
 
-  /* --- 4. Adresse de réception du formulaire de contact --------------------
-     Utilisée par FormSubmit. ⚠️ FormSubmit exige une activation : au tout
-     premier envoi, un e-mail de confirmation arrive dans cette boîte et le
-     lien doit être cliqué, sinon les messages suivants ne partent jamais. */
+  /* --- 4. Adresse d'Aurélia -----------------------------------------------
+     Reçoit les messages du formulaire de contact et une notification à chaque
+     lead capturé (via /api/contact et /api/lead). Sert aussi d'adresse de repli
+     affichée aux visiteurs si l'envoi échoue.
+
+     FormSubmit, qui servait auparavant au formulaire de contact, est abandonné :
+     il exigeait une activation manuelle jamais faite — les messages ne partaient
+     donc nulle part — et faisait transiter les messages par un service tiers. */
   emailContact: 'aurelia.grino.ozcoaching@gmail.com',
 
   /* --- 5. Téléphone --------------------------------------------------------

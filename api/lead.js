@@ -13,7 +13,48 @@ const { construireEmails, CONTACT } = require('./_emails');
 const EXPEDITEUR = 'Aurélia — OZ Coaching <contact@oz-coaching.fr>';
 const JOURS = { e2: 2, e3: 5, e4: 9 };
 
+const LIBELLES = {
+  outil: "de l'outil « L'œil »",
+  quiz: 'du quiz',
+  cv: '— CV importé',
+  doc: '— demande de documentation'
+};
+
 const dans = jours => new Date(Date.now() + jours * 86400000).toISOString();
+
+const esc = s => ('' + (s == null ? '' : s))
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+// Récapitulatif envoyé à Aurélia : ce qu'elle doit savoir pour rappeler la
+// personne, y compris ce que la séquence automatique va lui écrire ensuite.
+function notificationLead(b, e) {
+  const ligne = (l, v) => v ? `<tr><td style="padding:5px 12px 5px 0;color:#8A8F91;font-size:13.5px">${l}</td><td style="padding:5px 0;font-size:14.5px"><strong>${esc(v)}</strong></td></tr>` : '';
+  const bloc = (titre, arr) => (arr && arr.length)
+    ? `<p style="margin:16px 0 6px;font-size:13.5px;color:#8A8F91">${titre}</p><ul style="margin:0;padding-left:20px;font-size:14px;line-height:1.65">${arr.map(x => '<li>' + esc(x) + '</li>').join('')}</ul>`
+    : '';
+  return `
+<div style="font-family:Arial,Helvetica,sans-serif;color:#231F20;max-width:620px">
+  <p style="background:${e.b2b ? '#EFF6F8' : '#FDF6E9'};border-radius:12px;padding:12px 16px;margin:0 0 18px;font-size:15px">
+    <strong>${e.b2b ? '🏫 Lead école (B2B)' : '💼 Lead particulier'}</strong>
+  </p>
+  <table role="presentation" cellpadding="0" cellspacing="0">
+    ${ligne('Prénom', e.prenom)}
+    ${ligne('E-mail', e.email)}
+    ${ligne('Origine', LIBELLES[e.source] || e.source)}
+    ${ligne('Profil', e.profil)}
+    ${ligne('Document', e.doc)}
+    ${ligne('Établissement', e.orga)}
+    ${ligne('Score obtenu', b.score != null ? b.score + '/100' : '')}
+    ${ligne('Page', b.page)}
+  </table>
+  ${bloc("Points forts relevés", b.forces)}
+  ${bloc("Alertes relevées", b.alertes)}
+  <p style="margin-top:22px;padding-top:14px;border-top:1px solid #E9E7E2;font-size:12.5px;color:#8A8F91">
+    Cette personne vient de recevoir son e-mail, et recevra automatiquement trois relances
+    à J+2, J+5 et J+9. Répondez à ce message pour lui écrire directement.
+  </p>
+</div>`;
+}
 
 async function envoyer(cle, message) {
   const r = await fetch('https://api.resend.com/emails', {
@@ -66,6 +107,21 @@ module.exports = async (req, res) => {
   } catch (err) {
     console.error('envoi immediat', err);
     return res.status(502).json({ erreur: 'envoi' });
+  }
+
+  // Prévenir Aurélia : sans ça, elle ne sait pas qu'un lead est arrivé.
+  // L'échec ne doit pas faire échouer le formulaire — le prospect, lui, a
+  // déjà reçu son e-mail.
+  try {
+    await envoyer(cle, {
+      from: 'Site OZ Coaching <contact@oz-coaching.fr>',
+      to: CONTACT,
+      reply_to: email,
+      subject: `[Site OZ] Nouveau lead ${LIBELLES[e.source] || e.source} — ${e.prenom}`,
+      html: notificationLead(b, e)
+    });
+  } catch (err) {
+    console.error('notification lead', err);
   }
 
   // Un lead de test ne déclenche que le premier e-mail.

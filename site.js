@@ -187,6 +187,38 @@ document.addEventListener('DOMContentLoaded', () => {
       if (b) { b.textContent = 'Envoi en cours…'; b.disabled = true; }
     });
   });
+
+  // Formulaire de contact → e-mail à Aurélia + accusé de réception au visiteur.
+  const contact = document.getElementById('contact-form');
+  if (contact) {
+    contact.addEventListener('submit', async ev => {
+      ev.preventDefault();
+      if (contact.website && contact.website.value) return; // honeypot
+      const btn = contact.querySelector('button[type=submit]');
+      const label = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
+      const d = new FormData(contact);
+      try {
+        const r = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nom: d.get('nom'), email: d.get('email'), message: d.get('message'),
+            profil: d.get('profil'), organisation: d.get('organisation'),
+            website: d.get('website')
+          })
+        });
+        if (!r.ok) throw new Error('envoi');
+        contact.hidden = true;
+        const ok = document.getElementById('contact-sent');
+        if (ok) { ok.hidden = false; ok.classList.add('in'); }
+      } catch {
+        if (contact.dataset.echec) return contactDirect(contact);
+        contact.dataset.echec = '1';
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+      }
+    });
+  }
 });
 
 // Prise de RDV : Google Agenda (creneaux publies par Aurelia). L'URL vient

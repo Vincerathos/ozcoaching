@@ -96,12 +96,10 @@
         </div>
       </div>
 
-      <form class="rv card" id="contact-form" data-net action="https://formsubmit.co/aurelia.grino.ozcoaching@gmail.com" method="POST" style="padding:34px">
+      <form class="rv card" id="contact-form" style="padding:34px">
         <h2 style="font-size:22px;margin-bottom:6px">Ou écrivez-moi ici</h2>
         <p style="font-size:14px;color:var(--muted);margin-bottom:20px">Deux lignes suffisent pour démarrer.</p>
-        <input type="hidden" name="_subject" value="[Site OZ] Message contact" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://www.oz-coaching.fr/contact.html?sent=1" />
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
         <input type="hidden" name="profil" id="f-profil-hidden" value="Une école" />
 
         <p style="font-size:13.5px;font-weight:500;margin-bottom:10px">Vous êtes…</p>
@@ -126,6 +124,12 @@
         <button type="submit" class="btn btn-ocean" style="margin-top:20px;width:100%;justify-content:center">Envoyez votre message</button>
         <p style="font-size:12.5px;color:var(--muted);margin-top:12px">Vos données ne servent qu'à répondre à votre message (<a href="confidentialite.html" style="color:var(--ocean)">RGPD</a>).</p>
       </form>
+      <p id="contact-sent" hidden class="rv card" style="padding:34px;text-align:center">
+        <span style="font-size:38px;display:block;margin-bottom:10px">✅</span>
+        <strong style="font-size:19px;display:block;margin-bottom:8px">Votre message est parti</strong>
+        <span style="color:var(--muted);font-size:15px">Aurélia le lit personnellement et vous répond sous 48&nbsp;h ouvrées.
+        Un accusé de réception vient de vous être envoyé — pensez à vérifier vos spams.</span>
+      </p>
     </div>
   </div>
 </section>
