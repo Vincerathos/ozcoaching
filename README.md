@@ -186,9 +186,18 @@ l'aveugle vers une adresse que plus personne ne surveille.
 
 | Fichier | Rôle |
 |---|---|
-| `api/lead.js` | Capture de lead → e-mail 1 immédiat + relances J+2 / J+5 / J+9 |
+| `api/lead.js` | Capture de lead → e-mail 1 immédiat + relances J+2 / J+5 / J+9 + **notification à Aurélia** |
+| `api/contact.js` | Formulaire de contact → message à Aurélia + accusé de réception au visiteur |
 | `api/analyse-cv.js` | Premier filtre IA sur le CV (Claude) |
 | `api/_emails.js` | Contenu des 4 e-mails. Le préfixe `_` empêche Vercel d'en faire une route |
+
+**Aurélia est prévenue à chaque contact et à chaque lead**, avec le `reply_to` positionné
+sur la personne : elle répond depuis sa boîte sans recopier l'adresse. Une notification qui
+échoue ne fait jamais échouer le formulaire — le visiteur a déjà reçu sa réponse.
+
+`FormSubmit`, qui servait au formulaire de contact, est abandonné : il exigeait une
+activation par clic au premier envoi, qui n'a jamais été faite — **les messages de contact
+ne partaient donc nulle part** — et faisait transiter les messages par un tiers.
 
 **Les relances ne dépendent plus d'un automate allumé** : elles sont programmées chez
 Resend dès l'arrivée du lead (`scheduled_at`), donc elles partent même si plus rien ne
