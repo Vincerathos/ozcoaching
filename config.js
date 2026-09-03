@@ -20,12 +20,13 @@ window.OZ_CONFIG = {
   /* --- 3. Capture des leads ------------------------------------------------
      Reçoit : l'outil « L'œil », le quiz, les CV, les demandes de plaquette.
 
-     ⚠️ COUPÉ LE 03/09/2026. Ces deux endpoints pointaient vers une instance n8n
-     (n8n.srv1136474.hstgr.cloud) hébergée par l'ancienne entreprise de Vincent,
-     à laquelle il n'a plus accès. Les webhooks y répondaient encore : chaque
-     formulaire y envoyait le prénom et l'e-mail d'un prospect, et chaque import
-     de CV son contenu intégral — vers un tiers que ni Aurélia (responsable de
-     traitement) ni Vincent ne pouvaient plus consulter, sécuriser ou purger.
+     ⚠️ COUPÉ LE 03/09/2026. Ces deux endpoints pointaient vers une instance
+     d'automatisation tierce, devenue inaccessible au prestataire. Elle répondait
+     pourtant toujours : chaque formulaire y envoyait le prénom et l'e-mail d'un
+     prospect, et chaque import de CV son contenu intégral — vers une destination
+     que ni Aurélia (responsable de traitement) ni le prestataire ne pouvaient
+     plus consulter, sécuriser ou purger. (Détail technique dans le README, qui
+     n'est pas publié.)
 
      Tant que ces valeurs sont vides, les formulaires basculent proprement sur
      le contact par e-mail et l'outil « L'œil » repasse en audit humain.
