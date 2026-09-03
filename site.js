@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
           etudiant: {
             t: 'Cap sur votre alternance ou votre premier emploi 🎓',
             d: 'J’interviens surtout auprès des écoles, pour leurs apprenants — mais si vous cherchez seul·e, commencez par passer votre CV et votre profil LinkedIn sous l’œil de la recruteuse, c’est gratuit.',
-            o: '💡 Vous êtes dans une école partenaire ? Parlez-en à votre Career Center. Sinon, écrivez-moi : on regarde ensemble ce qui est possible.',
+            o: '💡 Vous êtes dans une école partenaire ? Parlez-en à votre centre de formation. Sinon, écrivez-moi : on regarde ensemble ce qui est possible.',
             href: 'oeil-recruteuse.html', cta: 'Tester mon profil gratuitement 👁️',
             form: 'Recevez mes conseils candidature par e-mail :'
           }
