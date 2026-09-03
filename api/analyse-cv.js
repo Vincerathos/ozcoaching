@@ -79,8 +79,12 @@ module.exports = async (req, res) => {
       })
     });
     if (!r.ok) {
-      console.error('anthropic ' + r.status, (await r.text().catch(() => '')).slice(0, 300));
-      return res.status(502).json({ erreur: 'analyse_indisponible' });
+      const detail = (await r.text().catch(() => '')).slice(0, 400);
+      console.error('anthropic ' + r.status, detail);
+      // Le statut renvoyé par le fournisseur est remonté tel quel : il dit
+      // immédiatement s'il s'agit d'une clé refusée (401), d'une requête
+      // invalide (400) ou d'un quota (429). Aucun secret n'y transite.
+      return res.status(502).json({ erreur: 'analyse_indisponible', amont: r.status });
     }
     reponse = await r.json();
   } catch (err) {
