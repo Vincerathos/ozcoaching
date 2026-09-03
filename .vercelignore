@@ -1,0 +1,23 @@
+# Ce qui ne doit PAS se retrouver en ligne.
+#
+# Vercel publie tout ce qui est à la racine du dépôt : sans ce fichier,
+# https://www.oz-coaching.fr/OFFRE-TARIFS-PROPOSITION.md serait accessible à
+# n'importe qui, tout comme les maquettes abandonnées et la doc technique
+# (webhooks n8n, identifiants de workflow). Rien ici n'est référencé par le
+# site : ces exclusions ne cassent aucune page.
+
+# Documentation interne (README, plan SEO, tarifs, automatisations)
+*.md
+
+# Pages et planches de travail
+idees.html
+logo-preview.html
+logo-preview.png
+
+# Maquettes et itérations abandonnées
+redesign/
+logos-v2/
+design/
+
+# Configuration de l'environnement de développement
+.claude/
